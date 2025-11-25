@@ -1,23 +1,71 @@
-
-import React from 'react';
+/// <reference types="vite/client" />
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const ContactPage: React.FC = () => {
+  const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setResult("Sending...");
+
+    const formData = new FormData(event.currentTarget);
+    // This grabs the key securely from your .env file
+    // Add || "" at the end
+formData.append("access_key", import.meta.env.VITE_WEB3_FORMS_ACCESS_KEY || "");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Message sent successfully! I'll get back to you soon.");
+        event.currentTarget.reset();
+      } else {
+        console.error("Error", data);
+        setResult(data.message || "Something went wrong.");
+      }
+    } catch (error) {
+      console.error("Error", error);
+      setResult("Failed to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <main className="p-8">
         <section id="contact" className="py-24">
         <div className="flex flex-col lg:flex-row gap-12 items-center">
             <div className="flex-1 w-full bg-gray-100 dark:bg-gray-800 p-8 sm:p-12 rounded-3xl">
             <h3 className="text-2xl font-bold text-theme-red mb-6">Message for AbhaY</h3>
-            <form className="space-y-6">
-                <input type="text" placeholder="Your name" className="w-full p-4 bg-white dark:bg-dark-bg rounded-lg border-2 border-transparent focus:border-theme-red outline-none transition-colors" />
-                <input type="email" placeholder="Your email/contact" className="w-full p-4 bg-white dark:bg-dark-bg rounded-lg border-2 border-transparent focus:border-theme-red outline-none transition-colors" />
-                <textarea placeholder="Your message" rows={5} className="w-full p-4 bg-white dark:bg-dark-bg rounded-lg border-2 border-transparent focus:border-theme-red outline-none transition-colors"></textarea>
-                <button type="submit" className="w-full px-8 py-4 bg-theme-red text-white dark:text-dark-text font-semibold rounded-full text-lg hover:opacity-80 transition-opacity">
-                SEND MESSAGE
+            
+            <form onSubmit={onSubmit} className="space-y-6">
+                {/* IMPORTANT: 'name' attributes are required for the email to work! */}
+                <input type="text" name="name" required placeholder="Your name" className="w-full p-4 bg-white dark:bg-dark-bg rounded-lg border-2 border-transparent focus:border-theme-red outline-none transition-colors" />
+                <input type="email" name="email" required placeholder="Your email" className="w-full p-4 bg-white dark:bg-dark-bg rounded-lg border-2 border-transparent focus:border-theme-red outline-none transition-colors" />
+                <textarea name="message" required placeholder="Your message" rows={5} className="w-full p-4 bg-white dark:bg-dark-bg rounded-lg border-2 border-transparent focus:border-theme-red outline-none transition-colors"></textarea>
+                
+                <button type="submit" disabled={isSubmitting} className="w-full px-8 py-4 bg-theme-red text-white dark:text-dark-text font-semibold rounded-full text-lg hover:opacity-80 transition-opacity disabled:opacity-50">
+                  {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
                 </button>
+
+                {/* Status Message */}
+                {result && (
+                  <p className={`text-center mt-4 font-medium ${result.includes("successfully") ? "text-green-600" : "text-red-500"}`}>
+                    {result}
+                  </p>
+                )}
             </form>
             </div>
+            
+            {/* Right Side Info */}
             <div className="flex-1 w-full flex flex-col items-start gap-8">
             <div className="space-y-4">
                 <h2 className="text-[50px] font-extrabold -tracking-wide">Let’s Build Something Awesome.</h2>
