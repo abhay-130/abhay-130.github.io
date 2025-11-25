@@ -8,10 +8,14 @@ const ContactPage: React.FC = () => {
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
+    // 1. Capture the form element immediately so we can reset it later
+    const form = event.currentTarget;
+    
     setIsSubmitting(true);
     setResult("Sending...");
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     formData.append("access_key", import.meta.env.VITE_WEB3_FORMS_ACCESS_KEY || "");
 
     try {
@@ -24,15 +28,16 @@ const ContactPage: React.FC = () => {
 
       if (data.success) {
         setResult("Message sent successfully! I'll get back to you soon.");
-        event.currentTarget.reset();
+        form.reset(); // <--- This clears the inputs on success
       } else {
-        console.error("API Error:", data); // Check Console if this happens
+        console.error("API Error:", data);
         setResult(data.message || "Something went wrong.");
       }
     } catch (error) {
-      console.error("Network Error:", error); // Check Console if this happens
-      // If the email actually arrived, this is likely a browser extension blocking the response
+      console.error("Network Error:", error);
+      // Even if there is a network glitch, if we assume it sent, clear the form:
       setResult("Message sent!"); 
+      form.reset(); // <--- This clears the inputs even on 'false alarm' errors
     } finally {
       setIsSubmitting(false);
     }
@@ -47,10 +52,8 @@ const ContactPage: React.FC = () => {
             
             <form onSubmit={onSubmit} className="space-y-6">
                 
-                {/* --- CUSTOM EMAIL SETTINGS --- */}
-                {/* This makes the email subject look professional in your Gmail */}
+                {/* Custom Email Settings */}
                 <input type="hidden" name="subject" value="New Project Inquiry from Portfolio" />
-                {/* This makes the sender name appear as 'Portfolio Contact' instead of 'Web3Forms' */}
                 <input type="hidden" name="from_name" value="Portfolio Contact" />
                 
                 <input type="text" name="name" required placeholder="Your name" className="w-full p-4 bg-white dark:bg-dark-bg rounded-lg border-2 border-transparent focus:border-theme-red outline-none transition-colors" />
