@@ -1,0 +1,18 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+
+# Environment variables (SECRETS - Very Important!)
+.env
+.env.local
+.env.*.local
+
+# macOS system files
+.DS_Store
