@@ -22,7 +22,7 @@ import ContactPage from './components/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
 
 const sectionSpacing =
-  'py-12 sm:py-16 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20';
+  'py-12 sm:py-16 md:py-24 px-7 sm:px-8 md:px-12 lg:px-16 xl:px-20';
 
 const homeSections = [
   { key: 'hero', element: <Hero /> },
