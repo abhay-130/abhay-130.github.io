@@ -42,7 +42,7 @@ const Hero: React.FC = () => {
         <h1 className="font-poppins font-extrabold text-[40px] sm:text-[60px] lg:text-[90px] leading-[1.1] text-gray-900 dark:text-white mb-[20px]">
           Hi, I'm <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
-            Abhay Kishor.
+            AbhaY!
           </span>
         </h1>
 
