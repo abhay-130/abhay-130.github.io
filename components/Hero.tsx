@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
   // Order: Hindi -> English -> Urdu -> Punjabi -> Others
   const languages: LanguageContent[] = [
     { lang: 'Hindi', line1: "नमस्ते, मैं", line2: "अभय हूँ!" },
-    { lang: 'English', line1: "Hi, I'm", line2: "AbhaY!" },
+    { lang: 'English', line1: "Hi, I'm", line2: "Ansh!" },
     { lang: 'Urdu', line1: "سلام، میں", line2: "ابھے ہوں!" },
     { lang: 'Punjabi', line1: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ, ਮੈਂ", line2: "ਅਭੈ ਹਾਂ!" },
     { lang: 'Bengali', line1: "নমস্কার, আমি", line2: "অভয়!" },
