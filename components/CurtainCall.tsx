@@ -1,10 +1,9 @@
-
 import React from 'react';
 import ResizableButton from './ResizableButton';
 
 const CurtainCall: React.FC = () => {
   return (
-    <section className="py-12 sm:py-16 md:py-24 flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 lg:gap-12 w-full px-4 sm:px-0">
+    <section className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 lg:gap-12 w-full">
       <div className="flex-1 space-y-6 sm:space-y-8">
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-extrabold leading-tight">
           You've seen the past. Let's build the future.

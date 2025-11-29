@@ -63,7 +63,7 @@ const services: ServiceItem[] = [
 const ServicesPage: React.FC = () => {
   return (
     <main className="p-4 sm:p-6 md:p-8">
-        <section id="services" className="py-12 sm:py-16 md:py-24">
+        <section id="services" className="pt-0 sm:py-16 md:py-24">
         <div className="text-center mb-10 sm:mb-12 md:mb-16">
             <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-[3px] text-light-text dark:text-dark-text">Services</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold -tracking-wide leading-tight">How I Can Help You</h2>

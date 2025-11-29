@@ -41,7 +41,7 @@ const ContactPage: React.FC = () => {
 
   return (
     <main className="p-4 sm:p-6 md:p-8">
-        <section id="contact" className="py-12 sm:py-16 md:py-24">
+        <section id="contact" className="pt-0 sm:py-16 md:py-24">
         <div className="flex flex-col lg:flex-row gap-8 sm:gap-10 lg:gap-12 items-center">
             <div className="flex-1 w-full bg-gray-100 dark:bg-gray-800 p-6 sm:p-8 md:p-12 rounded-3xl">
             <h3 className="text-xl sm:text-2xl font-bold text-theme-red mb-6">Message for AbhaY</h3>

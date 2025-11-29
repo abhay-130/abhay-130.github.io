@@ -1,33 +1,86 @@
-
 import React from 'react';
-import ResizableButton from './ResizableButton';
 
 const Hero: React.FC = () => {
   return (
-    <section id="home" className="relative pt-32 sm:pt-40 md:pt-48 pb-16 sm:pb-20 md:pb-24 flex flex-col md:flex-row items-center justify-between min-h-screen">
-      <div className="flex flex-col lg:flex-col items-center text-center md:text-left md:items-start md:w-1/2 space-y-4 sm:space-y-6 px-4 sm:px-0">
-        <h1 className="font-chewy text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[150px] leading-none text-shadow-lg dark:text-white">Hi, I'm AbhaY !</h1>
-        <p className="font-poppins text-sm sm:text-base md:text-lg text-center md:text-left self-stretch dark:text-dark-text-muted max-w-2xl">Welcome to the my creative corner! I'm currently navigating the world of Architecture at IIT Roorkee, but my creativity doesn't stop at buildings. I'm also a graphic designer who loves playing with visuals, music, and storytelling.</p>
-        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 !mt-4 sm:!mt-6">
-          <ResizableButton size={13} onClick={() => { window.location.hash = '#projects' }} className="inline-block px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base hover:bg-theme-red hover:text-white dark:hover:text-dark-text transition-colors">
-            Dive Into My Work
-          </ResizableButton>
-          <a href="#contact" className="text-sm sm:text-base font-semibold hover:text-theme-red transition-colors">
-            Contact Me
+    <section
+      id="home"
+      className="
+        w-full
+        flex flex-col lg:flex-row 
+        
+        /* CHANGED: 
+           1. items-center (keeps mobile centered horizontally)
+           2. lg:items-start (stops desktop from forcing vertical center) 
+           3. justify-start (keeps content at the top of the main axis)
+        */
+        items-center lg:items-start justify-start
+        
+        bg-white dark:bg-dark-bg
+        
+        /* This is the distance from the top of the screen */
+        /* 0px would hide it behind the navbar. 80-100px is usually safe. */
+        
+        !pt-[80px] lg:!pt-[80px] 
+        !pb-[60px]  lg:!pb-[50px]
+        !pl-[20px]  lg:!pl-[100px]
+        !pr-[20px]  lg:!pr-[100px]
+        
+        gap-[50px] lg:gap-[80px]
+        
+        overflow-hidden
+      "
+    >
+      
+      {/* 1. TEXT SECTION */}
+      {/* Added lg:mt-[40px] to align text nicely with the image top if needed */}
+      <div className="flex flex-col items-center text-center lg:items-start lg:text-left w-full lg:w-1/2 lg:mt-[20px]">
+        
+        <span className="mb-[15px] py-[8px] px-[16px] rounded-full bg-gray-100 dark:bg-gray-800 text-[12px] font-bold uppercase tracking-wider text-gray-600 dark:text-gray-300">
+          Architecture & Design
+        </span>
+
+        <h1 className="font-poppins font-extrabold text-[40px] sm:text-[60px] lg:text-[90px] leading-[1.1] text-gray-900 dark:text-white mb-[20px]">
+          Hi, I'm <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
+            Abhay Kishor.
+          </span>
+        </h1>
+
+        <p className="font-poppins text-[16px] sm:text-[18px] text-gray-600 dark:text-gray-400 max-w-[500px] mb-[40px]">
+          Welcome to my creative corner. I'm an <span className="font-bold text-gray-900 dark:text-gray-100">Architecture Student at IIT Roorkee</span> and a graphic designer passionate about visual storytelling.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center gap-[20px]">
+          <button 
+            onClick={() => { window.location.hash = '#projects' }}
+            className="px-[40px] py-[15px] rounded-full bg-red-600 text-white font-semibold text-[16px] hover:bg-red-700 transition-colors"
+          >
+            View My Work
+          </button>
+
+          <a
+            href="#contact"
+            className="text-[16px] font-medium text-gray-900 dark:text-white hover:text-red-600 transition-colors"
+          >
+            Contact Me →
           </a>
         </div>
       </div>
 
-      <div className="relative mt-8 sm:mt-12 md:mt-0 md:w-1/2 flex justify-center items-center px-4 sm:px-0">
-        <div className="relative w-[250px] h-[270px] sm:w-[350px] sm:h-[380px] md:w-[417px] md:h-[447px]">
-          <div className="absolute w-[100%] h-[100%] top-[4%] left-[10%] bg-gray-200 dark:bg-gray-700 rounded-[30px]"></div>
-          <img src="landing-page-images/abhay-profile.JPG" alt="Abhay" className="absolute w-[100%] top-[10%] left-[10%] h-auto rounded-lg object-cover" />
-          {/* Decorative elements */}
-          <div className="absolute w-[20%] h-[20%] top-0 left-[95%] bg-red-200 dark:bg-red-900/50 rounded-full animate-pulse"></div>
-          <div className="absolute w-[20%] h-[20%] top-[80%] left-0 bg-blue-200 dark:bg-blue-900/50 rounded-full animate-pulse delay-500"></div>
-          <div className="absolute w-[20%] h-[20%] top-0 left-[5%] bg-green-200 dark:bg-green-900/50 rounded-full animate-pulse delay-1000"></div>
-        </div>
+      {/* 2. IMAGE SECTION */}
+      <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+        <img
+          src="landing-page-images/abhay-profile.JPG"
+          alt="Abhay Kishor"
+          className="
+            object-cover rounded-[20px] shadow-2xl
+            w-[300px] h-[350px] 
+            sm:w-[400px] sm:h-[500px] 
+            lg:w-[500px] lg:h-[600px]
+          "
+        />
       </div>
+
     </section>
   );
 };

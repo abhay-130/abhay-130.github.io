@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
 
                 {/* Bottom Bar */}
                 <div className="border-t border-gray-300 dark:border-gray-700 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center text-light-text-muted dark:text-dark-text-muted text-xs sm:text-sm">
-                    <p style={{ opacity: .3 }}>Copyright © 2024 Abhay. All Rights Reserved.</p>
+                    <p style={{ opacity: .3 }}>Copyright ©2025 Abhay. All Rights Reserved.</p>
                     <p className="mt-2 md:mt-0" style={{ opacity: .3 }}>Terms of Use | Privacy Policy</p>
                 </div>
             </div>

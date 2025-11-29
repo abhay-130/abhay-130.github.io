@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
@@ -13,7 +12,7 @@ import Blog from './components/Blog';
 import Contact from './components/Contact';
 import CurtainCall from './components/CurtainCall';
 import Footer from './components/Footer';
-import ThemeToggle from './components/ThemeToggle';
+// import ThemeToggle from './components/ThemeToggle'; // Removed since it's in Header now
 import AboutPage from './components/AboutPage';
 import ProjectsPage from './components/ProjectsPage';
 import SocialLifePage from './components/SocialLifePage';
@@ -22,18 +21,29 @@ import BlogsPage from './components/BlogsPage';
 import ContactPage from './components/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
 
+const sectionSpacing =
+  'py-12 sm:py-16 md:py-24 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20';
+
+const homeSections = [
+  { key: 'hero', element: <Hero /> },
+  { key: 'services', element: <Services /> },
+  { key: 'projects', element: <Projects /> },
+  { key: 'about', element: <About /> },
+  { key: 'softwares', element: <Softwares /> },
+  { key: 'social-life', element: <SocialLife /> },
+  { key: 'faq', element: <Faq /> },
+  { key: 'blog', element: <Blog /> },
+  { key: 'contact', element: <Contact /> },
+  { key: 'curtain-call', element: <CurtainCall /> },
+];
+
 const HomePage: React.FC = () => (
-  <main className="max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-    <Hero />
-    <Services />
-    <Projects />
-    <About />
-    <Softwares />
-    <SocialLife />
-    <Faq />
-    <Blog />
-    <Contact />
-    <CurtainCall />
+  <main className="max-w-[1440px] mx-auto w-full">
+    {homeSections.map(({ key, element }) => (
+      <div key={key} className={sectionSpacing}>
+        {element}
+      </div>
+    ))}
   </main>
 );
 
@@ -66,13 +76,10 @@ const App: React.FC = () => {
   return (
     <div className="bg-white dark:bg-dark-bg text-light-text dark:text-dark-text font-poppins transition-colors duration-400 ease-in-out overflow-x-hidden">
       <ScrollToTop />
-      
-      {/* 1. DELETE or COMMENT OUT this line so the floating button disappears: */}
-      {/* <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} /> */}
-  
-      {/* 2. PASS the props to Header instead: */}
+
+      {/* Theme logic is passed to Header */}
       <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-      
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />

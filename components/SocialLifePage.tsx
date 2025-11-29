@@ -5,7 +5,7 @@ import ResizableButton from './ResizableButton';
 const SocialLifePage: React.FC = () => {
     return (
         <main className="p-4 sm:p-6 md:p-8">
-            <section className="py-16 sm:py-24 md:py-32 flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 lg:gap-12 w-full">
+            <section className="pt-0 sm:py-16 md:py-24 flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 lg:gap-12 w-full">
                 <div className="flex-1 flex flex-col items-start px-4 sm:px-0">
                     <p className="text-sm sm:text-base mb-[0] font-normal tracking-[3px]">Social Life</p>
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] mb-4 font-bold leading-tight">Proof That I Have a Life</h2>

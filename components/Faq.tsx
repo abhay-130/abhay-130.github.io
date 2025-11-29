@@ -41,7 +41,7 @@ const FaqAccordionItem: React.FC<{ item: FaqItem }> = ({ item }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="border-b border-gray-300 dark:border-gray-700 py-3 sm:py-4">
+        <div className="border-b border-gray-300 dark:border-gray-700 pt-0 sm:py-4">
             <button
                 className="w-full flex justify-between items-center text-left gap-3 sm:gap-4"
                 onClick={() => setIsOpen(!isOpen)}
@@ -62,9 +62,9 @@ const FaqAccordionItem: React.FC<{ item: FaqItem }> = ({ item }) => {
 
 const Faq: React.FC = () => {
     return (
-        <section id="faq" className="py-12 sm:py-16 md:py-24 flex flex-col md:flex-row items-start gap-8 sm:gap-12 md:gap-16 px-4 sm:px-0">
+        <section id="faq" className="flex flex-col md:flex-row items-start gap-8 sm:gap-10 lg:gap-12 w-full">
             {/* Left Side: Sticky Header */}
-            <div className="md:w-1/3 flex flex-col items-start gap-4 sm:gap-6 md:sticky md:top-24 w-full"> 
+            <div className="md:w-1/3 flex flex-col items-start gap-4 sm:gap-6 md:sticky md:top-24 w-full">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight">Frequently Asked Questions</h2>
                 <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed">
                     Can't find the answer you're looking for? Please chat with our friendly team.

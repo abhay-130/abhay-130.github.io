@@ -29,7 +29,7 @@ const BlogsPage: React.FC = () => {
 
     return (
         <main className="p-4 sm:p-6 md:p-8">
-            <section id="blogs" className="py-12 sm:py-16 md:py-24">
+            <section id="blogs" className="pt-0 sm:py-16 md:py-24">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-8 sm:mb-10 md:mb-12 gap-4">
                     <div>
                         <p className="text-sm sm:text-base font-medium uppercase tracking-[3px]">Our Corner</p>

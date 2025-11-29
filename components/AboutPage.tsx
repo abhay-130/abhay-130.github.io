@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const AboutPage: React.FC = () => {
     return (
         <main className="p-4 sm:p-6 md:p-8">
-            <section id="about" className="py-12 sm:py-16 md:py-24 flex flex-col md:flex-row items-center gap-8 sm:gap-12 md:gap-16">
+            <section id="about" className="pt-0 sm:py-16 md:py-24 flex flex-col md:flex-row items-center gap-8 sm:gap-10 lg:gap-12">
                 <div className="flex-1 w-full">
                     <img src="/landing-page-images/abhay-profile.JPG" alt="Abhay Kishor" className="rounded-3xl object-cover w-full h-auto" />
                 </div>

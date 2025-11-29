@@ -10,7 +10,7 @@ const projectItems = [
 
 const Projects: React.FC = () => {
   return (
-    <section id="projects" className="py-12 sm:py-16 md:py-24">
+    <section id="projects" className="w-full">
       <div className="flex flex-col md:flex-row justify-between items-end mb-8 sm:mb-10 md:mb-12 gap-4">
         <div>
           <p className="text-sm sm:text-base font-medium uppercase tracking-[3px]">Projects</p>
