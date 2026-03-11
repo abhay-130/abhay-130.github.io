@@ -20,6 +20,7 @@ import ServicesPage from './components/ServicesPage';
 import BlogsPage from './components/BlogsPage';
 import ContactPage from './components/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
+import BlogPostPage from './components/BlogPostPage.tsx';
 
 const sectionSpacing =
   'py-12 sm:py-16 md:py-24 px-7 sm:px-8 md:px-12 lg:px-16 xl:px-20';
@@ -87,7 +88,9 @@ const App: React.FC = () => {
         <Route path="/social-life" element={<SocialLifePage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/blogs" element={<BlogsPage />} />
+        <Route path="/blogs/:id" element={<BlogPostPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        
       </Routes>
       <Footer />
     </div>
