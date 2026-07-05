@@ -1,7 +1,25 @@
 /* Minimal global styles */
-:root { font-family: 'Poppins', sans-serif; }
-body { margin: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-#root { min-height: 100vh; }
+@font-face {
+  font-family: 'MursGothic';
+  /* Make sure the filename below matches your file exactly! */
+  src: url('./assets/fonts/mursgothic-widedark.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  /* This replaces Poppins globally */
+  font-family: 'MursGothic', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: 'MursGothic', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
 /* Thin scrollbar for Webkit (Chrome, Safari, Edge) */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;

@@ -30,13 +30,12 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
         {/* 2. DESKTOP NAV */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           {[
-            { name: 'Home', path: '/' },
             { name: 'About', path: '/about' },
             { name: 'Projects', path: '/projects' },
             { name: 'Social Life', path: '/social-life' },
             { name: 'Services', path: '/services' },
             { name: 'Blogs', path: '/blogs' },
-          ].map((item) => (
+            ].map((item) => (
             <Link 
               key={item.name} 
               to={item.path} 
