@@ -23,8 +23,8 @@ const AboutPage: React.FC = () => {
                         className="rounded-[2.5rem] object-cover w-full h-[400px] md:h-[550px] shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]" 
                     />
                     <div className="absolute -bottom-6 -left-6 bg-theme-red text-white p-6 rounded-3xl hidden lg:block shadow-xl">
-                        <p className="text-2xl font-bold">4th Year</p>
-                        <p className="text-sm opacity-90 text-white">Architecture @ IITR</p>
+                        <p className="text-2xl font-bold">@IIT_ROORKEE</p>
+                        <p className="text-sm opacity-90 text-white">Architecture Student</p>
                     </div>
                 </div>
 

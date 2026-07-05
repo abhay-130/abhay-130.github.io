@@ -23,7 +23,10 @@ import ScrollToTop from './components/ScrollToTop';
 import BlogPostPage from './components/BlogPostPage.tsx';
 
 const sectionSpacing =
-  'py-12 sm:py-16 md:py-24 px-7 sm:px-8 md:px-12 lg:px-16 xl:px-20';
+  'py-12 sm:py-16 md:py-24 px-7 sm:px-8 md:px-12 lg:px-16';
+
+const pageShellClassName =
+  'max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 pt-4 sm:pt-8 md:pt-12';
 
 const homeSections = [
   { key: 'hero', element: <Hero /> },
@@ -39,7 +42,7 @@ const homeSections = [
 ];
 
 const HomePage: React.FC = () => (
-  <main className="max-w-[1440px] mx-auto w-full">
+  <main className="w-full">
     {homeSections.map(({ key, element }) => (
       <div key={key} className={sectionSpacing}>
         {element}
@@ -81,17 +84,18 @@ const App: React.FC = () => {
       {/* Theme logic is passed to Header */}
       <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/social-life" element={<SocialLifePage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/blogs" element={<BlogsPage />} />
-        <Route path="/blogs/:id" element={<BlogPostPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        
-      </Routes>
+      <div className={pageShellClassName}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/social-life" element={<SocialLifePage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/blogs" element={<BlogsPage />} />
+          <Route path="/blogs/:id" element={<BlogPostPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );
