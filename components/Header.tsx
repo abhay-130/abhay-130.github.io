@@ -80,8 +80,8 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
       {isMenuOpen && (
         <div className="lg:hidden fixed top-24 left-4 right-4 z-30 bg-white/90 dark:bg-dark-bg/90 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
           <nav className="flex flex-col px-6 py-8 space-y-6">
-            {[
-              { name: 'Home', path: '/' },
+            {
+            [
               { name: 'About', path: '/about' },
               { name: 'Projects', path: '/projects' },
               { name: 'Social Life', path: '/social-life' },
