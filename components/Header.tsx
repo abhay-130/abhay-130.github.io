@@ -12,13 +12,13 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
 
   return (
     // Fixed wrapper is now transparent so the "pill" looks like it's floating
-    <header className="fixed top-0 left-0 right-0 z-40 bg-transparent transition-all duration-300 pt-4 sm:pt-6">
+    <header className="fixed top-0 left-0 right-0 z-40 bg-transparent transition-all duration-300 pt-4 sm:pt-6 px-4 sm:px-10 md:px-12 lg:px-16 xl:px-20">
       
       {/* THE GLASS PILL: Added rounded-full, border, and backdrop-blur */}
       <div className="max-w-[1440px] mx-auto h-16 md:h-20 flex items-center justify-between px-4 sm:px-8 md:px-10 lg:px-16 xl:px-20 
                       bg-white/10 dark:bg-black/20 backdrop-blur-md 
                       border border-white/20 dark:border-white/10 
-                      rounded-full shadow-lg mx-4 sm:mx-10 md:mx-12 lg:mx-16 xl:mx-20">
+                      rounded-full shadow-lg">
         
         {/* 1. LOGO */}
         <div className="flex-shrink-0">
