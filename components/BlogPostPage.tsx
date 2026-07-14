@@ -28,7 +28,7 @@ const BlogPostPage: React.FC = () => {
 
     // 5. Render the Blog
     return (
-        <main className="max-w-[1000px] mx-auto w-full px-6 sm:px-8 md:px-12 pt-24 pb-12 sm:pt-32 sm:pb-20">
+        <main className="max-w-[1000px] mx-auto w-full px-6 sm:px-8 md:px-12 pb-12 sm:pb-20">
             
             {/* Header */}
             <header className="mb-10 text-center">

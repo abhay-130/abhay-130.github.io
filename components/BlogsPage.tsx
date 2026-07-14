@@ -9,7 +9,7 @@ const BlogsPage: React.FC = () => {
         <main className="max-w-[1440px] mx-auto w-full bg-white dark:bg-dark-bg min-h-screen flex flex-col">
             <section
                 id="blogs"
-                className="flex-grow py-12 sm:py-16 md:py-24 px-7 sm:px-8 md:px-12 lg:px-16 xl:px-20"
+                className="flex-grow pb-12 sm:pb-16 md:pb-24 px-7 sm:px-8 md:px-12 lg:px-16 xl:px-20"
             >
 
                 {/* Header Section */}

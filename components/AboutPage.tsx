@@ -15,7 +15,7 @@ const AboutPage: React.FC = () => {
         /* Updated main container to match Footer margins */
         <main className="max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
             {/* --- HERO SECTION: The Persona --- */}
-            <section id="about" className="pt-8 sm:py-16 md:py-24 flex flex-col md:flex-row items-center gap-8 sm:gap-12 lg:gap-20">
+            <section id="about" className="sm:pb-16 md:pb-24 flex flex-col md:flex-row items-center gap-8 sm:gap-12 lg:gap-20">
                 <div className="flex-1 w-full relative group">
                     <img 
                         src="/landing-page-images/abhay-profile.JPG" 

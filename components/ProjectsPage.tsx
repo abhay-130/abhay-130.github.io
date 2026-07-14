@@ -46,7 +46,7 @@ const ProjectsPage: React.FC = () => {
     /* Adjusted margins and padding to match Footer exactly */
     <main className="max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
       {/* --- HEADER SECTION --- */}
-      <section id="projects" className="pt-8 sm:pt-16 md:pt-24">
+      <section id="projects" className="pb-16 md:pb-24">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
           <div className="max-w-2xl">
             <p className="text-theme-red font-bold text-sm sm:text-base uppercase tracking-[4px] mb-4">Portfolio</p>

@@ -54,7 +54,7 @@ const ServicesPage: React.FC = () => {
   return (
     /* Adjusted margins and padding to match Footer exactly */
     <main className="max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-        <section id="services" className="pt-8 sm:py-16 md:py-24">
+        <section id="services" className="sm:pb-16 md:pb-24">
         
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">

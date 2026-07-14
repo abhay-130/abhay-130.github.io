@@ -45,8 +45,7 @@ const Hero: React.FC = () => {
         flex flex-col lg:flex-row 
         items-center lg:items-start justify-start
         bg-white dark:bg-dark-bg
-        
-        !pt-[80px] lg:!pt-[80px] 
+
         !pb-[60px]  lg:!pb-[50px]
         !pl-[20px]  lg:!pl-[100px]
         !pr-[20px]  lg:!pr-[100px]

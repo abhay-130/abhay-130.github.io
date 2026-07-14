@@ -26,7 +26,7 @@ const sectionSpacing =
   'py-12 sm:py-16 md:py-24 px-7 sm:px-8 md:px-12 lg:px-16';
 
 const pageShellClassName =
-  'max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 pt-4 sm:pt-8 md:pt-12';
+  'max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 pt-24 sm:pt-28 md:pt-32';
 
 const homeSections = [
   { key: 'hero', element: <Hero /> },
@@ -43,8 +43,8 @@ const homeSections = [
 
 const HomePage: React.FC = () => (
   <main className="w-full">
-    {homeSections.map(({ key, element }) => (
-      <div key={key} className={sectionSpacing}>
+    {homeSections.map(({ key, element }, index) => (
+      <div key={key} className={index === 0 ? `${sectionSpacing} !pt-0` : sectionSpacing}>
         {element}
       </div>
     ))}

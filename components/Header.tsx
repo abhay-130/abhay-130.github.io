@@ -15,14 +15,14 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
     <header className="fixed top-0 left-0 right-0 z-40 bg-transparent transition-all duration-300 pt-4 sm:pt-6">
       
       {/* THE GLASS PILL: Added rounded-full, border, and backdrop-blur */}
-      <div className="max-w-[1440px] mx-auto h-16 md:h-20 flex items-center justify-between px-6 sm:px-8 md:px-10 lg:px-16 xl:px-20 
+      <div className="max-w-[1440px] mx-auto h-16 md:h-20 flex items-center justify-between px-4 sm:px-8 md:px-10 lg:px-16 xl:px-20 
                       bg-white/10 dark:bg-black/20 backdrop-blur-md 
                       border border-white/20 dark:border-white/10 
-                      rounded-full shadow-lg mx-4 sm:mx-8 md:mx-12 lg:mx-16 xl:mx-20">
+                      rounded-full shadow-lg mx-4 sm:mx-10 md:mx-12 lg:mx-16 xl:mx-20">
         
         {/* 1. LOGO */}
         <div className="flex-shrink-0">
-          <Link to="/" className="font-bold text-xl sm:text-2xl hover:text-theme-red dark:hover:text-theme-red transition-colors">
+          <Link to="/" className="font-bold text-lg sm:text-2xl hover:text-theme-red dark:hover:text-theme-red transition-colors">
             ABHAY KISHOR
           </Link>
         </div>
@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
         </nav>
 
         {/* Right Side Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           
           {/* 3. CONTACT BUTTON - Matches the white pill in your image */}
           <div className="hidden md:block">
