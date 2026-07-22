@@ -59,12 +59,12 @@ const ProjectsPage: React.FC = () => {
           </div>
           
           <a 
-            href="https://github.com/abhay-130" 
+            href="https://www.behance.net/abhaykishor130" 
             target="_blank" 
             rel="noopener noreferrer"
             className="px-8 py-3 rounded-full border-2 border-theme-red font-bold text-theme-red hover:bg-theme-red hover:text-white transition-all transform hover:scale-105"
           >
-            VIEW GITHUB
+            VIEW PORTFOLIO
           </a>
         </div>
 
