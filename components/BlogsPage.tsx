@@ -17,10 +17,24 @@ const BlogsPage: React.FC = () => {
     const [articles, setArticles] = useState<BlogArticle[]>([]);
     const [loading, setLoading] = useState(true);
 
+    // Helper function to sort articles by date (newest first)
+    const sortArticlesByNewest = (items: BlogArticle[]): BlogArticle[] => {
+        return [...items].sort((a, b) => {
+            const dateA = new Date(a.date).getTime();
+            const dateB = new Date(b.date).getTime();
+
+            // If date string parsing fails, fallback to standard string comparison
+            if (isNaN(dateA) || isNaN(dateB)) {
+                return b.date.localeCompare(a.date);
+            }
+            return dateB - dateA;
+        });
+    };
+
     useEffect(() => {
-        // GROQ Query to fetch all Blog Posts from Sanity
+        // GROQ Query to fetch all Blog Posts from Sanity sorted by published date (descending)
         const query = `*[_type == "post"] | order(date desc) {
-            "id": _id,
+            "id": coalesce(slug.current, _id),
             title,
             date,
             category,
@@ -32,18 +46,16 @@ const BlogsPage: React.FC = () => {
         sanityClient
             .fetch(query)
             .then((data: BlogArticle[]) => {
-                // If you have published posts in Sanity, show them.
-                // Otherwise, keep showing your existing static blog entries!
                 if (data && data.length > 0) {
-                    setArticles(data);
+                    setArticles(sortArticlesByNewest(data));
                 } else {
-                    setArticles(staticBlogArticles);
+                    setArticles(sortArticlesByNewest(staticBlogArticles));
                 }
                 setLoading(false);
             })
             .catch((error) => {
                 console.warn("Sanity fetch error (falling back to static blog data):", error);
-                setArticles(staticBlogArticles);
+                setArticles(sortArticlesByNewest(staticBlogArticles));
                 setLoading(false);
             });
     }, []);
@@ -84,7 +96,7 @@ const BlogsPage: React.FC = () => {
                                 key={article.id}
                                 className="group flex flex-col h-full"
                             >
-                                {/* Media Container (Renders YouTube video iframe if available, otherwise Cover Image) */}
+                                {/* Media Container */}
                                 <div className="relative overflow-hidden rounded-2xl mb-6 aspect-[4/3] w-full bg-black/5 dark:bg-white/5">
                                     {embedUrl ? (
                                         <iframe
