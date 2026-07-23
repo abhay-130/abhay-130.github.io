@@ -21,6 +21,8 @@ import BlogsPage from './components/BlogsPage';
 import ContactPage from './components/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
 import BlogPostPage from './components/BlogPostPage.tsx';
+import TermsPage from './components/TermsPage';
+import PrivacyPage from './components/PrivacyPage';
 
 const sectionSpacing =
   'py-12 sm:py-16 md:py-24 px-7 sm:px-8 md:px-12 lg:px-16';
@@ -94,6 +96,8 @@ const App: React.FC = () => {
           <Route path="/blogs" element={<BlogsPage />} />
           <Route path="/blogs/:id" element={<BlogPostPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
         </Routes>
       </div>
       <Footer />

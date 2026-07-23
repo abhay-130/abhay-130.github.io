@@ -172,9 +172,9 @@ const Footer: React.FC = () => {
                         Copyright ©2026 AbhaY. All Rights Reserved.
                     </p>
                     <p className="opacity-70 text-center sm:text-right hover:opacity-100 transition-opacity">
-                        <a href="#" className="hover:underline">Terms of Use</a>
+                        <a href="/terms" className="hover:underline">Terms of Use</a>
                         <span className="mx-2">•</span>
-                        <a href="#" className="hover:underline">Privacy Policy</a>
+                        <a href="/privacy" className="hover:underline">Privacy Policy</a>
                     </p>
                 </div>
             </div>
