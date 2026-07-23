@@ -98,7 +98,7 @@ const Footer: React.FC = () => {
                     
                     {/* LEFT SIDE: Brand & Socials */}
                     <div className="flex-1 w-full md:w-auto">
-                        <a href="#" className="font-poppins font-bold text-2xl sm:text-3xl dark:text-dark-text relative inline-block group">
+                        <a href="/" className="font-poppins font-bold text-2xl sm:text-3xl dark:text-dark-text relative inline-block group">
                             AbhaY
                             <span className="block h-[1px] w-12 sm:w-16 bg-current mt-1 transition-all duration-300 group-hover:w-20"></span>
                             <span className="block h-[1px] w-8 sm:w-10 bg-current mt-1 transition-all duration-300 group-hover:w-14"></span>
