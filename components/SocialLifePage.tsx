@@ -1,6 +1,16 @@
 /// <reference types="vite/client" />
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ResizableButton from './ResizableButton';
+import { sanityClient } from './data/sanityClient';
+
+interface SocialMediaPost {
+    id: string;
+    title: string;
+    location?: string;
+    image: string;
+    youtubeUrl?: string;
+    gridSpan?: string;
+}
 
 const SocialIcons = {
     LinkedIn: () => (
@@ -45,49 +55,71 @@ const SocialIcons = {
     ),
 };
 
-const SocialLifePage: React.FC = () => {
-    // Gallery items updated with custom asymmetric grid spans for a dynamic layout
-    const galleryImages = [
-        { 
-            src: "/landing-page-images/DSC_0180.JPG", 
-            alt: "Main Gallery", 
-            title: "Campus Vibes",
-            gridClass: "md:col-span-2 md:row-span-2 aspect-square md:aspect-auto"
-        },
-        { 
-            src: "/landing-page-images/trip1.jpg", 
-            alt: "Trip 1", 
-            title: "Weekend Getaway",
-            gridClass: "md:col-span-1 md:row-span-1 aspect-[4/5] md:aspect-auto"
-        },
-        { 
-            src: "/landing-page-images/event1.jpg", 
-            alt: "Event 1", 
-            title: "Virasat'26 Planning",
-            gridClass: "md:col-span-1 md:row-span-2 aspect-[3/4] md:aspect-auto"
-        },
-        { 
-            src: "/landing-page-images/chaos1.jpg", 
-            alt: "Chaos", 
-            title: "Architecture Studio Life",
-            gridClass: "md:col-span-1 md:row-span-1 aspect-square md:aspect-auto"
-        },
-        { 
-            src: "/landing-page-images/trip2.jpg", 
-            alt: "Trip 2", 
-            title: "Mountain Treks",
-            gridClass: "md:col-span-2 md:row-span-1 aspect-[16/9] md:aspect-auto"
-        },
-        { 
-            src: "/landing-page-images/random1.jpg", 
-            alt: "Random", 
-            title: "Random Moments",
-            gridClass: "md:col-span-3 md:row-span-1 aspect-[21/9] md:aspect-auto"
-        },
-    ];
+const defaultGalleryImages = [
+    { 
+        id: '1',
+        image: "/landing-page-images/DSC_0180.JPG", 
+        title: "Campus Vibes",
+        gridSpan: "md:col-span-2 md:row-span-2 aspect-square md:aspect-auto"
+    },
+    { 
+        id: '2',
+        image: "/landing-page-images/trip1.jpg", 
+        title: "Weekend Getaway",
+        gridSpan: "md:col-span-1 md:row-span-1 aspect-[4/5] md:aspect-auto"
+    },
+    { 
+        id: '3',
+        image: "/landing-page-images/event1.jpg", 
+        title: "Virasat'26 Planning",
+        gridSpan: "md:col-span-1 md:row-span-2 aspect-[3/4] md:aspect-auto"
+    },
+    { 
+        id: '4',
+        image: "/landing-page-images/chaos1.jpg", 
+        title: "Architecture Studio Life",
+        gridSpan: "md:col-span-1 md:row-span-1 aspect-square md:aspect-auto"
+    },
+    { 
+        id: '5',
+        image: "/landing-page-images/trip2.jpg", 
+        title: "Mountain Treks",
+        gridSpan: "md:col-span-2 md:row-span-1 aspect-[16/9] md:aspect-auto"
+    },
+    { 
+        id: '6',
+        image: "/landing-page-images/random1.jpg", 
+        title: "Random Moments",
+        gridSpan: "md:col-span-3 md:row-span-1 aspect-[21/9] md:aspect-auto"
+    },
+];
 
-   // Update these string paths and URLs with your actual profile links and image assets
-    // Replace 'abhay-130' and the placeholders below with your exact handles/usernames
+const SocialLifePage: React.FC = () => {
+    const [galleryPosts, setGalleryPosts] = useState<SocialMediaPost[]>(defaultGalleryImages);
+
+    useEffect(() => {
+        // GROQ Query to fetch Sanity Social Posts sorted by newest date
+        const query = `*[_type == "socialPost"] | order(date desc) {
+            "id": _id,
+            title,
+            location,
+            "image": image.asset->url,
+            youtubeUrl,
+            gridSpan
+        }`;
+
+        sanityClient
+            .fetch(query)
+            .then((data: SocialMediaPost[]) => {
+                if (data && data.length > 0) {
+                    setGalleryPosts(data);
+                }
+            })
+            .catch((err) => {
+                console.warn("Sanity social posts fetch error (using fallback items):", err);
+            });
+    }, []);
+
     const socialLinks = [
         { 
             name: 'LinkedIn', 
@@ -144,7 +176,6 @@ const SocialLifePage: React.FC = () => {
     };
 
     return (
-        /* Adjusted margins and padding to match Footer exactly */
         <main className="max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
             {/* --- HERO SECTION --- */}
             <section className="sm:pb-16 md:pb-24 flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 lg:gap-12 w-full">
@@ -168,12 +199,12 @@ const SocialLifePage: React.FC = () => {
                 <div className="flex-1 flex justify-center lg:justify-end w-full">
                     <div className="relative group">
                         <img 
-                            src="/landing-page-images/DSC_0180.JPG" 
+                            src={galleryPosts[0]?.image || "/landing-page-images/DSC_0180.JPG"} 
                             alt="Featured Moment" 
                             className="rounded-[2rem] object-cover w-full max-w-[600px] h-[400px] shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]" 
                         />
                         <div className="absolute -bottom-4 -right-4 bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-xl hidden sm:block">
-                            <p className="font-bold text-sm">📍 IIT Roorkee</p>
+                            <p className="font-bold text-sm">📍 {galleryPosts[0]?.location || 'IIT Roorkee'}</p>
                         </div>
                     </div>
                 </div>
@@ -191,18 +222,14 @@ const SocialLifePage: React.FC = () => {
                             rel="noopener noreferrer"
                             className={`group/btn flex flex-col items-center justify-center gap-2.5 w-52 h-32 text-xs font-semibold uppercase tracking-wider bg-transparent rounded-2xl border border-gray-200 dark:border-white/10 text-light-text-muted dark:text-dark-text-muted transition-all duration-300 ${link.color} hover:-translate-y-1 hover:shadow-lg hover:shadow-black/[0.03] dark:hover:shadow-white/[0.02]`}
                         >
-                            {/* Profile Image Container inside the Chip */}
                             <div className="w-12 h-12 rounded-full flex items-center justify-center bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-white/20 scale-100 group-hover/btn:scale-110 transition-transform duration-300 shrink-0">
                                 {link.icon}
                             </div>
-                            
-                            {/* Chip Label */}
                             <span className="font-sans font-bold tracking-widest text-[11px] text-center">{link.name}</span>
                         </a>
                     ))}
                 </div>
             </section>
-
 
             {/* --- GALLERY GRID SECTION (ASYMMETRIC MASONRY STYLE) --- */}
             <section id="gallery-grid" className="py-16">
@@ -211,25 +238,48 @@ const SocialLifePage: React.FC = () => {
                     <h3 className="text-xl sm:text-2xl font-bold tracking-tight uppercase font-sans mt-1">Staggered Perspectives</h3>
                 </div>
 
-                {/* 3-Column Complex Grid Framework with Defined Row Increments */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[280px]">
-                    {galleryImages.map((image, index) => (
+                    {galleryPosts.map((post) => (
                         <div 
-                            key={index} 
-                            className={`group relative overflow-hidden rounded-[24px] bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 ${image.gridClass}`}
+                            key={post.id} 
+                            className={`group relative overflow-hidden rounded-[24px] bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 ${post.gridSpan || 'md:col-span-1 md:row-span-1'}`}
                         >
-                            <img 
-                                src={image.src} 
-                                alt={image.alt} 
-                                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter grayscale group-hover:grayscale-0"
-                            />
-                            {/* Linear Shadow Scrim Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
+                            {post.youtubeUrl ? (
+                                <a href={post.youtubeUrl} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                                    <img 
+                                        src={post.image} 
+                                        alt={post.title} 
+                                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                    />
+                                    {/* Play Overlay Icon for Video Links */}
+                                    <div className="absolute inset-0 flex items-center justify-center z-20">
+                                        <div className="w-12 h-12 rounded-full bg-theme-red/90 text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 ml-0.5">
+                                                <path fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+                            ) : (
+                                <img 
+                                    src={post.image} 
+                                    alt={post.title} 
+                                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                />
+                            )}
                             
-                            {/* Visual Title Details on Hover */}
-                            <div className="absolute inset-0 p-6 flex flex-col justify-end z-10">
+                            {/* Linear Shadow Scrim Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                            
+                            {/* Visual Title & Location Details on Hover */}
+                            <div className="absolute inset-0 p-6 flex flex-col justify-end z-10 pointer-events-none">
+                                {post.location && (
+                                    <p className="text-xs text-theme-red font-bold uppercase tracking-widest mb-1">
+                                        📍 {post.location}
+                                    </p>
+                                )}
                                 <h4 className="text-white font-bold text-base sm:text-lg tracking-wide font-sans translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                    {image.title}
+                                    {post.title}
                                 </h4>
                             </div>
                         </div>
