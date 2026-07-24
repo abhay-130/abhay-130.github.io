@@ -1,5 +1,7 @@
+/// <reference types="vite/client" />
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { PortableText, PortableTextComponents } from '@portabletext/react';
 import { sanityClient } from './data/sanityClient';
 import { blogArticles } from './data/blogData';
 
@@ -10,9 +12,73 @@ interface ArticleDetail {
     category: string;
     description?: string;
     content?: string;
+    body?: any; // Sanity PortableText block content
     image: string;
     youtubeUrl?: string;
 }
+
+// Custom components to style PortableText elements (Headings, Bold, Quotes, Lists)
+const portableTextComponents: PortableTextComponents = {
+    block: {
+        h2: ({ children }) => (
+            <h2 className="text-2xl sm:text-3xl font-extrabold mt-10 mb-4 tracking-tight text-light-text dark:text-dark-text">
+                {children}
+            </h2>
+        ),
+        h3: ({ children }) => (
+            <h3 className="text-xl sm:text-2xl font-bold mt-8 mb-3 tracking-tight text-light-text dark:text-dark-text">
+                {children}
+            </h3>
+        ),
+        normal: ({ children }) => (
+            <p className="text-base sm:text-lg leading-relaxed mb-6 text-light-text-muted dark:text-dark-text-muted">
+                {children}
+            </p>
+        ),
+        blockquote: ({ children }) => (
+            <blockquote className="border-l-4 border-theme-red pl-6 py-2 italic my-8 text-lg text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-white/5 rounded-r-2xl">
+                {children}
+            </blockquote>
+        ),
+    },
+    list: {
+        bullet: ({ children }) => (
+            <ul className="list-disc list-outside ml-6 mb-6 space-y-2 text-light-text-muted dark:text-dark-text-muted">
+                {children}
+            </ul>
+        ),
+        number: ({ children }) => (
+            <ol className="list-decimal list-outside ml-6 mb-6 space-y-2 text-light-text-muted dark:text-dark-text-muted">
+                {children}
+            </ol>
+        ),
+    },
+    marks: {
+        strong: ({ children }) => (
+            <strong className="font-extrabold text-black dark:text-white">
+                {children}
+            </strong>
+        ),
+        em: ({ children }) => (
+            <em className="italic">{children}</em>
+        ),
+        code: ({ children }) => (
+            <code className="bg-gray-100 dark:bg-gray-800 text-theme-red px-2 py-0.5 rounded text-sm font-mono">
+                {children}
+            </code>
+        ),
+        link: ({ value, children }) => (
+            <a
+                href={value?.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-theme-red underline hover:opacity-80 transition-opacity"
+            >
+                {children}
+            </a>
+        ),
+    },
+};
 
 const BlogPostPage: React.FC = () => {
     // 1. Get the ID or Slug from the URL
@@ -27,13 +93,14 @@ const BlogPostPage: React.FC = () => {
 
         if (!id) return;
 
-        // Query Sanity by _id or slug
+        // Query Sanity by _id or slug including rich text body
         const query = `*[_type == "post" && (_id == $id || slug.current == $id)][0] {
             "id": _id,
             title,
             date,
             category,
             description,
+            body,
             "image": mainImage.asset->url,
             youtubeUrl
         }`;
@@ -113,11 +180,17 @@ const BlogPostPage: React.FC = () => {
                 ) : null}
             </div>
 
-            {/* Content Body */}
-            <article className="prose prose-lg dark:prose-invert mx-auto">
-                <p className="text-lg sm:text-xl leading-relaxed text-light-text dark:text-dark-text whitespace-pre-line">
-                    {article.description || article.content}
-                </p>
+            {/* Content Body — UPDATED TO w-full TO ALIGN WITH IMAGE EDGES */}
+            <article className="max-w-[870px] mx-auto">
+                {article.body ? (
+                    /* Sanity Rich Block Content (Supports H2, H3, Bold, Lists, Quotes) */
+                    <PortableText value={article.body} components={portableTextComponents} />
+                ) : (
+                    /* Fallback Plain Text Renderer */
+                    <p className="text-lg sm:text-xl leading-relaxed text-light-text dark:text-dark-text whitespace-pre-line">
+                        {article.description || article.content}
+                    </p>
+                )}
             </article>
 
             {/* --- BOTTOM NAVIGATION --- */}

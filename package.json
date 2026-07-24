@@ -13,6 +13,7 @@
     "add-image": "node scripts/copyImage.js"
   },
   "dependencies": {
+    "@portabletext/react": "^7.0.1",
     "@sanity/client": "^7.24.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
