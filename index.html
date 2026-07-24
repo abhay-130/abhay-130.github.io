@@ -1,12 +1,25 @@
-
 <!DOCTYPE html>
 <html lang="en" class="">
   <head>
     <meta charset="UTF-8" />
-    <!-- ADD OR UPDATE THIS LINE FOR YOUR LOGO -->
-    <link rel="icon" type="image/png" href="./my-website-favicon.png" />
+    <link rel="icon" type="image/png" href="/my-website-favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AbhaYKishor</title>
+    <title>abhaykishor.me</title>
+
+    <!-- SPA GitHub Pages Redirect Restoration Script -->
+    <script type="text/javascript">
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,9 +45,8 @@
         }
       }
     </script>
-    <!-- Removed importmap to allow Vite to use local React packages instead of CDN builds -->
-  <script type="module" crossorigin src="./assets/index-B3Am9Kbl.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DmXf4EkF.css">
+  <script type="module" crossorigin src="/assets/index-BB8LnWSS.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DmXf4EkF.css">
 </head>
   <body>
     <div id="root"></div>
