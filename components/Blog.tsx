@@ -16,6 +16,20 @@ interface BlogArticle {
 const Blog: React.FC = () => {
     const [articles, setArticles] = useState<BlogArticle[]>([]);
 
+    // Format date string to "13-May-2026"
+    const formatDate = (dateStr: string): string => {
+        if (!dateStr) return '';
+        const d = new Date(dateStr);
+        if (isNaN(d.getTime())) return dateStr;
+
+        const day = String(d.getDate()).padStart(2, '0');
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const month = monthNames[d.getMonth()];
+        const year = d.getFullYear();
+
+        return `${day}-${month}-${year}`;
+    };
+
     // Helper function to sort articles by date (newest first)
     const sortArticlesByNewest = (items: BlogArticle[]): BlogArticle[] => {
         return [...items].sort((a, b) => {
@@ -86,7 +100,13 @@ const Blog: React.FC = () => {
                 {mainArticle && (
                     <div className="lg:w-2/3">
                         <Link to={`/blogs/${mainArticle.id}`}>
-                            <div className="w-full aspect-[16/9] overflow-hidden rounded-3xl mb-4 sm:mb-6 bg-black/5 dark:bg-white/5">
+                            <div className="relative w-full aspect-[16/9] overflow-hidden rounded-3xl mb-4 sm:mb-6 bg-black/5 dark:bg-white/5">
+                                {/* Category Badge on Top-Left */}
+                                {mainArticle.category && (
+                                    <span className="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border border-white/20">
+                                        {mainArticle.category}
+                                    </span>
+                                )}
                                 <img 
                                     src={mainArticle.image} 
                                     alt={mainArticle.title} 
@@ -94,14 +114,22 @@ const Blog: React.FC = () => {
                                 />
                             </div>
                         </Link>
+                        {/* Formatted Date */}
                         <p className="text-sm sm:text-base md:text-lg text-light-text-muted dark:text-dark-text-muted mb-2">
-                            {mainArticle.date}
+                            {formatDate(mainArticle.date)}
                         </p>
                         <Link to={`/blogs/${mainArticle.id}`}>
-                            <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug hover:text-theme-red transition-colors cursor-pointer">
+                            <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug hover:text-theme-red transition-colors cursor-pointer mb-3">
                                 {mainArticle.title}
                             </h3>
                         </Link>
+
+                        {/* Starting 2-3 lines description */}
+                        {mainArticle.description && (
+                            <p className="text-sm sm:text-base md:text-lg text-light-text-muted dark:text-dark-text-muted leading-relaxed line-clamp-3">
+                                {mainArticle.description}
+                            </p>
+                        )}
                     </div>
                 )}
 
@@ -110,7 +138,13 @@ const Blog: React.FC = () => {
                     {sideArticles.map((article) => (
                         <div key={article.id} className="flex flex-col">
                             <Link to={`/blogs/${article.id}`}>
-                                <div className="w-full aspect-[16/10] overflow-hidden rounded-xl mb-2 bg-black/5 dark:bg-white/5">
+                                <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl mb-2 bg-black/5 dark:bg-white/5">
+                                    {/* Category Badge on Top-Left */}
+                                    {article.category && (
+                                        <span className="absolute top-3 left-3 z-10 bg-black/60 backdrop-blur-md text-white text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-white/20">
+                                            {article.category}
+                                        </span>
+                                    )}
                                     <img 
                                         src={article.image} 
                                         alt={article.title} 
@@ -118,8 +152,9 @@ const Blog: React.FC = () => {
                                     />
                                 </div>
                             </Link>
+                            {/* Formatted Date */}
                             <p className="text-xs sm:text-sm text-light-text-muted dark:text-dark-text-muted mb-1">
-                                {article.date}
+                                {formatDate(article.date)}
                             </p>
                             <Link to={`/blogs/${article.id}`}>
                                 <h4 className="text-base sm:text-lg md:text-xl font-semibold leading-normal hover:text-theme-red transition-colors cursor-pointer">
