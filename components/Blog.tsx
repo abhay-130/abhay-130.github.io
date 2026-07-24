@@ -1,30 +1,65 @@
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { sanityClient } from './data/sanityClient';
+import { blogArticles as staticBlogArticles } from './data/blogData';
 
-import React from 'react';
-
-const blogArticles = [
-    {
-        image: '/blog-images/landingpage-blogs-images/IMG_9832.jpg',
-        date: '24 APR 2024',
-        title: 'Why Ancient Indian Cities Were Smarter Than Us',
-        isMain: true,
-    },
-    {
-        image: '/blog-images/landingpage-blogs-images/IMG_9988.jpeg',
-        date: '20 APR 2024',
-        title: 'Lost in Transit: My Adventures Outside Roorkee',
-        isMain: false,
-    },
-    {
-        image: '/blog-images/landingpage-blogs-images/muhchodi.jpg',
-        date: '15 APR 2024',
-        title: 'Surviving IIT Roorkee: Dosti, trips & Deadlines',
-        isMain: false,
-    },
-];
+interface BlogArticle {
+    id: string;
+    title: string;
+    date: string;
+    category?: string;
+    description?: string;
+    image: string;
+    youtubeUrl?: string;
+}
 
 const Blog: React.FC = () => {
-    const mainArticle = blogArticles.find(a => a.isMain);
-    const sideArticles = blogArticles.filter(a => !a.isMain);
+    const [articles, setArticles] = useState<BlogArticle[]>([]);
+
+    // Helper function to sort articles by date (newest first)
+    const sortArticlesByNewest = (items: BlogArticle[]): BlogArticle[] => {
+        return [...items].sort((a, b) => {
+            const dateA = new Date(a.date).getTime();
+            const dateB = new Date(b.date).getTime();
+
+            if (isNaN(dateA) || isNaN(dateB)) {
+                return b.date.localeCompare(a.date);
+            }
+            return dateB - dateA;
+        });
+    };
+
+    useEffect(() => {
+        // Fetch latest 3 blog posts from Sanity sorted by date descending
+        const query = `*[_type == "post"] | order(date desc)[0...3] {
+            "id": coalesce(slug.current, _id),
+            title,
+            date,
+            category,
+            description,
+            "image": mainImage.asset->url,
+            youtubeUrl
+        }`;
+
+        sanityClient
+            .fetch(query)
+            .then((data: BlogArticle[]) => {
+                if (data && data.length > 0) {
+                    setArticles(sortArticlesByNewest(data));
+                } else {
+                    setArticles(sortArticlesByNewest(staticBlogArticles));
+                }
+            })
+            .catch((error) => {
+                console.warn("Sanity fetch error (falling back to static blog data):", error);
+                setArticles(sortArticlesByNewest(staticBlogArticles));
+            });
+    }, []);
+
+    // Main featured post is the newest one (index 0)
+    const mainArticle = articles.length > 0 ? articles[0] : null;
+    // Side posts are the next 2 recent posts
+    const sideArticles = articles.slice(1, 3);
 
     return (
         <section id="blogs" className="w-full">
@@ -32,38 +67,65 @@ const Blog: React.FC = () => {
                 {/* Left Side: Text */}
                 <div>
                     <p className="text-xs sm:text-base font-medium uppercase tracking-[2px] sm:tracking-[3px]">Our Corner</p>
-                    {/* Adjusted text sizes: text-xl for mobile, text-2xl for larger phones, scaling up for desktop */}
                     <h2 className="text-xl min-[400px]:text-2xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold -tracking-wide leading-tight">
                         Latest Blog/Articles
                     </h2>
                 </div>
 
                 {/* Right Side: Button */}
-                {/* Removed mt-4, added whitespace-nowrap, reduced mobile padding/text */}
-                <a 
-                    href="#" 
+                <Link 
+                    to="/blogs" 
                     className="whitespace-nowrap px-3 py-1.5 sm:px-6 sm:py-3 text-xs sm:text-base rounded-full border-2 border-theme-red font-semibold hover:bg-theme-red hover:text-white dark:hover:text-dark-text transition-colors"
                 >
                     EXPLORE MORE
-                </a>
+                </Link>
             </div>
 
             <div className="flex flex-col lg:flex-row gap-8 sm:gap-10 lg:gap-12">
+                {/* Featured Main Article */}
                 {mainArticle && (
                     <div className="lg:w-2/3">
-                        <img src={mainArticle.image} alt={mainArticle.title} className="w-full h-auto object-cover rounded-3xl mb-4 sm:mb-6" />
-                        <p className="text-sm sm:text-base md:text-lg text-light-text-muted dark:text-dark-text-muted mb-2">{mainArticle.date}</p>
-                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug hover:text-theme-red transition-colors cursor-pointer">
-                            <span className="font-semibold italic">Why Ancient Indian Cities Were Smarter </span> Than Us, <span className="font-normal">The story of the design</span>
-                        </h3>
+                        <Link to={`/blogs/${mainArticle.id}`}>
+                            <div className="w-full aspect-[16/9] overflow-hidden rounded-3xl mb-4 sm:mb-6 bg-black/5 dark:bg-white/5">
+                                <img 
+                                    src={mainArticle.image} 
+                                    alt={mainArticle.title} 
+                                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                                />
+                            </div>
+                        </Link>
+                        <p className="text-sm sm:text-base md:text-lg text-light-text-muted dark:text-dark-text-muted mb-2">
+                            {mainArticle.date}
+                        </p>
+                        <Link to={`/blogs/${mainArticle.id}`}>
+                            <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug hover:text-theme-red transition-colors cursor-pointer">
+                                {mainArticle.title}
+                            </h3>
+                        </Link>
                     </div>
                 )}
-                <div className="lg:w-1/3 flex flex-col gap-4 sm:gap-6">
-                    {sideArticles.map((article, index) => (
-                        <div key={index} className="flex flex-col">
-                            <img src={article.image} alt={article.title} className="w-full h-auto object-cover rounded-xl mb-2" />
-                            <p className="text-xs sm:text-sm text-light-text-muted dark:text-dark-text-muted mb-1">{article.date}</p>
-                            <h4 className="text-base sm:text-lg md:text-xl font-semibold leading-normal hover:text-theme-red transition-colors cursor-pointer">{article.title}</h4>
+
+                {/* Side Articles */}
+                <div className="lg:w-1/3 flex flex-col gap-6 sm:gap-8">
+                    {sideArticles.map((article) => (
+                        <div key={article.id} className="flex flex-col">
+                            <Link to={`/blogs/${article.id}`}>
+                                <div className="w-full aspect-[16/10] overflow-hidden rounded-xl mb-2 bg-black/5 dark:bg-white/5">
+                                    <img 
+                                        src={article.image} 
+                                        alt={article.title} 
+                                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                                    />
+                                </div>
+                            </Link>
+                            <p className="text-xs sm:text-sm text-light-text-muted dark:text-dark-text-muted mb-1">
+                                {article.date}
+                            </p>
+                            <Link to={`/blogs/${article.id}`}>
+                                <h4 className="text-base sm:text-lg md:text-xl font-semibold leading-normal hover:text-theme-red transition-colors cursor-pointer">
+                                    {article.title}
+                                </h4>
+                            </Link>
                         </div>
                     ))}
                 </div>
