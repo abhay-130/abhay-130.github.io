@@ -125,14 +125,21 @@ const ContactPage: React.FC = () => {
 
   return (
     <main className="max-w-[1240px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4">
-      {/* Endless Driving Keyframes */}
+      {/* Dynamic Keyframes for Car & Wheel Rotation */}
       <style>{`
-        @keyframes runEndless {
-          0% { transform: translateX(-150px); }
-          100% { transform: translateX(calc(100vw + 150px)); }
+        @keyframes endlessDrive {
+          0% { transform: translateX(-240px); }
+          100% { transform: translateX(calc(100vw + 240px)); }
+        }
+        @keyframes rotateWheel {
+          100% { transform: rotate(360deg); }
         }
         .animate-mustang-drive {
-          animation: runEndless 12s linear infinite;
+          animation: endlessDrive 12s linear infinite;
+        }
+        .animate-wheel-spin {
+          animation: rotateWheel 0.35s linear infinite;
+          transform-origin: center;
         }
       `}</style>
 
@@ -277,7 +284,7 @@ const ContactPage: React.FC = () => {
           </div>
         </div>
 
-        {/* --- CREATIVE QUOTE BOX (Cleaned without red hover glow) --- */}
+        {/* --- CREATIVE QUOTE BOX --- */}
         <div className="w-full p-8 rounded-[2.5rem] bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/10 relative overflow-hidden">
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="max-w-2xl">
@@ -298,29 +305,56 @@ const ContactPage: React.FC = () => {
           </div>
         </div>
 
-        {/* --- STANDALONE ENDLESS 1969 FORD MUSTANG DRIVE (Positioned directly below quote box) --- */}
-        <div className="w-full relative h-12 overflow-hidden border-b border-black/10 dark:border-white/10 flex items-end">
+        {/* --- STANDALONE ENDLESS 1969 MUSTANG DRIVE WITH STABLE ROTATING WHEELS --- */}
+        <div className="w-full relative h-16 overflow-hidden border-b border-black/10 dark:border-white/10 flex items-end">
           
-          {/* Animated 1969 Mustang Silhouette */}
-          <div className="animate-mustang-drive absolute bottom-0">
-            <svg className="w-24 h-10" viewBox="0 0 160 50">
-              {/* Body in 1969 Dark Green */}
-              <path 
-                d="M 10 38 L 22 38 C 24 32, 38 32, 40 38 L 110 38 C 112 32, 126 32, 128 38 L 150 38 L 155 30 L 138 18 L 95 14 L 50 18 L 20 28 Z" 
-                className="fill-[#1b382b] dark:fill-[#2d523e]" 
-              />
-              {/* Fastback Roofline & Windows */}
-              <path 
-                d="M 52 19 L 92 16 L 132 20 L 115 30 L 52 30 Z" 
-                className="fill-sky-200/40 dark:fill-sky-900/60" 
-              />
-              {/* Chrome Side Accent Strip */}
-              <path d="M 45 32 L 105 32" stroke="#d1d5db" strokeWidth="1.5" />
-              {/* Wheels */}
-              <circle cx="31" cy="38" r="7" className="fill-gray-900 stroke-gray-400" strokeWidth="2" />
-              <circle cx="119" cy="38" r="7" className="fill-gray-900 stroke-gray-400" strokeWidth="2" />
-              <circle cx="31" cy="38" r="2.5" className="fill-gray-300" />
-              <circle cx="119" cy="38" r="2.5" className="fill-gray-300" />
+          <style>{`
+            @keyframes endlessDrive {
+              0% { transform: translateX(-240px); }
+              100% { transform: translateX(calc(100vw + 240px)); }
+            }
+            @keyframes spinWheel {
+              100% { transform: rotate(360deg); }
+            }
+            .animate-mustang-drive {
+              animation: endlessDrive 12s linear infinite;
+            }
+            .animate-wheel-spin {
+              animation: spinWheel 0.35s linear infinite;
+              transform-box: fill-box;
+              transform-origin: center;
+            }
+          `}</style>
+
+          <div className="animate-mustang-drive absolute bottom-1">
+            <svg 
+              className="w-48 h-auto fill-current text-black dark:text-white" 
+              viewBox="0 0 234 64" 
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {/* Main Mustang Body & Fastback Chassis */}
+              <path d="M231.262 28.1456L226.382 25.7056L222.16 24.9746C200.628 20.6036 178.676 18.6386 156.71 19.1176L152.491 19.2096L132.367 4.60662C128.142 1.54062 123.037 -0.074369 117.817 0.00263097L83.964 0.501624C75.302 0.629624 66.778 2.69763 59.02 6.55363L43.36 14.3376L13.872 16.2576C10.297 16.4906 6.815 17.4996 3.67 19.2156L2.685 19.7526C1.294 20.5116 0.352999 21.8616 0.0859985 23.3906H65.688C68.582 23.3906 71.459 23.7956 74.241 24.5936L79.517 26.1086C81.969 26.8126 84.504 27.1906 87.053 27.2326C87.053 27.2326 98.434 26.7366 150.373 28.4866C150.379 28.4866 87.021 29.1806 87.021 29.1806C84.301 29.1366 81.596 28.7326 78.979 27.9816L73.703 26.4666C71.096 25.7186 68.399 25.3386 65.688 25.3386H0V26.5936C0 26.7556 0.0399962 26.9146 0.117996 27.0576C1.439 29.4956 3.13899 31.7076 5.15599 33.6106L5.881 34.2946C6.222 34.6156 6.41499 35.0636 6.41499 35.5316V37.7166C6.41499 38.2906 6.64599 38.8406 7.05499 39.2426C9.58399 41.7266 12.884 43.2746 16.41 43.6316L30.206 45.0286C31.909 38.6166 36.963 33.6366 43.399 32.0266L44.534 31.7426C45.048 31.6136 45.577 31.5486 46.107 31.5486H55.274C63.493 31.5486 70.155 38.2116 70.155 46.4296V52.2536H126.913L129.836 53.9586H166.538L166.945 51.7576C168.184 45.0516 172.248 39.2016 178.099 35.6996L178.21 35.6336C179.669 34.7606 181.303 34.3086 182.969 34.3086H194.649C202.129 34.3086 208.193 40.3726 208.193 47.8526V51.0356L214.377 50.0636C217.777 49.5296 220.988 48.1446 223.71 46.0376L225.49 44.6596C226.052 44.2256 226.38 43.5546 226.38 42.8446V42.1626C226.38 41.5486 226.607 40.9566 227.018 40.5006L229.823 37.3846C230.423 36.7186 231.277 36.3376 232.173 36.3376H232.318C232.985 36.3376 233.525 35.7976 233.525 35.1306V31.8066C233.528 30.2596 232.651 28.8396 231.262 28.1456ZM74.848 14.8456L70.156 14.6226L79.519 8.54063C83.833 5.73763 88.798 4.12363 93.915 3.83463L84.129 17.1316C81.215 15.7776 78.064 14.9986 74.848 14.8456ZM95.734 25.3806H89.482V24.7186C89.482 23.9636 90.095 23.3506 90.85 23.3506H94.367C95.122 23.3506 95.735 23.9626 95.735 24.7186V25.3806H95.734ZM143.585 20.5906H96.908C94.669 20.5906 92.451 20.2776 90.308 19.6866L90.129 18.2226C89.893 16.2876 90.332 14.3316 91.372 12.6836L96.989 3.78263H117.655C122.473 3.78263 127.155 5.37763 130.971 8.31963L144.272 18.5736C145.123 19.2296 144.659 20.5906 143.585 20.5906ZM17.864 31.5526H9.013L6.33299 28.0606H17.863V31.5526H17.864ZM226.353 36.2436L224.915 37.7356C224.672 37.9876 224.338 38.1296 223.988 38.1296H216.731C216.077 38.1296 215.526 37.6386 215.452 36.9886L215.329 35.9166C215.291 35.5816 215.553 35.2876 215.89 35.2876H225.946C226.445 35.2876 226.699 35.8856 226.353 36.2436Z" />
+
+              {/* Perfectly Aligned Front Wheel (Center: 51, 46.5) */}
+              <g className="animate-wheel-spin">
+                <circle cx="51" cy="46.5" r="12" className="fill-black dark:fill-white" />
+                <circle cx="51" cy="46.5" r="8" className="fill-white dark:fill-black" />
+                <circle cx="51" cy="46.5" r="3" className="fill-black dark:fill-white" />
+                {/* Wheel Spokes */}
+                <line x1="51" y1="38.5" x2="51" y2="54.5" stroke="currentColor" strokeWidth="2" />
+                <line x1="43" y1="46.5" x2="59" y2="46.5" stroke="currentColor" strokeWidth="2" />
+              </g>
+
+              {/* Perfectly Aligned Rear Wheel (Center: 188.5, 47.5) */}
+              <g className="animate-wheel-spin">
+                <circle cx="188.5" cy="47.5" r="12" className="fill-black dark:fill-white" />
+                <circle cx="188.5" cy="47.5" r="8" className="fill-white dark:fill-black" />
+                <circle cx="188.5" cy="47.5" r="3" className="fill-black dark:fill-white" />
+                {/* Wheel Spokes */}
+                <line x1="188.5" y1="39.5" x2="188.5" y2="55.5" stroke="currentColor" strokeWidth="2" />
+                <line x1="180.5" y1="47.5" x2="196.5" y2="47.5" stroke="currentColor" strokeWidth="2" />
+              </g>
             </svg>
           </div>
 
