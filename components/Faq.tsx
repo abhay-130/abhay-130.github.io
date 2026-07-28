@@ -92,10 +92,6 @@ const Faq: React.FC = () => {
                 {/* Quick Stats Grid */}
                 <div className="grid grid-cols-2 gap-3 w-full max-w-md my-1">
                     <div className="p-3 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
-                        <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-light-text-muted dark:text-dark-text-muted">Active Time</p>
-                        <p className="text-xs sm:text-sm font-extrabold text-light-text dark:text-dark-text mt-0.5"> 21 Hours</p>
-                    </div>
-                    <div className="p-3 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
                         <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-light-text-muted dark:text-dark-text-muted">Base Location</p>
                         <p className="text-xs sm:text-sm font-extrabold text-light-text dark:text-dark-text mt-0.5">IIT Roorkee, INDIA</p>
                     </div>
