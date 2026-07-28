@@ -300,7 +300,7 @@ const ContactPage: React.FC = () => {
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="max-w-2xl">
               <span className="text-[10px] font-mono font-bold uppercase tracking-[3px] text-theme-red block mb-2">
-                Studio Philosophy // 01
+                Studio Philosophy // YA
               </span>
               <p className="text-lg sm:text-xl font-medium italic font-serif leading-relaxed text-light-text dark:text-dark-text">
                 "Architecture is physical syntax. Code is digital logic. Cinema is human emotion. At their intersection lies everything worth building."
