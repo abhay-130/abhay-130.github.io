@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { FaqItem } from '../types';
 
@@ -41,20 +40,30 @@ const FaqAccordionItem: React.FC<{ item: FaqItem }> = ({ item }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="border-b border-gray-300 dark:border-gray-700 pt-0 sm:py-4">
+        <div className="border-b border-gray-300 dark:border-gray-700 py-4 sm:py-5">
             <button
-                className="w-full flex justify-between items-center text-left gap-3 sm:gap-4"
+                className="w-full flex justify-between items-center text-left gap-3 sm:gap-4 group"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                <h3 className={`flex-1 text-base sm:text-lg md:text-xl font-bold ${isOpen ? 'text-theme-red' : ''}`}>{item.question}</h3>
-                <div className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-theme-red text-white transition-transform duration-300 ${isOpen ? 'rotate-90' : 'rotate-0'}`}>
+                <h3 className={`flex-1 text-base sm:text-lg md:text-xl font-bold transition-colors ${
+                    isOpen ? 'text-theme-red' : 'text-light-text dark:text-dark-text group-hover:text-theme-red'
+                }`}>
+                    {item.question}
+                </h3>
+                <div className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center flex-shrink-0 rounded-full bg-theme-red text-white transition-transform duration-300 ${
+                    isOpen ? 'rotate-90' : 'rotate-0'
+                }`}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                 </div>
             </button>
-            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 mt-3 sm:mt-4' : 'max-h-0'}`}>
-                <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed">{item.answer}</p>
+            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                isOpen ? 'max-h-96 mt-3 sm:mt-4' : 'max-h-0'
+            }`}>
+                <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed">
+                    {item.answer}
+                </p>
             </div>
         </div>
     );
@@ -62,24 +71,39 @@ const FaqAccordionItem: React.FC<{ item: FaqItem }> = ({ item }) => {
 
 const Faq: React.FC = () => {
     return (
-        <section id="faq" className="flex flex-col md:flex-row items-start gap-8 sm:gap-10 lg:gap-12 w-full">
-            {/* Left Side: Sticky Header */}
-            <div className="md:w-1/3 flex flex-col items-start gap-4 sm:gap-6 md:sticky md:top-24 w-full">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight">Frequently Asked Questions</h2>
-                <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed">
-                    Can't find the answer you're looking for? Please chat with our friendly team.
+        /* Changed items-start to items-center for vertical alignment along the yellow center line */
+        <section id="faq" className="flex flex-col md:flex-row items-center justify-between gap-8 sm:gap-10 lg:gap-12 w-full py-6">
+            
+            {/* Left Side: Updated Container Design aligned with center line */}
+            <div className="md:w-5/12 flex flex-col items-start gap-4 sm:gap-5 w-full">
+                <span className="text-xs font-mono font-bold uppercase tracking-[4px] text-theme-red">
+                    FAQ // Help
+                </span>
+
+                <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black -tracking-wide leading-[1.12] text-light-text dark:text-dark-text">
+                    Frequently <br className="hidden sm:inline" />
+                    Asked Questions
+                </h2>
+
+                <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed max-w-md">
+                    Can't find the answer you're looking for? Feel free to reach out to our team directly.
                 </p>
-                <a href="#contact" className="mt-4 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base rounded-full border-2 border-light-text dark:border-dark-text font-semibold hover:bg-light-text hover:text-white dark:hover:bg-dark-text dark:hover:text-dark-bg transition-colors">
-                    Ask More
+
+                <a 
+                    href="#contact" 
+                    className="mt-2 px-6 py-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider rounded-full border border-black dark:border-white text-light-text dark:text-dark-text hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 shadow-sm"
+                >
+                    ASK MORE →
                 </a>
             </div>
 
-            {/* Right Side: Scrollable List */}
-            <div className="md:w-2/3 mt-8 md:mt-0 h-auto md:h-[360px] overflow-y-auto pr-0 md:pr-4 custom-scrollbar w-full">
+            {/* Right Side: Unchanged Question Container */}
+            <div className="md:w-7/12 h-auto md:h-[420px] overflow-y-auto pr-0 md:pr-4 custom-scrollbar w-full">
                 {faqData.map((item, index) => (
                     <FaqAccordionItem key={index} item={item} />
                 ))}
             </div>
+
         </section>
     );
 };
