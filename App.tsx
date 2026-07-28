@@ -12,7 +12,6 @@ import Blog from './components/Blog';
 import Contact from './components/Contact';
 import CurtainCall from './components/CurtainCall';
 import Footer from './components/Footer';
-// import ThemeToggle from './components/ThemeToggle'; // Removed since it's in Header now
 import AboutPage from './components/AboutPage';
 import ProjectsPage from './components/ProjectsPage';
 import SocialLifePage from './components/SocialLifePage';
@@ -20,7 +19,7 @@ import ServicesPage from './components/ServicesPage';
 import BlogsPage from './components/BlogsPage';
 import ContactPage from './components/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
-import BlogPostPage from './components/BlogPostPage.tsx';
+import BlogPostPage from './components/BlogPostPage';
 import TermsPage from './components/TermsPage';
 import PrivacyPage from './components/PrivacyPage';
 
@@ -83,7 +82,7 @@ const App: React.FC = () => {
     <div className="bg-white dark:bg-dark-bg text-light-text dark:text-dark-text font-poppins transition-colors duration-400 ease-in-out overflow-x-hidden">
       <ScrollToTop />
 
-      {/* Theme logic is passed to Header */}
+      {/* Header with Theme Switcher */}
       <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
 
       <div className={pageShellClassName}>
