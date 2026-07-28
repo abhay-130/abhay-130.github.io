@@ -71,13 +71,13 @@ const FaqAccordionItem: React.FC<{ item: FaqItem }> = ({ item }) => {
 
 const Faq: React.FC = () => {
     return (
-        /* Changed items-start to items-center for vertical alignment along the yellow center line */
         <section id="faq" className="flex flex-col md:flex-row items-center justify-between gap-8 sm:gap-10 lg:gap-12 w-full py-6">
             
-            {/* Left Side: Updated Container Design aligned with center line */}
+            {/* Left Side: Enriched Header Block */}
             <div className="md:w-5/12 flex flex-col items-start gap-4 sm:gap-5 w-full">
+               
                 <span className="text-xs font-mono font-bold uppercase tracking-[4px] text-theme-red">
-                    FAQ // Help
+                    FAQ // NEED HELP
                 </span>
 
                 <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black -tracking-wide leading-[1.12] text-light-text dark:text-dark-text">
@@ -86,15 +86,36 @@ const Faq: React.FC = () => {
                 </h2>
 
                 <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed max-w-md">
-                    Can't find the answer you're looking for? Feel free to reach out to our team directly.
+                    Got queries about architectural workflow, full-stack dev, or timelines? Here are quick answers to clear the air.
                 </p>
 
-                <a 
-                    href="#contact" 
-                    className="mt-2 px-6 py-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider rounded-full border border-black dark:border-white text-light-text dark:text-dark-text hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 shadow-sm"
-                >
-                    ASK MORE →
-                </a>
+                {/* Quick Stats Grid */}
+                <div className="grid grid-cols-2 gap-3 w-full max-w-md my-1">
+                    <div className="p-3 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
+                        <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-light-text-muted dark:text-dark-text-muted">Active Time</p>
+                        <p className="text-xs sm:text-sm font-extrabold text-light-text dark:text-dark-text mt-0.5"> 21 Hours</p>
+                    </div>
+                    <div className="p-3 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
+                        <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-light-text-muted dark:text-dark-text-muted">Base Location</p>
+                        <p className="text-xs sm:text-sm font-extrabold text-light-text dark:text-dark-text mt-0.5">IIT Roorkee, INDIA</p>
+                    </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3 mt-2">
+                    <a 
+                        href="#contact" 
+                        className="px-6 py-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider rounded-full border border-black dark:border-white text-light-text dark:text-dark-text hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 shadow-sm"
+                    >
+                        ASK MORE →
+                    </a>
+
+                    <a 
+                        href="mailto:abhaykishor130@gmail.com" 
+                        className="px-5 py-3 text-xs sm:text-sm font-bold text-light-text-muted dark:text-dark-text-muted hover:text-theme-red transition-colors"
+                    >
+                        DIRECT EMAIL
+                    </a>
+                </div>
             </div>
 
             {/* Right Side: Unchanged Question Container */}
