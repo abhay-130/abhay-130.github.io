@@ -45,7 +45,7 @@ const SocialLife: React.FC = () => {
           Proof That 
           <br />
           <span className="text-theme-red"> 
-            I Have A Life.
+            AbhaY Has A Life.
           </span>
         </h2>
 
