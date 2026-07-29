@@ -15,6 +15,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@portabletext/react": "^7.0.1",
     "@sanity/vision": "^6.7.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

@@ -41,26 +41,22 @@ export default {
       name: 'role',
       title: 'Your Role',
       type: 'string',
-      description: 'e.g., Lead Developer, Architectural Researcher, Designer',
     },
     {
       name: 'timeline',
       title: 'Timeline / Year',
       type: 'string',
-      description: 'e.g., Jan 2026 - Mar 2026',
     },
     {
       name: 'client',
       title: 'Client / Context',
       type: 'string',
-      description: 'e.g., City Library Saharanpur, IIT Roorkee',
     },
     {
       name: 'techStack',
       title: 'Tech Stack / Tools Used',
       type: 'array',
       of: [{ type: 'string' }],
-      description: 'e.g., React, Tailwind CSS, ArchiCAD, Supabase, Figma',
     },
     {
       name: 'mainImage',
@@ -75,21 +71,40 @@ export default {
       type: 'array',
       of: [{ type: 'image', options: { hotspot: true } }],
     },
+    /* --- RICH TEXT FIELD FOR BOLD, ITALICS, HEADINGS & LISTS --- */
     {
       name: 'fullCaseStudy',
       title: 'Full Case Study Breakdown',
-      type: 'text',
-      rows: 12,
-      description: 'Detailed explanation of the project workflow, challenge, solution, and results.',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          styles: [
+            { title: 'Normal', value: 'normal' },
+            { title: 'Heading 2', value: 'h2' },
+            { title: 'Heading 3', value: 'h3' },
+          ],
+          lists: [
+            { title: 'Bullet', value: 'bullet' },
+            { title: 'Numbered', value: 'number' },
+          ],
+          marks: {
+            decorators: [
+              { title: 'Strong', value: 'strong' },
+              { title: 'Emphasis', value: 'em' },
+            ],
+          },
+        },
+      ],
     },
     {
       name: 'videoUrl',
-      title: 'Video Embed URL (YouTube/Vimeo)',
+      title: 'Video Embed URL',
       type: 'url',
     },
     {
       name: 'externalLink',
-      title: 'External Live Link (GitHub/Behance/Live App)',
+      title: 'External Live Link',
       type: 'url',
     },
     {

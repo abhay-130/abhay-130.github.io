@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import ResizableButton from './ResizableButton';
 import { sanityClient } from './data/sanityClient';
+import { PortableText } from '@portabletext/react';
 
 interface ProjectDetail {
   id: string;
@@ -220,16 +221,20 @@ const ProjectDetailPage: React.FC = () => {
       )}
 
       {/* Full Case Study Breakdown */}
-      {project.fullCaseStudy && (
-        <section className="p-8 sm:p-12 rounded-[2.5rem] bg-gray-50 dark:bg-gray-900/60 border border-black/5 dark:border-white/10 mb-12 shadow-lg">
-          <span className="text-[10px] font-mono font-bold uppercase tracking-[3px] text-theme-red block mb-3">
-            CASE STUDY OVERVIEW
-          </span>
-          <div className="prose dark:prose-invert max-w-none text-light-text dark:text-dark-text leading-relaxed whitespace-pre-line text-sm sm:text-base">
-            {project.fullCaseStudy}
-          </div>
-        </section>
-      )}
+        {project.fullCaseStudy && (
+            <section className="p-8 sm:p-12 rounded-[2.5rem] bg-gray-50 dark:bg-gray-900/60 border border-black/5 dark:border-white/10 mb-12 shadow-lg">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-[3px] text-theme-red block mb-6">
+                CASE STUDY OVERVIEW
+                </span>
+                <div className="prose dark:prose-invert max-w-none text-light-text dark:text-dark-text leading-relaxed space-y-4">
+                {typeof project.fullCaseStudy === 'string' ? (
+                    <p className="whitespace-pre-line text-sm sm:text-base">{project.fullCaseStudy}</p>
+                ) : (
+                    <PortableText value={project.fullCaseStudy} />
+                )}
+                </div>
+            </section>
+        )}
 
       {/* Embedded Video Showcase (if present) */}
       {project.videoUrl && (
