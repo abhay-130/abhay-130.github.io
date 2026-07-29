@@ -1,7 +1,6 @@
 import { postType } from './post';
 import socialPost from './socialPost';
-// schemaTypes/index.ts (or schemas/index.js)
-import project from './project'
+import project from './project'; // <--- Make sure this import line is active!
 
 export const schemaTypes = [
   project,
