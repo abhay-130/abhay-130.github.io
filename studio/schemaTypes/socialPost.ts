@@ -1,60 +1,64 @@
-import { defineType, defineField } from 'sanity';
-
-export default defineType({
+export default {
   name: 'socialPost',
   title: 'Social Life Post',
   type: 'document',
   fields: [
-    defineField({
+    {
       name: 'title',
-      title: 'Title / Moment Name',
+      title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+    },
+    {
       name: 'date',
       title: 'Date',
       type: 'datetime',
       initialValue: () => new Date().toISOString(),
-    }),
-    defineField({
-      name: 'location',
-      title: 'Location (e.g., IIT Roorkee, Rishikesh)',
-      type: 'string',
-    }),
-    defineField({
+    },
+    /* --- SINGLE IMAGE (COVER / FALLBACK) --- */
+    {
       name: 'image',
-      title: 'Photo',
+      title: 'Main Photo / Cover Image',
       type: 'image',
       options: { hotspot: true },
-    }),
-    defineField({
+      description: 'Used as the main thumbnail in grids or fallback.',
+    },
+    /* --- CAROUSEL IMAGES (ARRAY OF MULTIPLE PHOTOS) --- */
+    {
+      name: 'carouselImages',
+      title: 'Carousel Photos',
+      type: 'array',
+      description: 'Add multiple photos here if you want an interactive carousel for this post.',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'caption',
+              title: 'Caption / Subtitle',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'youtubeUrl',
       title: 'YouTube Video Link (Optional)',
-      type: 'url',
-      description: 'If provided, a play button/video overlay will be prioritized.',
-    }),
-    defineField({
-      name: 'gridSpan',
-      title: 'Grid Display Layout Size',
       type: 'string',
-      options: {
-        list: [
-          { title: 'Standard Box (1x1)', value: 'md:col-span-1 md:row-span-1 aspect-square md:aspect-auto' },
-          { title: 'Large Square (2x2)', value: 'md:col-span-2 md:row-span-2 aspect-square md:aspect-auto' },
-          { title: 'Tall Portrait (1x2)', value: 'md:col-span-1 md:row-span-2 aspect-[3/4] md:aspect-auto' },
-          { title: 'Wide Banner (2x1)', value: 'md:col-span-2 md:row-span-1 aspect-[16/9] md:aspect-auto' },
-          { title: 'Full Width Row (3x1)', value: 'md:col-span-3 md:row-span-1 aspect-[21/9] md:aspect-auto' },
-        ],
-      },
-      initialValue: 'md:col-span-1 md:row-span-1 aspect-square md:aspect-auto',
-    }),
-  ],
-  preview: {
-    select: {
-      title: 'title',
-      subtitle: 'location',
-      media: 'image',
+      description: 'If provided, a play button/video overlay will be prioritized.',
     },
-  },
-});
+    {
+      name: 'gridSpan',
+      title: 'Grid Span Layout (Optional)',
+      type: 'string',
+      description: 'Custom Tailwind grid class e.g. "md:col-span-2 md:row-span-2"',
+    },
+  ],
+};
