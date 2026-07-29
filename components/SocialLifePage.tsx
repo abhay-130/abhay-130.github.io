@@ -49,7 +49,7 @@ const SocialIcons = {
     ),
     Reddit: () => (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
-            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.21 14.43c0 1.06-.86 1.92-1.92 1.92s-1.92-.86-1.92-1.92.86-1.92 1.92-1.92 1.92.86 1.92 1.92zm-6.3-5.49c1.06 0 1.92-.86 1.92-1.92s-.86-1.92-1.92-1.92.86-1.92 1.92 1.92.86 1.92 1.92 1.92zm-2.13 6.21c.35-.45.96-.6 1.41-.25.45.35.6.96.25 1.41-1.1 1.42-2.79 2.26-4.74 2.26-1.95 0-3.64-.84-4.74-2.26-.35-.45-.1-1.06.35-1.41.45-.35 1.06-.1 1.41.35.79.97 1.95 1.55 3.33 1.55s2.54-.58 3.33-1.55zm8.43-2.93c1.06 0 1.92-.86 1.92-1.92s-.86-1.92-1.92-1.92.86-1.92 1.92 1.92.86 1.92 1.92 1.92z" />
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.21 14.43c0 1.06-.86 1.92-1.92 1.92s-1.92-.86-1.92-1.92.86-1.92 1.92-1.92 1.92.86 1.92 1.92zm-6.3-5.49c1.06 0 1.92-.86 1.92-1.92s-.86-1.92-1.92-1.92.86-1.92 1.92 1.92.86 1.92 1.92 1.92zm-2.13 6.21c.35-.45.96-.6 1.41-.25.45.35.6.96.25 1.41-1.1 1.42-2.79 2.26-4.74 2.26-1.95 0-3.64-.84-4.74-2.26-.35-.45-.1-1.06.35-1.41.45-.35 1.06-.1 1.41.35.79.97 1.95 1.55 3.33 1.55s2.54-.58 3.33-1.55zm8.43-2.93c1.06 0 1.92-.86 1.92-1.92s-.86-1.92-1.92-1.92-1.92.86-1.92 1.92.86 1.92 1.92 1.92z" />
         </svg>
     ),
     Facebook: () => (
@@ -74,7 +74,6 @@ const SocialIcons = {
     ),
 };
 
-// Map simple container size dropdown choices to responsive Tailwind grid classes
 const getGridSpanClass = (spanKey?: string) => {
     const key = spanKey?.toLowerCase();
     switch (key) {
@@ -92,7 +91,6 @@ const getGridSpanClass = (spanKey?: string) => {
     }
 };
 
-// Map container size to proper image frame aspect ratio
 const getImageAspectClass = (spanKey?: string) => {
     const key = spanKey?.toLowerCase();
     switch (key) {
@@ -110,9 +108,7 @@ const getImageAspectClass = (spanKey?: string) => {
     }
 };
 
-// Responsive Light/Dark Theme Card Component
 const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
-    // Cover image first, followed by carousel images
     const rawImages = [
         ...(post.image ? [post.image] : []),
         ...(post.carouselImages && post.carouselImages.length > 0 ? post.carouselImages.map(item => item.url) : [])
@@ -139,13 +135,11 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
             <div className={`relative w-full rounded-[1.6rem] overflow-hidden bg-gray-200 dark:bg-black/80 flex items-center justify-center shrink-0 ${getImageAspectClass(post.gridSpan)}`}>
                 {post.youtubeUrl ? (
                     <a href={post.youtubeUrl} target="_blank" rel="noopener noreferrer" className="block w-full h-full relative">
-                        {/* Blurred Fill Layer */}
                         <img
                             src={post.image}
                             alt=""
                             className="absolute inset-0 w-full h-full object-cover blur-xl opacity-30 pointer-events-none"
                         />
-                        {/* Main Full Image */}
                         <img
                             src={post.image}
                             alt={post.title}
@@ -161,14 +155,12 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
                     </a>
                 ) : images.length > 1 ? (
                     <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-                        {/* Blurred Background Layer for Uncropped Fit */}
                         <img
                             src={images[currentIndex]}
                             alt=""
                             className="absolute inset-0 w-full h-full object-cover blur-xl opacity-30 pointer-events-none"
                         />
 
-                        {/* Full Image Track */}
                         <div
                             className="flex w-full h-full transition-transform duration-500 ease-out z-10"
                             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -184,7 +176,6 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
                             ))}
                         </div>
 
-                        {/* Top-Right Multi-Photo Pill Badge */}
                         <div className="absolute top-3 right-3 z-20 bg-black/60 dark:bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[10px] font-mono text-white font-bold">
                             📷 {images.length}
                         </div>
@@ -207,8 +198,6 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
 
             {/* BOTTOM DETAILS & CONTROLS BAR */}
             <div className="pt-3 px-1 pb-1 flex flex-col gap-1.5 w-full">
-                
-                {/* ROW 1: Location Tag (Left) + Next/Prev Controls (Right on the same line) */}
                 <div className="flex items-center justify-between gap-2 w-full flex-wrap">
                     {post.location ? (
                         <div className="flex items-center gap-1.5 text-theme-red font-mono font-extrabold text-[11px] uppercase tracking-wider min-w-0 max-w-full">
@@ -217,7 +206,6 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
                         </div>
                     ) : <div />}
 
-                    {/* Controls placed in-line on location row */}
                     {images.length > 1 && (
                         <div className="flex items-center gap-1.5 shrink-0 bg-black/10 dark:bg-black/50 px-2.5 py-1 rounded-full border border-black/10 dark:border-white/10 ml-auto">
                             <button
@@ -228,7 +216,6 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
                                 ‹
                             </button>
 
-                            {/* Bullet indicators */}
                             <div className="flex items-center gap-1">
                                 {images.map((_, idx) => (
                                     <span
@@ -251,11 +238,9 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
                     )}
                 </div>
 
-                {/* ROW 2: Full Title Heading (Wraps naturally to show complete text) */}
                 <h3 className="text-light-text dark:text-white font-black text-base sm:text-lg tracking-wide leading-snug break-words w-full">
                     {post.title}
                 </h3>
-
             </div>
 
         </div>
@@ -265,7 +250,7 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
 const SocialLifePage: React.FC = () => {
     const [galleryPosts, setGalleryPosts] = useState<SocialMediaPost[]>([]);
 
-    // HARDCODED 5-PHOTO HERO CAROUSEL DATA
+    // EXACT CASING MATCH FOR PUBLIC ASSETS
     const carouselImages = [
         { src: "/landing-page-images/photo1.JPG", caption: "Virasat'25 Team Jams" },
         { src: "/landing-page-images/photo2.JPG", caption: "Professional Life" },
@@ -276,7 +261,6 @@ const SocialLifePage: React.FC = () => {
 
     const [carouselIndex, setCarouselIndex] = useState(0);
 
-    // Auto Slide Carousel every 3 Seconds
     useEffect(() => {
         const timer = setInterval(() => {
             setCarouselIndex((prev) => (prev + 1) % carouselImages.length);
@@ -284,7 +268,6 @@ const SocialLifePage: React.FC = () => {
         return () => clearInterval(timer);
     }, [carouselImages.length]);
 
-    // Fetch dynamic gallery posts from Sanity
     useEffect(() => {
         const query = `*[_type == "socialPost"] | order(date desc) {
             "id": _id,
@@ -413,18 +396,22 @@ const SocialLifePage: React.FC = () => {
                 <div className="flex-1 w-full flex justify-center lg:justify-end">
                     <div className="relative w-full max-w-[540px] cursor-pointer overflow-hidden rounded-[2rem] border border-black/10 dark:border-white/10 shadow-xl group">
                         
-                        <div className="overflow-hidden relative aspect-[4/3] w-full">
+                        <div className="overflow-hidden relative aspect-[4/3] w-full bg-black/40">
                             {/* Carousel Track */}
                             <div 
                                 className="flex w-full h-full transition-transform duration-700 ease-in-out"
                                 style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
                             >
                                 {carouselImages.map((img, idx) => (
-                                    <div key={idx} className="w-full h-full shrink-0 relative">
+                                    <div key={idx} className="w-full h-full shrink-0 relative flex items-center justify-center">
                                         <img 
                                             src={img.src} 
                                             alt={img.caption}
                                             className="object-cover w-full h-full" 
+                                            onError={(e) => {
+                                                // Fallback if URL still fails
+                                                (e.target as HTMLElement).style.display = 'none';
+                                            }}
                                         />
                                     </div>
                                 ))}
@@ -503,7 +490,6 @@ const SocialLifePage: React.FC = () => {
                         ))}
                     </div>
                 ) : (
-                    /* Clean State When No CMS Posts Are Present */
                     <div className="w-full p-12 text-center rounded-[2rem] bg-gray-50 dark:bg-white/5 border border-dashed border-black/10 dark:border-white/10 my-4">
                         <p className="text-sm font-mono font-bold uppercase tracking-widest text-light-text-muted dark:text-dark-text-muted">
                             New Social Moments Coming Soon
