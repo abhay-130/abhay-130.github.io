@@ -1,0 +1,102 @@
+export default {
+  name: 'project',
+  title: 'Projects',
+  type: 'document',
+  fields: [
+    {
+      name: 'title',
+      title: 'Project Title',
+      type: 'string',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'slug',
+      title: 'Slug (URL Identifier)',
+      type: 'slug',
+      options: { source: 'title', maxLength: 96 },
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      options: {
+        list: [
+          'Full-Stack Development',
+          'Architecture Thesis',
+          'Vernacular Architecture',
+          'Branding & Identity',
+          'Leadership & Events',
+          'UI/UX Design',
+        ],
+      },
+    },
+    {
+      name: 'description',
+      title: 'Short Summary',
+      type: 'text',
+      rows: 2,
+    },
+    {
+      name: 'role',
+      title: 'Your Role',
+      type: 'string',
+      description: 'e.g., Lead Developer, Architectural Researcher, Designer',
+    },
+    {
+      name: 'timeline',
+      title: 'Timeline / Year',
+      type: 'string',
+      description: 'e.g., Jan 2026 - Mar 2026',
+    },
+    {
+      name: 'client',
+      title: 'Client / Context',
+      type: 'string',
+      description: 'e.g., City Library Saharanpur, IIT Roorkee',
+    },
+    {
+      name: 'techStack',
+      title: 'Tech Stack / Tools Used',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'e.g., React, Tailwind CSS, ArchiCAD, Supabase, Figma',
+    },
+    {
+      name: 'mainImage',
+      title: 'Main Cover Image',
+      type: 'image',
+      options: { hotspot: true },
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'gallery',
+      title: 'Additional Case Study Photos',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+    },
+    {
+      name: 'fullCaseStudy',
+      title: 'Full Case Study Breakdown',
+      type: 'text',
+      rows: 12,
+      description: 'Detailed explanation of the project workflow, challenge, solution, and results.',
+    },
+    {
+      name: 'videoUrl',
+      title: 'Video Embed URL (YouTube/Vimeo)',
+      type: 'url',
+    },
+    {
+      name: 'externalLink',
+      title: 'External Live Link (GitHub/Behance/Live App)',
+      type: 'url',
+    },
+    {
+      name: 'publishedAt',
+      title: 'Published Date',
+      type: 'datetime',
+      initialValue: () => new Date().toISOString(),
+    },
+  ],
+};
