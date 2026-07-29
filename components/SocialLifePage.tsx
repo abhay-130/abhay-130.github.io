@@ -49,7 +49,7 @@ const SocialIcons = {
     ),
     Reddit: () => (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
-            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.21 14.43c0 1.06-.86 1.92-1.92 1.92s-1.92-.86-1.92-1.92.86-1.92 1.92-1.92 1.92.86 1.92 1.92zm-6.3-5.49c1.06 0 1.92-.86 1.92-1.92s-.86-1.92-1.92-1.92-1.92.86-1.92 1.92.86 1.92 1.92 1.92zm-2.13 6.21c.35-.45.96-.6 1.41-.25.45.35.6.96.25 1.41-1.1 1.42-2.79 2.26-4.74 2.26-1.95 0-3.64-.84-4.74-2.26-.35-.45-.1-1.06.35-1.41.45-.35 1.06-.1 1.41.35.79.97 1.95 1.55 3.33 1.55s2.54-.58 3.33-1.55zm8.43-2.93c1.06 0 1.92-.86 1.92-1.92s-.86-1.92-1.92-1.92-1.92.86-1.92 1.92.86 1.92 1.92 1.92z" />
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.21 14.43c0 1.06-.86 1.92-1.92 1.92s-1.92-.86-1.92-1.92.86-1.92 1.92-1.92 1.92.86 1.92 1.92zm-6.3-5.49c1.06 0 1.92-.86 1.92-1.92s-.86-1.92-1.92-1.92-1.92.86-1.92 1.92.86 1.92 1.92 1.92zm-2.13 6.21c.35-.45.96-.6 1.41-.25.45.35.6.96.25 1.41-1.1 1.42-2.79 2.26-4.74 2.26-1.95 0-3.64-.84-4.74-2.26-.35-.45-.1-1.06.35-1.41.45-.35 1.06-.1 1.41.35.79.97 1.95 1.55 3.33 1.55s2.54-.58 3.33-1.55zm8.43-2.93c1.06 0 1.92-.86 1.92-1.92s-.86-1.92-1.92-1.92.86-1.92 1.92 1.92.86 1.92 1.92 1.92z" />
         </svg>
     ),
     Facebook: () => (
@@ -74,6 +74,42 @@ const SocialIcons = {
     ),
 };
 
+// Map simple container size dropdown choices to responsive Tailwind grid classes
+const getGridSpanClass = (spanKey?: string) => {
+    const key = spanKey?.toLowerCase();
+    switch (key) {
+        case '2x1':
+            return 'md:col-span-2 md:row-span-1';
+        case '1x2':
+            return 'md:col-span-1 md:row-span-2';
+        case '2x2':
+            return 'md:col-span-2 md:row-span-2';
+        case '3x1':
+            return 'md:col-span-3 md:row-span-1';
+        case '1x1':
+        default:
+            return 'md:col-span-1 md:row-span-1';
+    }
+};
+
+// Map container size to proper image frame aspect ratio
+const getImageAspectClass = (spanKey?: string) => {
+    const key = spanKey?.toLowerCase();
+    switch (key) {
+        case '2x1':
+            return 'aspect-[2/1] min-h-[220px] max-h-[380px]';
+        case '3x1':
+            return 'aspect-[3/1] min-h-[260px] max-h-[440px]';
+        case '1x2':
+            return 'aspect-[1/2] min-h-[420px]';
+        case '2x2':
+            return 'aspect-[1/1] min-h-[320px] max-h-[580px]';
+        case '1x1':
+        default:
+            return 'aspect-[4/3] sm:aspect-[1/1] md:aspect-[4/3]';
+    }
+};
+
 // Responsive Light/Dark Theme Card Component
 const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
     // FIX: Main cover image comes FIRST, then additional carousel images
@@ -96,17 +132,11 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
         setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
     };
 
-    // ... rest of your component remains the same
-
-    const isFullWidth = post.gridSpan?.includes('col-span-2') || post.gridSpan?.includes('col-span-3');
-
     return (
-        <div className={`flex flex-col p-3 rounded-[2.2rem] bg-gray-100 dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-lg transition-colors duration-300 ${post.gridSpan || 'md:col-span-1'}`}>
+        <div className={`flex flex-col p-3 rounded-[2.2rem] bg-gray-100 dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-lg transition-colors duration-300 ${getGridSpanClass(post.gridSpan)}`}>
             
-            {/* INNER IMAGE CONTAINER (Fully Uncropped Images with Subtle Blurred Background) */}
-            <div className={`relative w-full rounded-[1.6rem] overflow-hidden bg-gray-200 dark:bg-black/80 flex items-center justify-center shrink-0 ${
-                isFullWidth ? 'min-h-[300px] max-h-[580px] aspect-auto' : 'aspect-[4/3] sm:aspect-[1/1] md:aspect-[4/3]'
-            }`}>
+            {/* INNER IMAGE CONTAINER (Dynamic Aspect Ratio for 2x1 Wide Banner vs 1x1, 2x2, 3x1) */}
+            <div className={`relative w-full rounded-[1.6rem] overflow-hidden bg-gray-200 dark:bg-black/80 flex items-center justify-center shrink-0 ${getImageAspectClass(post.gridSpan)}`}>
                 {post.youtubeUrl ? (
                     <a href={post.youtubeUrl} target="_blank" rel="noopener noreferrer" className="block w-full h-full relative">
                         {/* Blurred Fill Layer */}

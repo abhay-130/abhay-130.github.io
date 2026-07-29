@@ -250,7 +250,7 @@ const ContactPage: React.FC = () => {
                   <p className="text-[10px] font-mono uppercase text-light-text-muted dark:text-dark-text-muted font-bold">Direct Email</p>
                   <a
                     href="mailto:abhaykishor130@gmail.com"
-                    className="text-sm sm:text-base font-bold text-light-text dark:text-dark-text hover:text-theme-red transition-colors break-all"
+                    className="text-sm sm:text-base font-bold text-light-text dark:text-dark-text hover:text-theme-red dark:hover:text-theme-red transition-colors break-all"
                   >
                     abhaykishor130@gmail.com
                   </a>
@@ -263,7 +263,7 @@ const ContactPage: React.FC = () => {
                   <p className="text-[10px] font-mono uppercase text-light-text-muted dark:text-dark-text-muted font-bold">Phone / WhatsApp</p>
                   <a
                     href="tel:+918273746070"
-                    className="text-sm sm:text-base font-bold text-light-text dark:text-dark-text hover:text-theme-red transition-colors"
+                    className="text-sm sm:text-base font-bold text-light-text dark:text-dark-text hover:text-theme-red dark:hover:text-theme-red transition-colors"
                   >
                     +91 8273746070
                   </a>

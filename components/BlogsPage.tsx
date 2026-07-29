@@ -129,7 +129,7 @@ const BlogsPage: React.FC = () => {
                                     </p>
 
                                     <Link to={`/blogs/${article.id}`} className="group-hover:text-theme-red transition-colors">
-                                        <h3 className="text-xl sm:text-2xl font-bold leading-tight mb-3 cursor-pointer text-black dark:text-white">
+                                        <h3 className="text-xl sm:text-2xl font-bold leading-tight mb-3 cursor-pointer text-black dark:text-white hover:text-theme-red dark:hover:text-theme-red">
                                             {article.title}
                                         </h3>
                                     </Link>

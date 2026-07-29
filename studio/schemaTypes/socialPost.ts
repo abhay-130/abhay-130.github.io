@@ -20,7 +20,6 @@ export default {
       type: 'datetime',
       initialValue: () => new Date().toISOString(),
     },
-    /* --- SINGLE IMAGE (COVER / FALLBACK) --- */
     {
       name: 'image',
       title: 'Main Photo / Cover Image',
@@ -28,7 +27,6 @@ export default {
       options: { hotspot: true },
       description: 'Used as the main thumbnail in grids or fallback.',
     },
-    /* --- CAROUSEL IMAGES (ARRAY OF MULTIPLE PHOTOS) --- */
     {
       name: 'carouselImages',
       title: 'Carousel Photos',
@@ -54,11 +52,24 @@ export default {
       type: 'string',
       description: 'If provided, a play button/video overlay will be prioritized.',
     },
+    
+    /* --- SIMPLE CONTAINER SIZE DROPDOWN --- */
     {
       name: 'gridSpan',
-      title: 'Grid Span Layout (Optional)',
+      title: 'Container Size',
       type: 'string',
-      description: 'Custom Tailwind grid class e.g. "md:col-span-2 md:row-span-2"',
+      description: 'Select the size aspect ratio for this post in the gallery grid.',
+      initialValue: '1x1',
+      options: {
+        list: [
+          { title: '1x1 (Standard Square)', value: '1x1' },
+          { title: '2x1 (Wide Banner)', value: '2x1' },
+          { title: '1x2 (Tall Portrait)', value: '1x2' },
+          { title: '2x2 (Large Square Hero)', value: '2x2' },
+          { title: '3x1 (Full Width Banner)', value: '3x1' },
+        ],
+        layout: 'dropdown',
+      },
     },
   ],
 };
