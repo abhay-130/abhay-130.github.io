@@ -3,14 +3,33 @@ import React, { useEffect, useState } from 'react';
 import ResizableButton from './ResizableButton';
 import { sanityClient } from './data/sanityClient';
 
+interface CarouselImageItem {
+    url: string;
+    caption?: string;
+}
+
 interface SocialMediaPost {
     id: string;
     title: string;
     location?: string;
     image: string;
+    carouselImages?: CarouselImageItem[];
     youtubeUrl?: string;
     gridSpan?: string;
 }
+
+// Custom Location SVG Icon
+const LocationPinIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
+    <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 345 512" 
+        fill="currentColor" 
+        className={`inline-block shrink-0 ${className}`}
+    >
+        <path d="M160.916 0H183.02C184.637 0.564122 194.385 1.45004 197.032 1.88432C207.5 3.52293 217.782 6.1918 227.725 9.852C268.277 24.7786 301.185 55.2885 319.132 94.5977C324.74 106.918 328.767 119.899 331.115 133.231C336.96 166.309 331.76 190.193 319.935 221.32C305.365 259.673 284.487 297.975 263.235 333.05C242.827 366.872 220.565 399.54 196.547 430.9C193.942 434.237 174.952 459.673 170.715 456.578C162.348 450.465 152.863 438.085 146.369 429.698C122.447 397.968 100.285 366.53 80.0118 332.015C52.2328 284.723 20.3476 228.899 11.4106 174.049C7.10757 147.641 16.3851 111.292 28.2281 88.0455C48.5071 48.1905 84.4506 18.5667 127.445 6.27357C134.22 4.3451 141.104 2.82695 148.062 1.72737C151.119 1.27008 158.428 0.913657 160.916 0ZM176.2 209.937C205.24 207.663 226.95 182.304 224.725 153.263C222.5 124.221 197.177 102.467 168.132 104.645C139.018 106.828 117.202 132.223 119.433 161.333C121.664 190.442 147.095 212.216 176.2 209.937Z" />
+        <path d="M228.062 432.062C234.577 432.297 241.105 433.153 247.577 433.91C270.937 436.64 324.047 444.548 340.215 462.043C342.502 464.518 344.215 467.615 344.102 471.078C343.972 475.193 341.522 478.602 338.587 481.275C318.66 499.437 256.855 507.83 229.76 509.835C222.582 510.312 215.402 510.728 208.217 511.075C205.39 511.215 198.317 511.36 196.01 512H148.4C145.254 511.17 138.497 511.18 134.994 511.013C128.049 510.648 121.109 510.208 114.173 509.69C89.5659 507.668 15.2151 498.758 1.71586 476.85C0.165114 474.333 -0.401384 471.37 0.292616 468.48C1.66437 462.765 7.12287 458.515 11.9381 455.688C33.5591 442.988 70.3964 436.99 95.3659 434.025C102.114 433.225 109.184 432.18 115.974 432.215C124.29 442.982 132.15 454.35 141.112 464.698C148.144 472.818 157.938 486.008 169.192 487.825C175.107 488.78 180.737 486.87 185.22 483.06C197.995 472.33 208.39 457.515 218.67 444.448C220.59 442.008 226.35 433.68 228.062 432.062Z" />
+    </svg>
+);
 
 const SocialIcons = {
     LinkedIn: () => (
@@ -55,6 +74,158 @@ const SocialIcons = {
     ),
 };
 
+// Responsive Light/Dark Theme Card Component
+const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
+    // Combine carousel images and fallback main image cleanly
+    const rawImages = [
+        ...(post.carouselImages && post.carouselImages.length > 0 ? post.carouselImages.map(item => item.url) : []),
+        ...(post.image ? [post.image] : [])
+    ];
+    const images = Array.from(new Set(rawImages.filter(Boolean)));
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const prevSlide = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    };
+
+    const nextSlide = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    };
+
+    const isFullWidth = post.gridSpan?.includes('col-span-2') || post.gridSpan?.includes('col-span-3');
+
+    return (
+        <div className={`flex flex-col p-3 rounded-[2.2rem] bg-gray-100 dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-lg transition-colors duration-300 ${post.gridSpan || 'md:col-span-1'}`}>
+            
+            {/* INNER IMAGE CONTAINER (Fully Uncropped Images with Subtle Blurred Background) */}
+            <div className={`relative w-full rounded-[1.6rem] overflow-hidden bg-gray-200 dark:bg-black/80 flex items-center justify-center shrink-0 ${
+                isFullWidth ? 'min-h-[300px] max-h-[580px] aspect-auto' : 'aspect-[4/3] sm:aspect-[1/1] md:aspect-[4/3]'
+            }`}>
+                {post.youtubeUrl ? (
+                    <a href={post.youtubeUrl} target="_blank" rel="noopener noreferrer" className="block w-full h-full relative">
+                        {/* Blurred Fill Layer */}
+                        <img
+                            src={post.image}
+                            alt=""
+                            className="absolute inset-0 w-full h-full object-cover blur-xl opacity-30 pointer-events-none"
+                        />
+                        {/* Main Full Image */}
+                        <img
+                            src={post.image}
+                            alt={post.title}
+                            className="relative z-10 w-full h-full object-contain"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center z-20">
+                            <div className="w-12 h-12 rounded-full bg-theme-red/90 text-white flex items-center justify-center shadow-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 ml-0.5">
+                                    <path fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                ) : images.length > 1 ? (
+                    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                        {/* Blurred Background Layer for Uncropped Fit */}
+                        <img
+                            src={images[currentIndex]}
+                            alt=""
+                            className="absolute inset-0 w-full h-full object-cover blur-xl opacity-30 pointer-events-none"
+                        />
+
+                        {/* Full Image Track */}
+                        <div
+                            className="flex w-full h-full transition-transform duration-500 ease-out z-10"
+                            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                        >
+                            {images.map((imgUrl, idx) => (
+                                <div key={idx} className="w-full h-full shrink-0 flex items-center justify-center p-1">
+                                    <img
+                                        src={imgUrl}
+                                        alt={`${post.title} - ${idx + 1}`}
+                                        className="w-full h-full object-contain max-h-[580px]"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Top-Right Multi-Photo Pill Badge */}
+                        <div className="absolute top-3 right-3 z-20 bg-black/60 dark:bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[10px] font-mono text-white font-bold">
+                            📷 {images.length}
+                        </div>
+                    </div>
+                ) : (
+                    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                        <img
+                            src={post.image}
+                            alt=""
+                            className="absolute inset-0 w-full h-full object-cover blur-xl opacity-30 pointer-events-none"
+                        />
+                        <img
+                            src={post.image}
+                            alt={post.title}
+                            className="relative z-10 w-full h-full object-contain max-h-[580px]"
+                        />
+                    </div>
+                )}
+            </div>
+
+            {/* BOTTOM DETAILS & CONTROLS BAR (Light Mode & Dark Mode Responsive) */}
+            <div className="pt-3 px-2 pb-1 flex items-center justify-between w-full">
+                {/* Left side: Location tag & Title */}
+                <div className="flex flex-col items-start truncate pr-2">
+                    {post.location && (
+                        <div className="flex items-center gap-1.5 text-theme-red font-mono font-extrabold text-[11px] uppercase tracking-wider mb-0.5">
+                            <LocationPinIcon className="w-3 h-3 fill-theme-red text-theme-red" />
+                            <span>{post.location}</span>
+                        </div>
+                    )}
+                    <h3 className="text-light-text dark:text-white font-black text-base tracking-wide truncate">
+                        {post.title}
+                    </h3>
+                </div>
+
+                {/* Right side: Carousel Controls */}
+                {images.length > 1 && (
+                    <div className="flex items-center gap-2 shrink-0 bg-black/10 dark:bg-black/50 px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10">
+                        <button
+                            onClick={prevSlide}
+                            aria-label="Previous Slide"
+                            className="w-6 h-6 rounded-full bg-black/20 dark:bg-white/20 hover:bg-theme-red dark:hover:bg-theme-red text-black dark:text-white hover:text-white flex items-center justify-center text-xs font-bold transition-colors"
+                        >
+                            ‹
+                        </button>
+
+                        {/* Bullet indicators */}
+                        <div className="flex items-center gap-1">
+                            {images.map((_, idx) => (
+                                <span
+                                    key={idx}
+                                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                                        currentIndex === idx ? 'w-3.5 bg-black dark:bg-white' : 'w-1.5 bg-black/30 dark:bg-white/30'
+                                    }`}
+                                />
+                            ))}
+                        </div>
+
+                        <button
+                            onClick={nextSlide}
+                            aria-label="Next Slide"
+                            className="w-6 h-6 rounded-full bg-black/20 dark:bg-white/20 hover:bg-theme-red dark:hover:bg-theme-red text-black dark:text-white hover:text-white flex items-center justify-center text-xs font-bold transition-colors"
+                        >
+                            ›
+                        </button>
+                    </div>
+                )}
+            </div>
+
+        </div>
+    );
+};
+
 const SocialLifePage: React.FC = () => {
     const [galleryPosts, setGalleryPosts] = useState<SocialMediaPost[]>([]);
 
@@ -84,6 +255,10 @@ const SocialLifePage: React.FC = () => {
             title,
             location,
             "image": image.asset->url,
+            "carouselImages": carouselImages[] {
+                "url": asset->url,
+                caption
+            },
             youtubeUrl,
             gridSpan
         }`;
@@ -192,7 +367,7 @@ const SocialLifePage: React.FC = () => {
                     <ResizableButton 
                         onClick={scrollToGallery} 
                         size={13} 
-                             className="px-8 py-3.5 text-black dark:text-white hover:bg-theme-red dark:hover:bg-theme-red hover:text-white dark:hover:text-white font-extrabold uppercase tracking-wider rounded-full text-xs sm:text-sm transition-all duration-300 shadow-md"
+                        className="px-8 py-3.5 text-black dark:text-white hover:bg-theme-red dark:hover:bg-theme-red hover:text-white dark:hover:text-white font-extrabold uppercase tracking-wider rounded-full text-xs sm:text-sm transition-all duration-300 shadow-md"
                     >
                         EXPLORE GALLERY ↓
                     </ResizableButton>
@@ -213,7 +388,7 @@ const SocialLifePage: React.FC = () => {
                                         <img 
                                             src={img.src} 
                                             alt={img.caption}
-                                            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out" 
+                                            className="object-cover w-full h-full" 
                                         />
                                     </div>
                                 ))}
@@ -286,49 +461,9 @@ const SocialLifePage: React.FC = () => {
                 </div>
 
                 {galleryPosts.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[280px]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
                         {galleryPosts.map((post) => (
-                            <div 
-                                key={post.id} 
-                                className={`group relative overflow-hidden rounded-[2rem] bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/10 shadow-md ${post.gridSpan || 'md:col-span-1 md:row-span-1'}`}
-                            >
-                                {post.youtubeUrl ? (
-                                    <a href={post.youtubeUrl} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-                                        <img 
-                                            src={post.image} 
-                                            alt={post.title} 
-                                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                                        />
-                                        <div className="absolute inset-0 flex items-center justify-center z-20">
-                                            <div className="w-12 h-12 rounded-full bg-theme-red/90 text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 ml-0.5">
-                                                    <path fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </a>
-                                ) : (
-                                    <img 
-                                        src={post.image} 
-                                        alt={post.title} 
-                                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                                    />
-                                )}
-                                
-                                {/* Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                                
-                                <div className="absolute inset-0 p-6 flex flex-col justify-end z-10 pointer-events-none">
-                                    {post.location && (
-                                        <p className="text-xs text-theme-red font-mono font-bold uppercase tracking-widest mb-1">
-                                            📍 {post.location}
-                                        </p>
-                                    )}
-                                    <h3 className="text-white font-bold text-base sm:text-lg tracking-wide translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
-                                        {post.title}
-                                    </h3>
-                                </div>
-                            </div>
+                            <SocialCard key={post.id} post={post} />
                         ))}
                     </div>
                 ) : (
