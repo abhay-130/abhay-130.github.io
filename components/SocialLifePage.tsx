@@ -268,7 +268,7 @@ const SocialLifePage: React.FC = () => {
     // HARDCODED 5-PHOTO HERO CAROUSEL DATA
     const carouselImages = [
         { src: "/landing-page-images/photo1.JPG", caption: "Virasat'25 Team Jams" },
-        { src: "/landing-page-images/photo2.JPG", caption: "Road Trips" },
+        { src: "/landing-page-images/photo2.JPG", caption: "Professional Life" },
         { src: "/landing-page-images/photo3.JPG", caption: "Site Visiting" },
         { src: "/landing-page-images/photo4.JPG", caption: "My Circle" },
         { src: "/landing-page-images/photo5.JPG", caption: "Unscripted Offline Life" }
