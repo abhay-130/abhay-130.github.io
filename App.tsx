@@ -14,6 +14,7 @@ import CurtainCall from './components/CurtainCall';
 import Footer from './components/Footer';
 import AboutPage from './components/AboutPage';
 import ProjectsPage from './components/ProjectsPage';
+import ProjectDetailPage from './components/ProjectDetailPage'; // Added Project Detail Component
 import SocialLifePage from './components/SocialLifePage';
 import ServicesPage from './components/ServicesPage';
 import BlogsPage from './components/BlogsPage';
@@ -90,6 +91,7 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:slug" element={<ProjectDetailPage />} /> {/* Case Study Detail Route */}
           <Route path="/social-life" element={<SocialLifePage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/blogs" element={<BlogsPage />} />
