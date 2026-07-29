@@ -22,12 +22,13 @@ export default {
       type: 'string',
       options: {
         list: [
-          'Full-Stack Development',
-          'Architecture Thesis',
+          'Architecture',
           'Vernacular Architecture',
           'Branding & Identity',
-          'Leadership & Events',
           'UI/UX Design',
+          'Web Development',
+          'Full-Stack Development',
+          'Leadership & Events',
         ],
       },
     },
