@@ -49,7 +49,7 @@ const SocialIcons = {
     ),
     Reddit: () => (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
-            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.21 14.43c0 1.06-.86 1.92-1.92 1.92s-1.92-.86-1.92-1.92.86-1.92 1.92-1.92 1.92.86 1.92 1.92zm-6.3-5.49c1.06 0 1.92-.86 1.92-1.92s-.86-1.92-1.92-1.92-1.92.86-1.92 1.92.86 1.92 1.92 1.92zm-2.13 6.21c.35-.45.96-.6 1.41-.25.45.35.6.96.25 1.41-1.1 1.42-2.79 2.26-4.74 2.26-1.95 0-3.64-.84-4.74-2.26-.35-.45-.1-1.06.35-1.41.45-.35 1.06-.1 1.41.35.79.97 1.95 1.55 3.33 1.55s2.54-.58 3.33-1.55zm8.43-2.93c1.06 0 1.92-.86 1.92-1.92s-.86-1.92-1.92-1.92.86-1.92 1.92 1.92.86 1.92 1.92 1.92z" />
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.21 14.43c0 1.06-.86 1.92-1.92 1.92s-1.92-.86-1.92-1.92.86-1.92 1.92-1.92 1.92.86 1.92 1.92zm-6.3-5.49c1.06 0 1.92-.86 1.92-1.92s-.86-1.92-1.92-1.92.86-1.92 1.92 1.92.86 1.92 1.92 1.92zm-2.13 6.21c.35-.45.96-.6 1.41-.25.45.35.6.96.25 1.41-1.1 1.42-2.79 2.26-4.74 2.26-1.95 0-3.64-.84-4.74-2.26-.35-.45-.1-1.06.35-1.41.45-.35 1.06-.1 1.41.35.79.97 1.95 1.55 3.33 1.55s2.54-.58 3.33-1.55zm8.43-2.93c1.06 0 1.92-.86 1.92-1.92s-.86-1.92-1.92-1.92.86-1.92 1.92 1.92.86 1.92 1.92 1.92z" />
         </svg>
     ),
     Facebook: () => (
@@ -112,7 +112,7 @@ const getImageAspectClass = (spanKey?: string) => {
 
 // Responsive Light/Dark Theme Card Component
 const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
-    // FIX: Main cover image comes FIRST, then additional carousel images
+    // Cover image first, followed by carousel images
     const rawImages = [
         ...(post.image ? [post.image] : []),
         ...(post.carouselImages && post.carouselImages.length > 0 ? post.carouselImages.map(item => item.url) : [])
@@ -133,9 +133,9 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
     };
 
     return (
-        <div className={`flex flex-col p-3 rounded-[2.2rem] bg-gray-100 dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-lg transition-colors duration-300 ${getGridSpanClass(post.gridSpan)}`}>
+        <div className={`flex flex-col p-3.5 rounded-[2.2rem] bg-gray-100 dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-lg transition-colors duration-300 ${getGridSpanClass(post.gridSpan)}`}>
             
-            {/* INNER IMAGE CONTAINER (Dynamic Aspect Ratio for 2x1 Wide Banner vs 1x1, 2x2, 3x1) */}
+            {/* INNER IMAGE CONTAINER */}
             <div className={`relative w-full rounded-[1.6rem] overflow-hidden bg-gray-200 dark:bg-black/80 flex items-center justify-center shrink-0 ${getImageAspectClass(post.gridSpan)}`}>
                 {post.youtubeUrl ? (
                     <a href={post.youtubeUrl} target="_blank" rel="noopener noreferrer" className="block w-full h-full relative">
@@ -205,53 +205,57 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
                 )}
             </div>
 
-            {/* BOTTOM DETAILS & CONTROLS BAR (Light Mode & Dark Mode Responsive) */}
-            <div className="pt-3 px-2 pb-1 flex items-center justify-between w-full">
-                {/* Left side: Location tag & Title */}
-                <div className="flex flex-col items-start truncate pr-2">
-                    {post.location && (
-                        <div className="flex items-center gap-1.5 text-theme-red font-mono font-extrabold text-[11px] uppercase tracking-wider mb-0.5">
-                            <LocationPinIcon className="w-3 h-3 fill-theme-red text-theme-red" />
-                            <span>{post.location}</span>
+            {/* BOTTOM DETAILS & CONTROLS BAR */}
+            <div className="pt-3 px-1 pb-1 flex flex-col gap-1.5 w-full">
+                
+                {/* ROW 1: Location Tag (Left) + Next/Prev Controls (Right on the same line) */}
+                <div className="flex items-center justify-between gap-2 w-full flex-wrap">
+                    {post.location ? (
+                        <div className="flex items-center gap-1.5 text-theme-red font-mono font-extrabold text-[11px] uppercase tracking-wider min-w-0 max-w-full">
+                            <LocationPinIcon className="w-3.5 h-3.5 fill-theme-red text-theme-red shrink-0" />
+                            <span className="break-words">{post.location}</span>
+                        </div>
+                    ) : <div />}
+
+                    {/* Controls placed in-line on location row */}
+                    {images.length > 1 && (
+                        <div className="flex items-center gap-1.5 shrink-0 bg-black/10 dark:bg-black/50 px-2.5 py-1 rounded-full border border-black/10 dark:border-white/10 ml-auto">
+                            <button
+                                onClick={prevSlide}
+                                aria-label="Previous Slide"
+                                className="w-6 h-6 rounded-full bg-black/20 dark:bg-white/20 hover:bg-theme-red dark:hover:bg-theme-red text-black dark:text-white hover:text-white flex items-center justify-center text-xs font-bold transition-colors"
+                            >
+                                ‹
+                            </button>
+
+                            {/* Bullet indicators */}
+                            <div className="flex items-center gap-1">
+                                {images.map((_, idx) => (
+                                    <span
+                                        key={idx}
+                                        className={`h-1.5 rounded-full transition-all duration-300 ${
+                                            currentIndex === idx ? 'w-3.5 bg-black dark:bg-white' : 'w-1.5 bg-black/30 dark:bg-white/30'
+                                        }`}
+                                    />
+                                ))}
+                            </div>
+
+                            <button
+                                onClick={nextSlide}
+                                aria-label="Next Slide"
+                                className="w-6 h-6 rounded-full bg-black/20 dark:bg-white/20 hover:bg-theme-red dark:hover:bg-theme-red text-black dark:text-white hover:text-white flex items-center justify-center text-xs font-bold transition-colors"
+                            >
+                                ›
+                            </button>
                         </div>
                     )}
-                    <h3 className="text-light-text dark:text-white font-black text-base tracking-wide truncate">
-                        {post.title}
-                    </h3>
                 </div>
 
-                {/* Right side: Carousel Controls */}
-                {images.length > 1 && (
-                    <div className="flex items-center gap-2 shrink-0 bg-black/10 dark:bg-black/50 px-3 py-1.5 rounded-full border border-black/10 dark:border-white/10">
-                        <button
-                            onClick={prevSlide}
-                            aria-label="Previous Slide"
-                            className="w-6 h-6 rounded-full bg-black/20 dark:bg-white/20 hover:bg-theme-red dark:hover:bg-theme-red text-black dark:text-white hover:text-white flex items-center justify-center text-xs font-bold transition-colors"
-                        >
-                            ‹
-                        </button>
+                {/* ROW 2: Full Title Heading (Wraps naturally to show complete text) */}
+                <h3 className="text-light-text dark:text-white font-black text-base sm:text-lg tracking-wide leading-snug break-words w-full">
+                    {post.title}
+                </h3>
 
-                        {/* Bullet indicators */}
-                        <div className="flex items-center gap-1">
-                            {images.map((_, idx) => (
-                                <span
-                                    key={idx}
-                                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                                        currentIndex === idx ? 'w-3.5 bg-black dark:bg-white' : 'w-1.5 bg-black/30 dark:bg-white/30'
-                                    }`}
-                                />
-                            ))}
-                        </div>
-
-                        <button
-                            onClick={nextSlide}
-                            aria-label="Next Slide"
-                            className="w-6 h-6 rounded-full bg-black/20 dark:bg-white/20 hover:bg-theme-red dark:hover:bg-theme-red text-black dark:text-white hover:text-white flex items-center justify-center text-xs font-bold transition-colors"
-                        >
-                            ›
-                        </button>
-                    </div>
-                )}
             </div>
 
         </div>
