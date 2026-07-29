@@ -76,10 +76,10 @@ const SocialIcons = {
 
 // Responsive Light/Dark Theme Card Component
 const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
-    // Combine carousel images and fallback main image cleanly
+    // FIX: Main cover image comes FIRST, then additional carousel images
     const rawImages = [
-        ...(post.carouselImages && post.carouselImages.length > 0 ? post.carouselImages.map(item => item.url) : []),
-        ...(post.image ? [post.image] : [])
+        ...(post.image ? [post.image] : []),
+        ...(post.carouselImages && post.carouselImages.length > 0 ? post.carouselImages.map(item => item.url) : [])
     ];
     const images = Array.from(new Set(rawImages.filter(Boolean)));
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -95,6 +95,8 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
         e.preventDefault();
         setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
     };
+
+    // ... rest of your component remains the same
 
     const isFullWidth = post.gridSpan?.includes('col-span-2') || post.gridSpan?.includes('col-span-3');
 
