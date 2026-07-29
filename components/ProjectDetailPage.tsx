@@ -96,16 +96,6 @@ const ProjectDetailPage: React.FC = () => {
   return (
     <main className="max-w-[1240px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4">
       
-      {/* Back Navigation */}
-      <div className="mb-8">
-        <Link
-          to="/projects"
-          className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-light-text-muted dark:text-dark-text-muted hover:text-theme-red transition-colors"
-        >
-          ← Back to All Projects
-        </Link>
-      </div>
-
       {/* Hero Title Block */}
       <section className="mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-theme-red/10 border border-theme-red/20 text-theme-red text-xs font-mono font-bold tracking-widest uppercase mb-4">
@@ -222,9 +212,9 @@ const ProjectDetailPage: React.FC = () => {
 
       {/* Full Case Study Breakdown */}
         {project.fullCaseStudy && (
-            <section className="p-8 sm:p-12 rounded-[2.5rem] bg-gray-50 dark:bg-gray-900/60 border border-black/5 dark:border-white/10 mb-12 shadow-lg">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-[3px] text-theme-red block mb-6">
-                CASE STUDY OVERVIEW
+            <section className="p-8 sm:p-12 rounded-[2.5rem] bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 mb-12 shadow-lg">
+                <span className="text-[12px] font-mono font-bold uppercase tracking-[1.5px] text-theme-red block mb-6">
+                CASE STUDY DETAILS
                 </span>
                 <div className="prose dark:prose-invert max-w-none text-light-text dark:text-dark-text leading-relaxed space-y-4">
                 {typeof project.fullCaseStudy === 'string' ? (
@@ -257,23 +247,25 @@ const ProjectDetailPage: React.FC = () => {
       {/* Footer Navigation CTA */}
       <section className="py-12 text-center border-t border-gray-200 dark:border-gray-800 mt-12">
         <h3 className="text-2xl font-black mb-6 text-light-text dark:text-dark-text">
-          Want to discuss a similar project?
+          Want to discuss a project?
         </h3>
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <Link to="/contact">
-            <ResizableButton
-              size={14}
-              className="bg-black dark:bg-white text-white dark:text-black hover:bg-theme-red dark:hover:bg-theme-red dark:hover:text-white font-extrabold uppercase tracking-wider rounded-full px-8 py-3.5 text-xs sm:text-sm transition-all duration-300 shadow-md"
-            >
-              START A CONVERSATION →
-            </ResizableButton>
-          </Link>
-          <Link
+            <Link
             to="/projects"
             className="px-6 py-3.5 border border-black/20 dark:border-white/20 text-xs sm:text-sm font-extrabold uppercase tracking-wider rounded-full text-light-text dark:text-dark-text hover:bg-black/5 dark:hover:bg-white/5 transition-all"
           >
             ← All Works
           </Link>
+
+          <Link to="/contact">
+            <ResizableButton
+              size={14}
+              className="text-black dark:text-white hover:bg-theme-red dark:hover:bg-theme-red hover:text-white dark:hover:text-white font-extrabold uppercase tracking-wider rounded-full px-5 py-3.5 text-xs sm:text-sm transition-all duration-300 shadow-md"
+            >
+              START A CONVERSATION →
+            </ResizableButton>
+          </Link>
+          
         </div>
       </section>
 

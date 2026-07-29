@@ -174,11 +174,11 @@ const ProjectsPage: React.FC = () => {
                     <div className="flex flex-wrap items-center gap-3">
                       {item.slug && (
                         <Link to={`/projects/${item.slug}`}>
-                          <ResizableButton 
-                            size={13} 
-                            className="bg-white text-black font-extrabold uppercase tracking-wider text-xs px-6 py-2.5 rounded-full hover:bg-theme-red hover:text-white transition-all duration-300 shadow-md"
+                          <ResizableButton
+                            size={14}
+                            className="text-white dark:text-white hover:bg-theme-red dark:hover:bg-theme-red hover:text-white dark:hover:text-white font-extrabold uppercase tracking-wider rounded-full px-8 py-3.5 text-xs sm:text-sm transition-all duration-300 shadow-md"
                           >
-                            CASE STUDY →
+                            Case Study→
                           </ResizableButton>
                         </Link>
                       )}
@@ -217,7 +217,7 @@ const ProjectsPage: React.FC = () => {
       </section>
 
       {/* --- FOOTER CTA --- */}
-      <section className="text-center py-16 px-6 bg-gray-50 dark:bg-gray-900/60 rounded-[2.5rem] border border-black/5 dark:border-white/10 my-8 shadow-lg">
+      <section className="text-center py-16 px-6">
         <h3 className="text-2xl sm:text-3xl font-black mb-3 text-light-text dark:text-dark-text">
           Have a specific project or blueprint in mind?
         </h3>
@@ -226,22 +226,14 @@ const ProjectsPage: React.FC = () => {
         </p>
 
         <Link to="/contact">
-          <ResizableButton 
-            size={14} 
-            className="bg-black dark:bg-white text-white dark:text-black hover:bg-theme-red dark:hover:bg-theme-red dark:hover:text-white font-extrabold uppercase tracking-wider rounded-full px-8 py-3.5 text-xs sm:text-sm transition-all duration-300 shadow-md"
-          >
-            START A CONVERSATION →
-          </ResizableButton>
-        </Link>
-
-        <div className="mt-8">
-          <Link 
-            to="/" 
-            className="text-xs font-mono font-bold uppercase tracking-widest text-light-text-muted dark:text-dark-text-muted hover:text-theme-red transition-colors"
-          >
-            ← BACK TO HOME
+            <ResizableButton
+              size={14}
+              className="text-black dark:text-white hover:bg-theme-red dark:hover:bg-theme-red hover:text-white dark:hover:text-white font-extrabold uppercase tracking-wider rounded-full px-5 py-3.5 text-xs sm:text-sm transition-all duration-300 shadow-md"
+            >
+              START A CONVERSATION →
+            </ResizableButton>
           </Link>
-        </div>
+
       </section>
 
     </main>
