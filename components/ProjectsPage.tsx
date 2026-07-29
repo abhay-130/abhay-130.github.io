@@ -23,53 +23,14 @@ export interface ProjectItem {
   featured?: boolean;
 }
 
-const fallbackProjects: ProjectItem[] = [
-  {
-    id: '1',
-    title: 'Flavyo App',
-    category: 'Full-Stack Development',
-    description: 'Android ice cream application built with Jetpack Compose UI & Supabase backend architecture.',
-    mainImage: '/landing-page-images/architecture.jpg',
-    externalLink: 'https://github.com/abhaykishor',
-  },
-  {
-    id: '2',
-    title: 'City Library Saharanpur',
-    category: 'Branding & Identity',
-    description: 'Full corporate identity design including custom logos and a large-scale horizontal outdoor banner (10ft x 4ft).',
-    mainImage: '/landing-page-images/design.JPG',
-    externalLink: 'https://www.behance.net/abhaykishor130',
-  },
-  {
-    id: '3',
-    title: 'Ancient Urbanism Research',
-    category: 'Architecture Thesis',
-    description: 'Researching Chola dynasty urban settlement philosophies and radiocarbon dating applications in historic planning.',
-    mainImage: '/landing-page-images/code.JPG',
-  },
-  {
-    id: '4',
-    title: 'Chhattisgarh Internship',
-    category: 'Vernacular Architecture',
-    description: 'Field documentation of traditional mud house construction techniques, spatial integration, and local material usage.',
-    mainImage: '/landing-page-images/career.jpeg',
-  },
-  {
-    id: '5',
-    title: 'Virasat’26 Heritage Fest',
-    category: 'Leadership & Events',
-    description: 'Served as Convener for IIT Roorkee’s heritage fest, managing multi-disciplinary teams and coordinating 8+ major workshops.',
-    mainImage: '/landing-page-images/social.jpg',
-  },
-];
-
 const ProjectsPage: React.FC = () => {
-  const [projects, setProjects] = useState<ProjectItem[]>(fallbackProjects);
+  const [projects, setProjects] = useState<ProjectItem[]>([]);
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [categories, setCategories] = useState<string[]>(['All']);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // GROQ Query to fetch Projects from Sanity Studio
+    // GROQ Query to fetch Projects dynamically from Sanity Studio
     const query = `*[_type == "project"] | order(publishedAt desc) {
       "id": _id,
       title,
@@ -90,13 +51,15 @@ const ProjectsPage: React.FC = () => {
         if (data && data.length > 0) {
           setProjects(data);
           
-          // Extract unique categories dynamically from Sanity
+          // Extract unique categories dynamically from Sanity items
           const uniqueCats = ['All', ...Array.from(new Set(data.map((p) => p.category).filter(Boolean)))];
           setCategories(uniqueCats);
         }
+        setLoading(false);
       })
       .catch((err) => {
-        console.warn('Sanity projects fetch error (using fallback items):', err);
+        console.warn('Sanity projects fetch error:', err);
+        setLoading(false);
       });
   }, []);
 
@@ -155,87 +118,102 @@ const ProjectsPage: React.FC = () => {
         )}
 
         {/* --- DYNAMIC PROJECT GRID --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          {filteredProjects.map((item, index) => {
-            const isFullWidth = index % 3 === 0;
+        {loading ? (
+          <div className="w-full p-16 text-center rounded-[2.5rem] bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/10 font-mono text-xs font-bold uppercase tracking-widest text-light-text-muted dark:text-dark-text-muted">
+            Fetching Projects from Sanity...
+          </div>
+        ) : filteredProjects.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+            {filteredProjects.map((item, index) => {
+              const isFullWidth = index % 3 === 0;
 
-            return (
-              <div 
-                key={item.id} 
-                className={`group relative overflow-hidden rounded-[2.5rem] bg-gray-50 dark:bg-gray-900/60 border border-black/5 dark:border-white/10 shadow-xl transition-all duration-500 hover:-translate-y-1 ${
-                  isFullWidth ? 'md:col-span-2 h-[420px] md:h-[580px]' : 'h-[480px] md:h-[520px]'
-                }`}
-              >
-                {/* Main Media Image */}
-                <img 
-                  src={item.mainImage} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" 
-                />
-                
-                {/* Gradient Scrim Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-300"></div>
-                
-                {/* Video Play Badge (If video exists in Sanity) */}
-                {item.videoUrl && (
-                  <div className="absolute top-6 right-6 z-20">
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-xs font-mono font-bold">
-                      <svg className="w-3.5 h-3.5 fill-theme-red" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                      VIDEO CASE STUDY
-                    </span>
-                  </div>
-                )}
-
-                {/* Content Overlay Box */}
-                <div className="absolute bottom-0 left-0 p-6 sm:p-8 md:p-10 w-full flex flex-col items-start z-10">
-                  <span className="text-theme-red font-mono font-bold text-xs uppercase tracking-widest mb-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-                    {item.category}
-                  </span>
-
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight tracking-tight">
-                    {item.title}
-                  </h3>
-
-                  <p className="text-white/80 text-xs sm:text-sm md:text-base leading-relaxed mb-6 max-w-2xl line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
-                    {item.description}
-                  </p>
-
-                  <div className="flex flex-wrap items-center gap-3">
-                    {item.externalLink ? (
-                      <a 
-                        href={item.externalLink} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="px-6 py-2.5 bg-white text-black hover:bg-theme-red hover:text-white font-extrabold uppercase tracking-wider text-xs rounded-full transition-all duration-300 shadow-md"
-                      >
-                        VIEW LIVE PROJECT ↗
-                      </a>
-                    ) : item.slug ? (
-                      <Link to={`/projects/${item.slug}`}>
-                        <ResizableButton 
-                          size={13} 
-                          className="bg-white text-black font-extrabold uppercase tracking-wider text-xs px-6 py-2.5 rounded-full hover:bg-theme-red hover:text-white transition-all duration-300"
-                        >
-                          CASE STUDY →
-                        </ResizableButton>
-                      </Link>
-                    ) : null}
-
-                    {/* Gallery Count Pill */}
-                    {item.galleryImages && item.galleryImages.length > 0 && (
-                      <span className="text-[11px] font-mono text-white/70 bg-black/40 backdrop-blur-md px-3 py-2 rounded-full border border-white/10">
-                        📷 {item.galleryImages.length} Shots
+              return (
+                <div 
+                  key={item.id} 
+                  className={`group relative overflow-hidden rounded-[2.5rem] bg-gray-50 dark:bg-gray-900/60 border border-black/5 dark:border-white/10 shadow-xl transition-all duration-500 hover:-translate-y-1 ${
+                    isFullWidth ? 'md:col-span-2 h-[420px] md:h-[580px]' : 'h-[480px] md:h-[520px]'
+                  }`}
+                >
+                  {/* Main Media Image */}
+                  <img 
+                    src={item.mainImage} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" 
+                  />
+                  
+                  {/* Gradient Scrim Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-300"></div>
+                  
+                  {/* Video Play Badge (If video exists) */}
+                  {item.videoUrl && (
+                    <div className="absolute top-6 right-6 z-20">
+                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-xs font-mono font-bold">
+                        <svg className="w-3.5 h-3.5 fill-theme-red" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                        VIDEO CASE STUDY
                       </span>
-                    )}
-                  </div>
-                </div>
+                    </div>
+                  )}
 
-              </div>
-            );
-          })}
-        </div>
+                  {/* Content Overlay Box */}
+                  <div className="absolute bottom-0 left-0 p-6 sm:p-8 md:p-10 w-full flex flex-col items-start z-10">
+                    <span className="text-theme-red font-mono font-bold text-xs uppercase tracking-widest mb-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                      {item.category}
+                    </span>
+
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-3 leading-tight tracking-tight">
+                      {item.title}
+                    </h3>
+
+                    <p className="text-white/80 text-xs sm:text-sm md:text-base leading-relaxed mb-6 max-w-2xl line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
+                      {item.description}
+                    </p>
+
+                    {/* Action Buttons Group */}
+                    <div className="flex flex-wrap items-center gap-3">
+                      {item.slug && (
+                        <Link to={`/projects/${item.slug}`}>
+                          <ResizableButton 
+                            size={13} 
+                            className="bg-white text-black font-extrabold uppercase tracking-wider text-xs px-6 py-2.5 rounded-full hover:bg-theme-red hover:text-white transition-all duration-300 shadow-md"
+                          >
+                            CASE STUDY →
+                          </ResizableButton>
+                        </Link>
+                      )}
+
+                      {item.externalLink && (
+                        <a 
+                          href={item.externalLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="px-6 py-2.5 bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white hover:text-black font-extrabold uppercase tracking-wider text-xs rounded-full transition-all duration-300 shadow-md"
+                        >
+                          LIVE LINK ↗
+                        </a>
+                      )}
+
+                      {/* Gallery Count Badge */}
+                      {item.galleryImages && item.galleryImages.length > 0 && (
+                        <span className="text-[11px] font-mono text-white/70 bg-black/40 backdrop-blur-md px-3 py-2 rounded-full border border-white/10">
+                          📷 {item.galleryImages.length} Shots
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="w-full p-16 text-center rounded-[2.5rem] bg-gray-50 dark:bg-white/5 border border-dashed border-black/10 dark:border-white/10 my-4">
+            <p className="text-sm font-mono font-bold uppercase tracking-widest text-light-text-muted dark:text-dark-text-muted">
+              No Projects Published Yet
+            </p>
+          </div>
+        )}
       </section>
 
       {/* --- FOOTER CTA --- */}
