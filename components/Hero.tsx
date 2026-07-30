@@ -87,8 +87,8 @@ const Hero: React.FC = () => {
           </button>
 
           <a
-            href="#contact"
-            className="text-[16px] font-medium text-gray-900 dark:text-white hover:text-red-600 transition-colors"
+            href="#contact" 
+            className="scroll-mt-24 sm:scroll-mt-28 md:scroll-mt-32 text-[16px] font-medium text-gray-900 dark:text-white hover:text-red-600 transition-colors"
           >
             Contact Me →
           </a>

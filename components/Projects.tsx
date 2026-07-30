@@ -10,7 +10,7 @@ const projectItems = [
 
 const Projects: React.FC = () => {
   return (
-    <section id="projects" className="w-full">
+    <section id="projects" className="scroll-mt-24 sm:scroll-mt-28 md:scroll-mt-32">
       <div className="flex flex-row justify-between items-end mb-8 sm:mb-10 md:mb-12 gap-2 sm:gap-4">
         {/* Left Side: Text */}
         <div>
@@ -24,10 +24,10 @@ const Projects: React.FC = () => {
         {/* Right Side: Button */}
         {/* Removed mt-4, reduced padding (px-3 py-1) and text size (text-xs) for mobile */}
         <a 
-          href="#" 
+          href="./projects" 
           className="whitespace-nowrap px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-base rounded-full border-2 border-theme-red font-semibold hover:bg-theme-red hover:text-white dark:hover:text-dark-text transition-colors"
         >
-          EXPLORE MORE
+          EXPLORE MORE →
         </a>
       </div>
 
@@ -39,7 +39,7 @@ const Projects: React.FC = () => {
             <div className="absolute bottom-0 left-0 p-4 sm:p-6 md:p-8 text-white">
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold">{item.title}</h3>
               <p className="text-sm sm:text-base md:text-lg">{item.category}</p>
-              <a href="#" className="mt-3 sm:mt-4 inline-block px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full border-2 border-white text-black bg-white font-semibold hover:bg-transparent hover:text-white transition-colors">
+              <a href="./projects" className="mt-3 sm:mt-4 inline-block px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full border-2 border-white text-black bg-white font-semibold hover:bg-transparent hover:text-white transition-colors">
                 Explore More
               </a>
             </div>

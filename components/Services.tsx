@@ -121,7 +121,7 @@ const Services: React.FC = () => {
       {/* Explore Button */}
       <div className="text-center mt-10 sm:mt-12 md:mt-16">
         <a 
-          href="#projects" 
+          href="./services" 
           className="inline-block px-7 sm:px-8 py-3 sm:py-3.5 rounded-full border-2 border-theme-red text-theme-red dark:text-theme-red font-extrabold text-sm sm:text-base uppercase tracking-wider hover:bg-theme-red hover:text-white dark:hover:text-white transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
         >
           Explore Now →

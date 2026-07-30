@@ -99,7 +99,7 @@ const Faq: React.FC = () => {
 
                 <div className="flex flex-wrap items-center gap-3 mt-2">
                     <a 
-                        href="#contact" 
+                        href="./contact" 
                         className="px-6 py-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider rounded-full border border-black dark:border-white text-light-text dark:text-dark-text hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 shadow-sm"
                     >
                         ASK MORE →

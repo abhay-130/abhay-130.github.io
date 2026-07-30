@@ -40,7 +40,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="w-full">
+    <section id="contact" className="scroll-mt-24 sm:scroll-mt-28 md:scroll-mt-32">
       {/* Side-by-Side Layout matching ContactPage */}
       <div className="flex flex-col lg:flex-row gap-8 sm:gap-12 lg:gap-14 items-start w-full">
         

@@ -91,7 +91,7 @@ const Blog: React.FC = () => {
                     to="/blogs" 
                     className="whitespace-nowrap px-3 py-1.5 sm:px-6 sm:py-3 text-xs sm:text-base rounded-full border-2 border-theme-red font-semibold hover:bg-theme-red hover:text-white dark:hover:text-dark-text transition-colors"
                 >
-                    EXPLORE MORE
+                    EXPLORE MORE →
                 </Link>
             </div>
 

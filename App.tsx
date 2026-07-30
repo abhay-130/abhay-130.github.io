@@ -88,7 +88,7 @@ const App: React.FC = () => {
 
       <div className={pageShellClassName}>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} /> 
           <Route path="/about" element={<AboutPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:slug" element={<ProjectDetailPage />} /> {/* Case Study Detail Route */}
