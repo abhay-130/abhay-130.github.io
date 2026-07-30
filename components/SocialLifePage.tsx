@@ -252,11 +252,11 @@ const SocialLifePage: React.FC = () => {
 
     // EXACT CASING MATCH FOR PUBLIC ASSETS
     const carouselImages = [
-        { src: "/landing-page-images/photo1.JPG", caption: "Virasat'25 Team Jams" },
-        { src: "/landing-page-images/photo2.JPG", caption: "Professional Life" },
-        { src: "/landing-page-images/photo3.JPG", caption: "Site Visiting" },
-        { src: "/landing-page-images/photo4.JPG", caption: "My Circle" },
-        { src: "/landing-page-images/photo5.JPG", caption: "Unscripted Offline Life" }
+        { src: "/social-life-page-images/image1.JPG", caption: "Virasat'25 Team Jams" },
+        { src: "/social-life-page-images/image2.JPG", caption: "Professional Life" },
+        { src: "/social-life-page-images/image3.JPG", caption: "Site Visiting" },
+        { src: "/social-life-page-images/image4.JPG", caption: "My Circle" },
+        { src: "/social-life-page-images/image5.JPG", caption: "Unscripted Offline Life" }
     ];
 
     const [carouselIndex, setCarouselIndex] = useState(0);
