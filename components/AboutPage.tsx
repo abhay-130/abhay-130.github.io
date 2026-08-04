@@ -109,9 +109,9 @@ const AboutPage: React.FC = () => {
                     {/* CTAs */}
                     <div className="flex flex-wrap gap-4 mt-8">
                         <ResizableButton 
-                            onClick={() => window.open('/path-to-your-resume.pdf')} 
+                            onClick={() => window.open('/Resume/AbhaYKishor_Resume.pdf')} 
                             size={14} 
-                            className="bg-black dark:bg-white text-white dark:text-black px-7 py-3.5 rounded-full font-extrabold uppercase tracking-wider text-xs shadow-lg hover:bg-theme-red dark:hover:bg-theme-red dark:hover:text-white transition-all"
+                            className="text-black dark:text-white px-7 py-3.5 rounded-full font-extrabold uppercase tracking-wider text-xs shadow-lg hover:bg-theme-red dark:hover:bg-theme-red hover:text-white dark:hover:text-white transition-all"
                         >
                             Download CV ↓
                         </ResizableButton>

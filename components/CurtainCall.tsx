@@ -3,10 +3,10 @@ import ResizableButton from './ResizableButton';
 
 const CurtainCall: React.FC = () => {
   const handleDownload = () => {
-    const resumeUrl = '/Resume/AbhaY-resume.pdf';
+    const resumeUrl = '/Resume/AbhaYKishor_Resume.pdf';
     const link = document.createElement('a');
     link.href = resumeUrl;
-    link.download = 'AbhaY_Resume.pdf';
+    link.download = 'AbhaYKishor_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
