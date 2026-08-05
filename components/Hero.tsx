@@ -60,9 +60,9 @@ const Hero: React.FC = () => {
         flex flex-col lg:flex-row 
         items-center justify-between
         bg-white dark:bg-dark-bg
-        py-6 sm:py-10 lg:py-12
+        py-4 sm:py-8 lg:py-6
         px-6 sm:px-12 md:px-16 lg:px-24
-        gap-8 lg:gap-14 xl:gap-16
+        gap-6 lg:gap-8 xl:gap-10
         max-w-[1280px] mx-auto
       "
     >
