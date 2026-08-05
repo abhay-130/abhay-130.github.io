@@ -77,11 +77,17 @@ const Blog: React.FC = () => {
 
     return (
         <section id="blogs" className="w-full">
+            {/* Header Section */}
             <div className="flex flex-row justify-between items-end mb-8 sm:mb-10 md:mb-12 gap-2 sm:gap-4">
-                {/* Left Side: Text */}
+                {/* Left Side: Title */}
                 <div>
-                    <p className="text-xs sm:text-base font-medium uppercase tracking-[2px] sm:tracking-[3px]">Our Corner</p>
-                    <h2 className="text-xl min-[400px]:text-2xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold -tracking-wide leading-tight">
+                    <div className="inline-flex items-center gap-2 mb-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-theme-red animate-pulse" />
+                        <p className="text-xs sm:text-sm font-mono font-bold uppercase tracking-[2px] sm:tracking-[3px] text-theme-red">
+                            Our Corner
+                        </p>
+                    </div>
+                    <h2 className="text-xl min-[400px]:text-2xl sm:text-4xl md:text-5xl lg:text-[50px] font-black -tracking-wide leading-tight text-light-text dark:text-dark-text">
                         Latest Blog/Articles
                     </h2>
                 </div>
@@ -89,75 +95,110 @@ const Blog: React.FC = () => {
                 {/* Right Side: Button */}
                 <Link 
                     to="/blogs" 
-                    className="whitespace-nowrap px-3 py-1.5 sm:px-6 sm:py-3 text-xs sm:text-base rounded-full border-2 border-theme-red font-semibold hover:bg-theme-red hover:text-white dark:hover:text-dark-text transition-colors"
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    className="whitespace-nowrap px-4 py-2 sm:px-6 sm:py-2.5 text-xs sm:text-sm rounded-full border-2 border-theme-red font-bold uppercase tracking-wider text-light-text dark:text-dark-text hover:bg-theme-red hover:text-white dark:hover:text-white transition-colors duration-300 shadow-sm"
                 >
                     EXPLORE MORE →
                 </Link>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-8 sm:gap-10 lg:gap-12">
+            {/* Articles Grid Layout */}
+            <div className="flex flex-col lg:flex-row gap-8 sm:gap-10 lg:gap-12 items-stretch">
                 {/* Featured Main Article */}
                 {mainArticle && (
-                    <div className="lg:w-2/3">
-                        <Link to={`/blogs/${mainArticle.id}`}>
-                            <div className="relative w-full aspect-[16/9] overflow-hidden rounded-3xl mb-4 sm:mb-6 bg-black/5 dark:bg-white/5">
-                                {/* Category Badge on Top-Left */}
+                    <div className="lg:w-2/3 group flex flex-col">
+                        <Link 
+                            to={`/blogs/${mainArticle.id}`}
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            className="block overflow-hidden rounded-[2rem] mb-5 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 relative shadow-lg group-hover:shadow-2xl group-hover:shadow-theme-red/10 transition-all duration-500"
+                        >
+                            <div className="relative w-full aspect-[16/9] overflow-hidden">
+                                {/* Category Badge */}
                                 {mainArticle.category && (
-                                    <span className="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border border-white/20">
+                                    <span className="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md text-white text-xs font-mono font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full border border-white/20 shadow-md">
                                         {mainArticle.category}
                                     </span>
                                 )}
                                 <img 
                                     src={mainArticle.image} 
                                     alt={mainArticle.title} 
-                                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" 
                                 />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             </div>
                         </Link>
-                        {/* Formatted Date */}
-                        <p className="text-sm sm:text-base md:text-lg text-light-text-muted dark:text-dark-text-muted mb-2">
-                            {formatDate(mainArticle.date)}
-                        </p>
-                        <Link to={`/blogs/${mainArticle.id}`}>
-                            <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug hover:text-theme-red transition-colors cursor-pointer mb-3">
+
+                        {/* Date */}
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-theme-red" />
+                            <p className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-light-text-muted dark:text-dark-text-muted">
+                                {formatDate(mainArticle.date)}
+                            </p>
+                        </div>
+
+                        {/* Title */}
+                        <Link 
+                            to={`/blogs/${mainArticle.id}`}
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        >
+                            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black leading-snug text-light-text dark:text-white group-hover:text-theme-red transition-colors cursor-pointer mb-3">
                                 {mainArticle.title}
                             </h3>
                         </Link>
 
-                        {/* Starting 2-3 lines description */}
+                        {/* Description */}
                         {mainArticle.description && (
-                            <p className="text-sm sm:text-base md:text-lg text-light-text-muted dark:text-dark-text-muted leading-relaxed line-clamp-3">
+                            <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed line-clamp-3 mb-4">
                                 {mainArticle.description}
                             </p>
                         )}
+
+                        <Link 
+                            to={`/blogs/${mainArticle.id}`}
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-theme-red hover:underline mt-auto"
+                        >
+                            <span>Read Full Article</span>
+                            <span>→</span>
+                        </Link>
                     </div>
                 )}
 
                 {/* Side Articles */}
-                <div className="lg:w-1/3 flex flex-col gap-6 sm:gap-8">
+                <div className="lg:w-1/3 flex flex-col justify-between gap-6 sm:gap-8">
                     {sideArticles.map((article) => (
-                        <div key={article.id} className="flex flex-col">
-                            <Link to={`/blogs/${article.id}`}>
-                                <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl mb-2 bg-black/5 dark:bg-white/5">
-                                    {/* Category Badge on Top-Left */}
+                        <div key={article.id} className="group flex flex-col p-4 rounded-2xl bg-gray-50/50 dark:bg-white/[0.02] border border-black/5 dark:border-white/5 hover:border-theme-red/30 transition-all duration-300">
+                            <Link 
+                                to={`/blogs/${article.id}`}
+                                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                                className="block overflow-hidden rounded-xl mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 relative"
+                            >
+                                <div className="relative w-full aspect-[16/10] overflow-hidden">
+                                    {/* Category Badge */}
                                     {article.category && (
-                                        <span className="absolute top-3 left-3 z-10 bg-black/60 backdrop-blur-md text-white text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-white/20">
+                                        <span className="absolute top-3 left-3 z-10 bg-black/60 backdrop-blur-md text-white text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-white/20">
                                             {article.category}
                                         </span>
                                     )}
                                     <img 
                                         src={article.image} 
                                         alt={article.title} 
-                                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" 
                                     />
                                 </div>
                             </Link>
-                            {/* Formatted Date */}
-                            <p className="text-xs sm:text-sm text-light-text-muted dark:text-dark-text-muted mb-1">
+
+                            {/* Date */}
+                            <p className="text-xs font-mono font-bold uppercase tracking-wider text-light-text-muted dark:text-dark-text-muted mb-1.5">
                                 {formatDate(article.date)}
                             </p>
-                            <Link to={`/blogs/${article.id}`}>
-                                <h4 className="text-base sm:text-lg md:text-xl font-semibold leading-normal hover:text-theme-red transition-colors cursor-pointer">
+
+                            {/* Title */}
+                            <Link 
+                                to={`/blogs/${article.id}`}
+                                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            >
+                                <h4 className="text-base sm:text-lg font-bold leading-snug text-light-text dark:text-white group-hover:text-theme-red transition-colors cursor-pointer">
                                     {article.title}
                                 </h4>
                             </Link>

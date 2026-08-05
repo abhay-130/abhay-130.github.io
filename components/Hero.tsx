@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { sanityClient } from './data/sanityClient';
 
-// Define the structure for our language objects
 interface LanguageContent {
   lang: string;
-  line1: string; // The "Hi, I'm" part
-  line2: string; // The "AbhaY!" part (will get the gradient)
+  line1: string; 
+  line2: string; 
 }
 
-const Hero: React.FC = () => {
-  // 1. STATE: Keeps track of which language index is currently showing
-  const [currentIndex, setCurrentIndex] = useState(0);
+const fallbackImage = 'landing-page-images/abhay-profile.JPG';
 
-  // 2. DATA: The list of languages in the specific order you requested
-  // Order: Hindi -> English -> Urdu -> Punjabi -> Others
+const Hero: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [heroImageUrl, setHeroImageUrl] = useState<string>(fallbackImage);
+
   const languages: LanguageContent[] = [
     { lang: 'Hindi', line1: "नमस्ते, मैं", line2: "अभय हूँ!" },
     { lang: 'English', line1: "Hi, I'm", line2: "AbhaY!" },
@@ -27,13 +27,28 @@ const Hero: React.FC = () => {
     { lang: 'Malayalam', line1: "നമസ്കാരം, ഞാൻ", line2: "അഭയ്!" },
   ];
 
-  // 3. EFFECT: Cycles through the array every 3 seconds
+  useEffect(() => {
+    const query = `*[_type == "heroImage"][0]{
+      "url": image.asset->url
+    }`;
+
+    sanityClient
+      .fetch(query)
+      .then((data) => {
+        if (data && data.url) {
+          setHeroImageUrl(data.url);
+        }
+      })
+      .catch((err) => {
+        console.warn('Sanity hero image fetch error:', err);
+      });
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % languages.length);
-    }, 4000); // 3000ms = 3 seconds
+    }, 4000);
 
-    // Cleanup function to stop the timer if the component unmounts
     return () => clearInterval(interval);
   }, [languages.length]);
 
@@ -43,71 +58,86 @@ const Hero: React.FC = () => {
       className="
         w-full
         flex flex-col lg:flex-row 
-        items-center lg:items-start justify-start
+        items-center justify-between
         bg-white dark:bg-dark-bg
-
-        !pb-[60px]  lg:!pb-[50px]
-        !pl-[20px]  lg:!pl-[100px]
-        !pr-[20px]  lg:!pr-[100px]
-        
-        gap-[50px] lg:gap-[80px]
-        
-        overflow-hidden
+        py-6 sm:py-10 lg:py-12
+        px-6 sm:px-12 md:px-16 lg:px-24
+        gap-8 lg:gap-14 xl:gap-16
+        max-w-[1280px] mx-auto
       "
     >
-      
       {/* 1. TEXT SECTION */}
-      <div className="flex flex-col items-center text-center lg:items-start lg:text-left w-full lg:w-1/2 lg:mt-[20px]">
+      <div className="flex flex-col items-center text-center lg:items-start lg:text-left w-full lg:flex-1 min-w-0">
         
-        <span className="mb-[15px] py-[8px] px-[16px] rounded-full bg-gray-100 dark:bg-gray-800 text-[12px] font-bold uppercase tracking-wider text-gray-600 dark:text-gray-300">
-          Architecture & Design
-        </span>
+        {/* CENTERED BADGE */}
+        <div className="w-full flex justify-center lg:justify-start">
+          <div className="inline-flex items-center gap-2 mb-6 py-1.5 px-4 rounded-full bg-gray-100 dark:bg-white/5 border border-black/5 dark:border-white/10 text-[12px] font-mono font-bold uppercase tracking-widest text-gray-700 dark:text-gray-300">
+            <span className="w-2 h-2 rounded-full bg-theme-red" />
+            <span>Architecture & Design</span>
+          </div>
+        </div>
 
-        {/* DYNAMIC HEADING SECTION */}
-        <h1 className="font-poppins font-extrabold text-[40px] sm:text-[60px] lg:text-[90px] leading-[1.1] text-gray-900 dark:text-white mb-[20px] min-h-[140px] lg:min-h-[200px]">
-          {/* We use a transition effect here implicitly by React re-rendering */}
-          <span className="block animate-fade-in">
+        {/* REDUCED SIZE HEADING */}
+        <h1 className="font-poppins font-black text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-gray-900 dark:text-white mb-6 min-h-[140px] sm:min-h-[170px] lg:min-h-[210px] flex flex-col justify-center leading-[1.12] sm:leading-[1.15]">
+          <span 
+            key={`line1-${currentIndex}`} 
+            className="block py-0.5 animate-fade-in transition-all duration-500"
+          >
             {languages[currentIndex].line1}
           </span> 
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600 block">
+          <span 
+            key={`line2-${currentIndex}`}
+            className="text-theme-red block py-0.5 animate-fade-in transition-all duration-500"
+          >
             {languages[currentIndex].line2}
           </span>
         </h1>
 
-        <p className="font-poppins text-[16px] sm:text-[18px] text-gray-600 dark:text-gray-400 max-w-[500px] mb-[40px]">
+        {/* PARAGRAPH */}
+        <p className="font-poppins text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 max-w-lg mb-8 leading-relaxed">
           Welcome to my creative corner. I'm an <span className="font-bold text-gray-900 dark:text-gray-100">Architecture Student at IIT Roorkee</span> and a graphic designer passionate about visual storytelling.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center gap-[20px]">
+        {/* ACTION BUTTONS */}
+        <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
           <button 
             onClick={() => { window.location.hash = '#projects' }}
-            className="px-[40px] py-[15px] rounded-full bg-red-600 text-white font-semibold text-[16px] hover:bg-red-700 transition-colors"
+            className="w-full sm:w-auto px-8 py-4 rounded-full bg-theme-red text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-theme-red/90 transition-colors duration-300"
           >
             View My Work
           </button>
 
           <a
             href="#contact" 
-            className="scroll-mt-24 sm:scroll-mt-28 md:scroll-mt-32 text-[16px] font-medium text-gray-900 dark:text-white hover:text-red-600 transition-colors"
+            className="w-full sm:w-auto text-center px-7 py-4 rounded-full border border-black/10 dark:border-white/10 text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-900 dark:text-white hover:border-theme-red hover:text-theme-red dark:hover:text-theme-red transition-colors duration-300 group"
           >
-            Contact Me →
+            <span>Contact Me</span>
+            <span className="inline-block transform group-hover:translate-x-1 transition-transform ml-1">→</span>
           </a>
         </div>
       </div>
 
-      {/* 2. IMAGE SECTION */}
-      <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-        <img
-          src="landing-page-images/abhay-profile.JPG"
-          alt="Abhay Kishor"
-          className="
-            object-cover rounded-[20px] shadow-2xl
-            w-[300px] h-[350px] 
-            sm:w-[400px] sm:h-[500px] 
-            lg:w-[500px] lg:h-[600px]
-          "
-        />
+      {/* 2. FIXED SIZE PHOTO CONTAINER (NO BADGE OVERLAY) */}
+      <div className="flex-shrink-0 shrink-0 w-[280px] sm:w-[380px] lg:w-[440px] xl:w-[480px] flex justify-center lg:justify-end">
+        <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden shadow-xl border border-black/10 dark:border-white/10">
+          <img
+            src={heroImageUrl}
+            alt="Abhay Kishor"
+            className="w-full h-full object-cover rounded-[2rem]"
+          />
+        </div>
       </div>
+
+      {/* Keyframe for Fade Effect */}
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(4px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fadeIn 0.4s ease-out forwards;
+        }
+      `}</style>
 
     </section>
   );
