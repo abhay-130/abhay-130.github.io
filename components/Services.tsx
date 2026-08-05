@@ -62,7 +62,7 @@ const services: ServiceItem[] = [
 
 const Services: React.FC = () => {
   return (
-    <section id="services" className="w-full py-6">
+    <section id="services" className="w-full">
       
       {/* Header */}
       <div className="text-center mb-10 sm:mb-12 md:mb-16 flex flex-col items-center gap-2">

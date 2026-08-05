@@ -14,7 +14,7 @@ import CurtainCall from './components/CurtainCall';
 import Footer from './components/Footer';
 import AboutPage from './components/AboutPage';
 import ProjectsPage from './components/ProjectsPage';
-import ProjectDetailPage from './components/ProjectDetailPage'; // Added Project Detail Component
+import ProjectDetailPage from './components/ProjectDetailPage';
 import SocialLifePage from './components/SocialLifePage';
 import ServicesPage from './components/ServicesPage';
 import BlogsPage from './components/BlogsPage';
@@ -24,9 +24,11 @@ import BlogPostPage from './components/BlogPostPage';
 import TermsPage from './components/TermsPage';
 import PrivacyPage from './components/PrivacyPage';
 
+// Standardized equal vertical padding while preserving initial side paddings (px-7 sm:px-8 md:px-12 lg:px-16)
 const sectionSpacing =
-  'py-12 sm:py-16 md:py-24 px-7 sm:px-8 md:px-12 lg:px-16';
+  'py-12 sm:py-16 md:py-20 px-7 sm:px-8 md:px-12 lg:px-16';
 
+// Preserved initial page shell class
 const pageShellClassName =
   'max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 pt-24 sm:pt-28 md:pt-32';
 
@@ -44,9 +46,12 @@ const homeSections = [
 ];
 
 const HomePage: React.FC = () => (
-  <main className="w-full">
+  <main className="w-full flex flex-col">
     {homeSections.map(({ key, element }, index) => (
-      <div key={key} className={index === 0 ? `${sectionSpacing} !pt-0` : sectionSpacing}>
+      <div 
+        key={key} 
+        className={index === 0 ? `${sectionSpacing} !pt-0` : sectionSpacing}
+      >
         {element}
       </div>
     ))}
@@ -91,7 +96,7 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage />} /> 
           <Route path="/about" element={<AboutPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/projects/:slug" element={<ProjectDetailPage />} /> {/* Case Study Detail Route */}
+          <Route path="/projects/:slug" element={<ProjectDetailPage />} />
           <Route path="/social-life" element={<SocialLifePage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/blogs" element={<BlogsPage />} />
