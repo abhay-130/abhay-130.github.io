@@ -350,7 +350,7 @@ const SocialLifePage: React.FC = () => {
     };
 
     return (
-        <main className="max-w-[1240px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4">
+        <main className="max-w-[1440px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4">
             
             {/* --- HERO SECTION --- */}
             <section className="pb-12 sm:pb-16 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16 w-full">
@@ -362,12 +362,12 @@ const SocialLifePage: React.FC = () => {
                         <span>OFF-DUTY CHRONICLES</span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-black -tracking-wide leading-[1.15] text-light-text dark:text-dark-text mb-4">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold -tracking-wide leading-tight text-black dark:text-white">
                         Proof That <br />
                         <span className="text-theme-red">AbhaY Has A Life.</span>
-                    </h1>
+                    </h2>
 
-                    <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed max-w-xl mb-6">
+                    <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed max-w-xl mb-12 mt-4">
                         Believe it or not, I do leave my desk! Between ArchiCAD rendering and React builds, here's a raw collection of campus chaos, road trips, night outs, and all unscripted moments.
                     </p>
 

@@ -110,7 +110,10 @@ const Contact: React.FC = () => {
         {/* Right Column: Title & Information Cards */}
         <div className="flex-1 w-full flex flex-col items-start gap-6">
           <div className="space-y-3">
-            <span className="text-xs font-bold text-theme-red uppercase tracking-[4px]">Get In Touch</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-theme-red/10 border border-theme-red/20 text-theme-red text-xs font-mono font-bold tracking-widest uppercase mb-4">
+                <span className="w-2 h-2 rounded-full bg-theme-red animate-pulse" />
+                <span>GET IN TOUCH</span>
+            </div>
             <h2 className="text-3xl sm:text-4xl md:text-[44px] font-black -tracking-wide leading-[1.15] text-light-text dark:text-dark-text">
               Let's Build Something Awesome.
             </h2>

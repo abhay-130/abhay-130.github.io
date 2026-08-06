@@ -69,7 +69,7 @@ const ProjectsPage: React.FC = () => {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <main className="max-w-[1240px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4">
+    <main className="max-w-[1440px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4">
       
       {/* --- HEADER SECTION --- */}
       <section id="projects" className="pb-12 sm:pb-16">
@@ -79,11 +79,11 @@ const ProjectsPage: React.FC = () => {
               <span className="w-2 h-2 rounded-full bg-theme-red animate-pulse" />
               <span>SELECTED WORKS</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-black -tracking-wide leading-[1.15] text-light-text dark:text-dark-text mb-4">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold -tracking-wide leading-tight text-black dark:text-white">
               Architecture, Code <br />
               <span className="text-theme-red">& Visual Identity.</span>
-            </h1>
-            <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed">
+            </h2>
+            <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed mt-4">
               A curated portfolio of architectural studies, mobile apps, brand identities, and leadership projects completed at IIT Roorkee and beyond.
             </p>
           </div>

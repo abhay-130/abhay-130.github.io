@@ -156,14 +156,14 @@ const ServicesPage: React.FC = () => {
               <span>MY EXPERTISE</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black -tracking-wide leading-[1.08] text-light-text dark:text-dark-text">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold -tracking-wide leading-tight text-black dark:text-white">
               Architecture. Coding. <span className="text-theme-red">Creative Design.</span>
-            </h1>
+            </h2>
           </div>
 
           <div className="max-w-md flex flex-col items-start lg:items-end">
-            <p className="text-base sm:text-lg text-light-text-muted dark:text-dark-text-muted leading-relaxed mb-6">
-              I am an architecture student at IIT Roorkee who also works on web development and graphic design. Here is how I can help on your next project.
+            <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed max-w-xl space-y-4 mb-12 mt-4">
+              I am an architecture undergraduate at IIT Roorkee who also works on web development and graphic design. Here is how I can help on your next project.
             </p>
 
             <a href="mailto:abhaykishor130@gmail.com" className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-theme-red hover:underline">

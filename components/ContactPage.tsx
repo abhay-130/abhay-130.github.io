@@ -124,7 +124,7 @@ const ContactPage: React.FC = () => {
   ];
 
   return (
-    <main className="max-w-[1240px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4">
+    <main className="max-w-[1440px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4">
 
       {/* Mustang Drive Keyframes & Centered Wheel Rotations */}
       <style>{`
@@ -190,7 +190,7 @@ const ContactPage: React.FC = () => {
                   type="text" 
                   name="email" 
                   required 
-                  placeholder="e.g. parul@example.com" 
+                  placeholder="e.g. parul130@example.com" 
                   className="w-full p-3.5 bg-white dark:bg-dark-bg rounded-2xl border border-black/10 dark:border-white/10 focus:border-theme-red outline-none transition-all text-sm shadow-sm" 
                 />
               </div>
@@ -225,7 +225,10 @@ const ContactPage: React.FC = () => {
           {/* Right Column: Title & Location Cards */}
           <div className="flex-1 w-full flex flex-col items-start gap-6">
             <div className="space-y-3">
-              <span className="text-xs font-bold text-theme-red uppercase tracking-[4px]">Get In Touch</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-theme-red/10 border border-theme-red/20 text-theme-red text-xs font-mono font-bold tracking-widest uppercase mb-4">
+                <span className="w-2 h-2 rounded-full bg-theme-red animate-pulse" />
+                <span>GET IN TOUCH</span>
+              </div>
               <h2 className="text-3xl sm:text-4xl md:text-[44px] font-black -tracking-wide leading-[1.15] text-light-text dark:text-dark-text">
                 Let's Build Something Awesome.
               </h2>

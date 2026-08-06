@@ -77,11 +77,12 @@ const BlogsPage: React.FC = () => {
                 {/* Header Section */}
                 <div className="flex flex-row justify-between items-end mb-12 sm:mb-16 gap-4 border-b border-gray-200 dark:border-gray-800 pb-8">
                     <div>
-                        <p className="text-xs sm:text-base font-bold uppercase tracking-[3px] text-theme-red mb-2">
-                            The Journal
-                        </p>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-theme-red/10 border border-theme-red/20 text-theme-red text-xs font-mono font-bold tracking-widest uppercase mb-4">
+                        <span className="w-2 h-2 rounded-full bg-theme-red animate-pulse" />
+                        <span>MY JOURNAL</span>
+                        </div>
                         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold -tracking-wide leading-tight text-black dark:text-white">
-                            Thoughts & Stories
+                            Thoughts & <span className="text-theme-red">Stories.</span>
                         </h2>
                     </div>
                 </div>
