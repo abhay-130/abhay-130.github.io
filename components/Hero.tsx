@@ -60,10 +60,11 @@ const Hero: React.FC = () => {
         flex flex-col lg:flex-row 
         items-center justify-between
         bg-white dark:bg-dark-bg
-        py-4 sm:py-8 lg:py-6
+        pt-2 sm:pt-2 pb-0
         px-6 sm:px-12 md:px-16 lg:px-24
         gap-6 lg:gap-8 xl:gap-10
         max-w-[1280px] mx-auto
+        -mb-12 sm:-mb-16 md:-mb-5
       "
     >
       {/* 1. TEXT SECTION */}

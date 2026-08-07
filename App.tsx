@@ -26,7 +26,7 @@ import PrivacyPage from './components/PrivacyPage';
 
 // Standardized equal vertical padding while preserving initial side paddings (px-7 sm:px-8 md:px-12 lg:px-16)
 const sectionSpacing =
-  'py-12 sm:py-16 md:py-20 px-7 sm:px-8 md:px-12 lg:px-16';
+  'py-12 sm:py-16 md:py-15 px-7 sm:px-8 md:px-12 lg:px-16';
 
 // Preserved initial page shell class
 const pageShellClassName =
