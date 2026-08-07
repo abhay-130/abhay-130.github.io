@@ -145,7 +145,7 @@ const ServicesPage: React.FC = () => {
   const marqueeItems = [...testimonials, ...testimonials, ...testimonials];
 
   return (
-    <main className="max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-4">
+    <main className="max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
       <section id="services" className="pb-12 sm:pb-16 md:pb-24">
         
         {/* --- HERO HEADER --- */}
@@ -162,7 +162,7 @@ const ServicesPage: React.FC = () => {
           </div>
 
           <div className="max-w-md flex flex-col items-start lg:items-end">
-            <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed max-w-xl space-y-4 mb-12 mt-4">
+            <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed max-w-xl space-y-4 mb-12">
               I am an architecture undergraduate at IIT Roorkee who also works on web development and graphic design. Here is how I can help on your next project.
             </p>
 

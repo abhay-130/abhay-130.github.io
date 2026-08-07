@@ -18,6 +18,18 @@ interface SocialMediaPost {
     gridSpan?: string;
 }
 
+interface WatchlistItem {
+    dateWatched: string;
+    year: string;
+    title: string;
+    rating: string;
+    cast?: string;
+    director?: string;
+    genre?: string;
+    country?: string;
+    comments?: string;
+}
+
 // Custom Location SVG Icon
 const LocationPinIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
     <svg 
@@ -247,6 +259,173 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
     );
 };
 
+/* --- WATCHLIST TABLE COMPONENT --- */
+const WatchlistSection: React.FC = () => {
+    const [activeTab, setActiveTab] = useState<'movies' | 'webseries'>('movies');
+
+    const moviesData: WatchlistItem[] = [
+        { dateWatched: "2023-12-09", year: "2018", title: "Qismat", rating: "8", cast: "Ammy Virk, Sargun Mehta, Hardeep Gill", director: "Jagdeep Sidhu", genre: "Love Story, Romance", country: "India", comments: "Based on true love story" },
+        { dateWatched: "2023-11-20", year: "2019", title: "Hellboy", rating: "8", cast: "David Harbour", director: "", genre: "Action, Fantasy", country: "", comments: "" },
+        { dateWatched: "2023-10-15", year: "2009", title: "Inglourious Basterds", rating: "8", cast: "Brad Pitt", director: "", genre: "War, Drama", country: "", comments: "" },
+        { dateWatched: "2023-09-02", year: "2014", title: "The Imitation Game", rating: "6", cast: "", director: "", genre: "Biography, Drama", country: "", comments: "world war 2 story" },
+        { dateWatched: "2023-08-10", year: "2019", title: "Coma", rating: "6", cast: "", director: "", genre: "Sci-Fi", country: "Russia", comments: "define the coma condition" },
+        { dateWatched: "2023-07-22", year: "2014", title: "Fury", rating: "8", cast: "", director: "", genre: "War, Action", country: "", comments: "" },
+        { dateWatched: "2023-06-18", year: "1998", title: "Saving Private Ryan", rating: "8", cast: "", director: "Steven Spielberg", genre: "War", country: "", comments: "Save ryan in war world 2" },
+        { dateWatched: "2023-05-12", year: "1995", title: "Jumanji", rating: "8", cast: "", director: "", genre: "Game, Adventure", country: "", comments: "" },
+        { dateWatched: "2023-05-11", year: "1995", title: "Jumanji", rating: "8", cast: "", director: "", genre: "Game, Adventure", country: "", comments: "" },
+        { dateWatched: "2023-05-10", year: "1995", title: "Jumanji", rating: "8", cast: "", director: "", genre: "Game, Adventure", country: "", comments: "" },
+        { dateWatched: "2023-04-01", year: "1998", title: "Patch Adams", rating: "8", cast: "Robin Williams, Phillip Seymour Hoffman, Monia Potter", director: "Tom Shadyac", genre: "Biography", country: "United States", comments: "medical system based" },
+        { dateWatched: "2023-03-14", year: "2003", title: "Munna Bhai M.B.B.S.", rating: "7", cast: "", director: "", genre: "Comedy, Drama", country: "India", comments: "" },
+        { dateWatched: "2023-03-13", year: "2003", title: "Munna Bhai M.B.B.S.", rating: "7", cast: "", director: "", genre: "Comedy, Drama", country: "India", comments: "" },
+        { dateWatched: "2023-02-10", year: "2012", title: "That's My Boy", rating: "8", cast: "", director: "", genre: "Comedy", country: "", comments: "" },
+        { dateWatched: "2023-01-20", year: "2006", title: "The God must be curzy I", rating: "6", cast: "", director: "", genre: "Comedy", country: "", comments: "" },
+        { dateWatched: "2023-01-19", year: "2006", title: "The God must be curzy II", rating: "6", cast: "", director: "", genre: "Comedy", country: "", comments: "" },
+        { dateWatched: "2023-01-05", year: "2023", title: "The Bad Guys", rating: "9", cast: "", director: "", genre: "Animation", country: "", comments: "" },
+        { dateWatched: "2022-12-25", year: "2021", title: "Tenet", rating: "10", cast: "", director: "Crrisktopher Nolan", genre: "Time Travel, Action", country: "", comments: "" },
+        { dateWatched: "2022-11-12", year: "2014", title: "John Wick", rating: "8", cast: "", director: "", genre: "Action", country: "", comments: "" },
+        { dateWatched: "2022-10-01", year: "2017", title: "John Wick 2", rating: "9", cast: "", director: "", genre: "Action", country: "", comments: "" },
+        { dateWatched: "2022-09-15", year: "2019", title: "John Wick 3", rating: "8", cast: "", director: "", genre: "Action", country: "", comments: "" },
+        { dateWatched: "2022-08-20", year: "2014", title: "The Kingsman", rating: "10", cast: "", director: "", genre: "Action", country: "", comments: "" },
+        { dateWatched: "2022-08-19", year: "2017", title: "The Kingsman", rating: "10", cast: "", director: "", genre: "Action", country: "", comments: "" },
+        { dateWatched: "2022-07-01", year: "2005", title: "Bunty aur Babli", rating: "7", cast: "Abhishek Bachan, Rani Mukharje, Amitabh Bachan", director: "Shaad Ali", genre: "Comedy, Romance", country: "India", comments: "songs are good story also good" }
+    ];
+
+    const webSeriesData: WatchlistItem[] = [
+        { dateWatched: "2023-11-01", year: "2017-2022", title: "Money Heist", rating: "10", cast: "Alvaro Morte, Pedro Alonso, Itziar Ituno, Najwa Nimri", director: "Alex Pina", genre: "Thriller", country: "Spain", comments: "Season 1-5" },
+        { dateWatched: "2023-10-10", year: "2019-2023", title: "Sex Education", rating: "10", cast: "Kedar Williams Stirling, Gillian Anderson", director: "Runyararo Mapfumo, Michelle Savill", genre: "Drama", country: "UK", comments: "Season 1-8" },
+        { dateWatched: "2023-09-15", year: "2017-2019", title: "End of the fucking world", rating: "8", cast: "Jessica Barden, Alex Lawther, Steve Oram", director: "Tcherniak, Lucy Forbes, Destiny Ekaragha", genre: "Drama", country: "UK", comments: "Season 1-2" },
+        { dateWatched: "2023-08-20", year: "2011-2019", title: "Games of Thrones", rating: "9", cast: "Harington, Jason Momoa, Maisie Williams", director: "D.B. Weiss, David Benioff", genre: "Drama, Politics, Adventures", country: "USA", comments: "Season 1-8" },
+        { dateWatched: "2023-07-11", year: "2015-2021", title: "Younger", rating: "7", cast: "Tortorella, Debi Mazar, Peter Hermann", director: "Peter Lauer, Tamra Davis, Jennifer Arnold, Miriam Shor", genre: "Drama, Publicing", country: "USA", comments: "Season 1-9" },
+        { dateWatched: "2023-06-05", year: "2020", title: "Scam 1992: The Harshad Mehta Story", rating: "8", cast: "Shreya Dhanwanthary, Hemant Kher", director: "Hansal Mehta", genre: "Drama, History scam", country: "India", comments: "" },
+        { dateWatched: "2023-05-18", year: "2023", title: "Scam 2003: The Telgi Story", rating: "8", cast: "Kirandeep Kaur, Gagan Dev Riar, Sana Amin Sheikh", director: "Tushar Hiranadani", genre: "Drama, History scam", country: "India", comments: "" },
+        { dateWatched: "2023-04-12", year: "2023", title: "Bodies", rating: "5", cast: "Stephen Graham, Kyle Soller, Amaka Okfor", director: "Marco Kreuzpaintner", genre: "Drama, Sci-Fi, History, Thriller", country: "UK", comments: "" },
+        { dateWatched: "2023-03-30", year: "2023", title: "Gen V", rating: "10", cast: "", director: "", genre: "", country: "", comments: "" },
+        { dateWatched: "2023-02-14", year: "2021-2022", title: "The Boys", rating: "9", cast: "", director: "", genre: "", country: "", comments: "" },
+        { dateWatched: "2023-01-22", year: "2023", title: "Big Vape: The rise and fall of juul", rating: "6", cast: "", director: "", genre: "Psychology", country: "", comments: "" }
+    ];
+
+    // Sort items by Date Watched (Newest First)
+    const currentList = (activeTab === 'movies' ? moviesData : webSeriesData).sort((a, b) => 
+        new Date(b.dateWatched).getTime() - new Date(a.dateWatched).getTime()
+    );
+
+    return (
+        <section className="w-full my-12 p-6 sm:p-8 rounded-[2.5rem] bg-gray-50/80 dark:bg-[#1a1a1a]/80 border border-black/10 dark:border-white/10 shadow-xl backdrop-blur-md">
+            
+            {/* Header + Tab Switcher */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-black/10 dark:border-white/10">
+                <div>
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-[3px] text-theme-red block mb-1">
+                        PERSONAL MEDIA LOG
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-black text-light-text dark:text-dark-text">
+                        Movies & Series Watched
+                    </h3>
+                </div>
+
+                {/* Tab Switcher */}
+                <div className="inline-flex p-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10">
+                    <button
+                        onClick={() => setActiveTab('movies')}
+                        className={`px-5 py-2 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 ${
+                            activeTab === 'movies'
+                                ? 'bg-theme-red text-white shadow-md'
+                                : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white'
+                        }`}
+                    >
+                        Movies ({moviesData.length})
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('webseries')}
+                        className={`px-5 py-2 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 ${
+                            activeTab === 'webseries'
+                                ? 'bg-theme-red text-white shadow-md'
+                                : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white'
+                        }`}
+                    >
+                        Web Series ({webSeriesData.length})
+                    </button>
+                </div>
+            </div>
+
+            {/* Scrollable Container Fixed to ~13 Rows Height */}
+            <div className="w-full overflow-x-auto overflow-y-auto max-h-[580px] rounded-2xl border border-black/5 dark:border-white/5 custom-scrollbar">
+                <table className="w-full text-left text-xs sm:text-sm font-poppins border-collapse">
+                    
+                    {/* Sticky Table Header */}
+                    <thead className="sticky top-0 bg-gray-200/90 dark:bg-black/90 backdrop-blur-md text-light-text dark:text-dark-text font-mono uppercase text-[11px] tracking-wider z-10 border-b border-black/10 dark:border-white/10">
+                        <tr>
+                            <th className="py-3.5 px-4">Title</th>
+                            <th className="py-3.5 px-4">Year</th>
+                            <th className="py-3.5 px-4 text-center">Rating</th>
+                            <th className="py-3.5 px-4">Genre</th>
+                            <th className="py-3.5 px-4 hidden md:table-cell">Cast & Director</th>
+                            <th className="py-3.5 px-4 hidden lg:table-cell">Country</th>
+                            <th className="py-3.5 px-4">Comments</th>
+                        </tr>
+                    </thead>
+
+                    {/* Table Body */}
+                    <tbody className="divide-y divide-black/5 dark:divide-white/5">
+                        {currentList.map((item, idx) => (
+                            <tr 
+                                key={idx} 
+                                className="hover:bg-theme-red/5 transition-colors duration-150 group text-light-text dark:text-dark-text"
+                            >
+                                <td className="py-3.5 px-4 font-bold text-sm text-black dark:text-white group-hover:text-theme-red transition-colors min-w-[160px]">
+                                    {item.title}
+                                </td>
+                                <td className="py-3.5 px-4 font-mono text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                                    {item.year || '—'}
+                                </td>
+                                <td className="py-3.5 px-4 text-center whitespace-nowrap">
+                                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-theme-red/10 text-theme-red font-mono font-bold text-xs border border-theme-red/20">
+                                        ★ {item.rating}/10
+                                    </span>
+                                </td>
+                                <td className="py-3.5 px-4 font-mono text-xs text-gray-600 dark:text-gray-300 min-w-[120px]">
+                                    {item.genre || '—'}
+                                </td>
+                                <td className="py-3.5 px-4 hidden md:table-cell text-xs text-gray-500 dark:text-gray-400 min-w-[180px]">
+                                    <div>{item.cast || '—'}</div>
+                                    {item.director && (
+                                        <div className="text-[10px] font-mono text-gray-400 dark:text-gray-500">Dir: {item.director}</div>
+                                    )}
+                                </td>
+                                <td className="py-3.5 px-4 hidden lg:table-cell font-mono text-xs text-gray-500 dark:text-gray-400">
+                                    {item.country || '—'}
+                                </td>
+                                <td className="py-3.5 px-4 text-xs italic text-gray-500 dark:text-gray-400 max-w-[200px] truncate">
+                                    {item.comments || '—'}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+            {/* Custom Scrollbar Styles */}
+            <style>{`
+                .custom-scrollbar::-webkit-scrollbar {
+                    width: 6px;
+                    height: 6px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background: rgba(239, 68, 68, 0.3);
+                    border-radius: 9999px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                    background: rgba(239, 68, 68, 0.7);
+                }
+            `}</style>
+
+        </section>
+    );
+};
+
 const SocialLifePage: React.FC = () => {
     const [galleryPosts, setGalleryPosts] = useState<SocialMediaPost[]>([]);
 
@@ -350,7 +529,7 @@ const SocialLifePage: React.FC = () => {
     };
 
     return (
-        <main className="max-w-[1440px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4">
+        <main className="max-w-[1440px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20">
             
             {/* --- HERO SECTION --- */}
             <section className="pb-12 sm:pb-16 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16 w-full">
@@ -362,7 +541,7 @@ const SocialLifePage: React.FC = () => {
                         <span>OFF-DUTY CHRONICLES</span>
                     </div>
 
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold -tracking-wide leading-tight text-black dark:text-white">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold -tracking-wide leading-tight text-black dark:text-white">
                         Proof That <br />
                         <span className="text-theme-red">AbhaY Has A Life.</span>
                     </h2>
@@ -409,7 +588,6 @@ const SocialLifePage: React.FC = () => {
                                             alt={img.caption}
                                             className="object-cover w-full h-full" 
                                             onError={(e) => {
-                                                // Fallback if URL still fails
                                                 (e.target as HTMLElement).style.display = 'none';
                                             }}
                                         />
@@ -497,6 +675,9 @@ const SocialLifePage: React.FC = () => {
                     </div>
                 )}
             </section>
+
+            {/* --- WATCHLIST TABLE SECTION --- */}
+            <WatchlistSection />
 
             {/* --- CREATIVE QUOTE BOX --- */}
             <section className="w-full my-8 p-8 rounded-[2.5rem] bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/10">

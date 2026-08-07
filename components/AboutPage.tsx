@@ -64,7 +64,7 @@ const AboutPage: React.FC = () => {
             `}</style>
             
             {/* --- HERO SECTION --- */}
-            <section id="about" className="pt-6 sm:pt-10 pb-16 md:pb-24 flex flex-col md:flex-row items-center gap-10 sm:gap-14 lg:gap-20 relative">
+            <section id="about" className="pt-3 sm:pt-1 pb-6 md:pb-10 flex flex-col md:flex-row items-center gap-10 sm:gap-14 lg:gap-20 relative">
                 
                 {/* Left Column: Portrait with Architectural Blueprint Grid Details */}
                 <div className="flex-1 w-full relative group">
@@ -146,7 +146,7 @@ const AboutPage: React.FC = () => {
             </section>
 
             {/* --- EXPERTISE SECTION: The Toolkit --- */}
-            <section className="py-16 sm:py-24 border-t border-gray-200 dark:border-gray-800">
+            <section className="py-6 sm:py-10 border-t border-gray-200 dark:border-gray-800">
                 <div className="text-center max-w-2xl mx-auto mb-16">
                     <p className="font-bold text-xs sm:text-sm text-theme-red tracking-[4px] uppercase mb-2">Capabilities</p>
                     <h2 className="text-3xl sm:text-4xl font-extrabold text-light-text dark:text-dark-text tracking-tight">

@@ -94,7 +94,7 @@ const ProjectDetailPage: React.FC = () => {
   ].filter(Boolean);
 
   return (
-    <main className="max-w-[1240px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4">
+    <main className="max-w-[1440px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20">
       
       {/* Hero Title Block */}
       <section className="mb-10">

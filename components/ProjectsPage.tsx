@@ -69,7 +69,7 @@ const ProjectsPage: React.FC = () => {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <main className="max-w-[1440px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 py-4">
+    <main className="max-w-[1440px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20">
       
       {/* --- HEADER SECTION --- */}
       <section id="projects" className="pb-12 sm:pb-16">
