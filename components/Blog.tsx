@@ -96,7 +96,7 @@ const Blog: React.FC = () => {
                 <Link 
                     to="/blogs" 
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className="whitespace-nowrap px-4 py-2 sm:px-6 sm:py-2.5 text-xs sm:text-sm rounded-full border-2 border-theme-red font-bold uppercase tracking-wider text-light-text dark:text-dark-text hover:bg-theme-red hover:text-white dark:hover:text-white transition-colors duration-300 shadow-sm"
+                    className="whitespace-nowrap px-7 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm rounded-full border-2 border-theme-red font-bold uppercase tracking-wider text-light-text dark:text-dark-text hover:bg-theme-red hover:text-white dark:hover:text-white transition-colors duration-300 shadow-sm"
                 >
                     EXPLORE MORE →
                 </Link>

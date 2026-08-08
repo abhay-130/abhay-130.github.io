@@ -386,7 +386,7 @@ const AboutPage: React.FC = () => {
                     to="/" 
                     className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-widest px-8 py-4 rounded-full border border-black/10 dark:border-white/10 text-light-text dark:text-dark-text hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 hover:shadow-lg"
                 >
-                    ← Return to Portfolio Home
+                    ← Back to Home
                 </Link>
             </div>
         </main>

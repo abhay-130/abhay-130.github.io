@@ -17,6 +17,12 @@ const CurtainCall: React.FC = () => {
       
       {/* LEFT COLUMN: ENRICHED TEXT CONTAINER */}
       <div className="flex-1 flex flex-col items-start gap-5 sm:gap-6">
+        <div className="inline-flex items-center gap-2 mb-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-theme-red animate-pulse" />
+            <p className="text-xs sm:text-sm font-mono font-bold uppercase tracking-[2px] sm:tracking-[3px] text-theme-red">
+              Future Endeavors
+            </p>
+          </div>
       
         {/* Heading */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] font-black -tracking-wide leading-[1.12] text-light-text dark:text-dark-text">

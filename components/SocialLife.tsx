@@ -31,40 +31,33 @@ const SocialLife: React.FC = () => {
   return (
     <section className="flex flex-col md:flex-row items-center justify-between gap-10 lg:gap-16 w-full py-8">
       
-      {/* --- LEFT: TEXT STORY & CALL TO ACTION --- */}
-      <div className="flex-1 flex flex-col items-start order-2 md:order-1">
-        
-        {/* Badge Header */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-theme-red/10 border border-theme-red/20 text-theme-red text-xs font-mono font-bold tracking-widest uppercase mb-4">
-          <span className="w-2 h-2 rounded-full bg-theme-red animate-pulse" />
-          <span>OFF-DUTY CHRONICLES</span>
-        </div>
+      {/* LEFT TEXT STORY */}
+                <div className="flex-1 flex flex-col items-start">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-theme-red/10 border border-theme-red/20 text-theme-red text-xs font-mono font-bold tracking-widest uppercase mb-4">
+                        <span className="w-2 h-2 rounded-full bg-theme-red animate-pulse" />
+                        <span>OFF-DUTY CHRONICLES</span>
+                    </div>
 
-        {/* Solid Heading */}
-        <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black -tracking-wide leading-[1.15] text-light-text dark:text-dark-text mb-4">
-          Proof That 
-          <br />
-          <span className="text-theme-red"> 
-            AbhaY Has A Life.
-          </span>
-        </h2>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold -tracking-wide leading-tight text-black dark:text-white">
+                        Proof That <br />
+                        <span className="text-theme-red">AbhaY Has A Life.</span>
+                    </h2>
 
-        <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed max-w-xl mb-6">
-          Believe it or not, I do leave my desk! Here's a raw collection of campus chaos, weekend road trips, late-night architectural jams, and all the unscripted moments that keep me sane between deadlines.
-        </p>
+                    <p className="text-sm sm:text-base text-light-text-muted dark:text-dark-text-muted leading-relaxed max-w-xl mb-12 mt-4">
+                        Believe it or not, I do leave my desk! Between ArchiCAD rendering and React builds, here's a raw collection of campus chaos, road trips, night outs, and all unscripted moments.
+                    </p>
 
-        {/* Quick Vibe Highlights */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          {['Campus Chaos', 'Road Trips', 'Night-Outs', 'Pure Randomness'].map((tag, idx) => (
-            <span 
-              key={idx}
-              className="text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-light-text-muted dark:text-dark-text-muted"
-            >
-              #{tag}
-            </span>
-          ))}
-        </div>
-
+                    {/* Vibe Tags */}
+                    <div className="flex flex-wrap gap-2 mb-8">
+                        {['IITRoorkee', 'RoadTrips', 'NightOuts', 'PureRandomness'].map((tag, idx) => (
+                            <span 
+                                key={idx}
+                                className="text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-light-text-muted dark:text-dark-text-muted"
+                            >
+                                #{tag}
+                            </span>
+                        ))}
+                    </div>
         <ResizableButton
           onClick={handleNavigation}
           size={13}

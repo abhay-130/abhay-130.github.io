@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const projectItems = [
-  { image: '/landing-page-images/architecture.jpg', title: 'Architecture', category: 'Spaces & Structures Body' },
+  { image: '/landing-page-images/architecture.jpg', title: 'Architecture', category: 'Spaces & Structures' },
   { image: '/landing-page-images/design.JPG', title: 'Design', category: 'Brand & Identity' },
-  { image: '/landing-page-images/code.JPG', title: 'Codes', category: 'Code & Logic' },
+  { image: '/landing-page-images/code.JPG', title: 'Codes', category: 'Logic & Development' },
   { image: '/landing-page-images/career.jpeg', title: 'Tutor', category: 'The Listener & Mentor' },
   { image: '/landing-page-images/social.jpg', title: 'Social Life', category: 'Myself & People' },
 ];
@@ -32,10 +32,11 @@ const Projects: React.FC = () => {
         <Link 
           to="/projects" 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="relative overflow-hidden group border-2 border-theme-red rounded-full px-4 py-2 sm:px-6 sm:py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-light-text dark:text-dark-text transition-colors duration-300 shadow-sm"
+          className="relative overflow-hidden group border-2 border-theme-red rounded-full px-7 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-light-text dark:text-dark-text transition-colors duration-300 shadow-sm"
         >
           {/* Animated fill layer starting from bottom */}
-          <span className="absolute bottom-0 left-0 w-full h-0 bg-theme-red transition-all duration-300 ease-out group-hover:h-full z-0" />
+          <span 
+          className="absolute bottom-0 left-0 w-full h-0 bg-theme-red transition-all duration-300 ease-out group-hover:h-full z-0" />
           <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
             EXPLORE MORE →
           </span>

@@ -65,14 +65,19 @@ const Services: React.FC = () => {
     <section id="services" className="w-full">
       
       {/* Header */}
-      <div className="text-center mb-10 sm:mb-12 md:mb-16 flex flex-col items-center gap-2">
-        <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-[4px] text-theme-red">
-          SERVICES
-        </span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black -tracking-wide leading-tight text-light-text dark:text-dark-text">
-          How I Can Help You
-        </h2>
-      </div>
+        <div className="text-center mb-10 sm:mb-12 md:mb-16 flex flex-col items-center gap-2">
+          {/* Inline Badge Wrapper */}
+          <div className="inline-flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-theme-red animate-pulse shrink-0" />
+            <p className="text-xs sm:text-sm font-mono font-bold uppercase tracking-[2px] sm:tracking-[3px] text-theme-red">
+              SERVICES
+            </p>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black -tracking-wide leading-tight text-light-text dark:text-dark-text">
+            How I Can Help You
+          </h2>
+        </div>
 
       {/* Services Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
@@ -99,7 +104,7 @@ const Services: React.FC = () => {
             {/* Projects Done Counter Badge */}
             <div className="flex items-center gap-4 pt-4 border-t border-black/5 dark:border-white/5">
               <div className="relative w-12 h-12 sm:w-14 sm:h-14 shrink-0">
-                <div className="absolute inset-0 bg-black dark:bg-white rounded-2xl transform rotate-3 group-hover:rotate-0 transition-transform duration-300"></div>
+                <div className="absolute inset-0 bg-black/5 dark:bg-white rounded-2xl transform rotate-3 group-hover:rotate-0 transition-transform duration-300"></div>
                 <p className="absolute inset-0 flex items-center justify-center font-mono font-black text-lg sm:text-xl text-theme-red z-10">
                   {service.projects}+
                 </p>
@@ -122,7 +127,7 @@ const Services: React.FC = () => {
       <div className="text-center mt-10 sm:mt-12 md:mt-16">
         <a 
           href="./services" 
-          className="inline-block px-7 sm:px-8 py-3 sm:py-3.5 rounded-full border-2 border-theme-red text-theme-red dark:text-theme-red font-extrabold text-sm sm:text-base uppercase tracking-wider hover:bg-theme-red hover:text-white dark:hover:text-white transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+          className="inline-block px-7 sm:px-8 py-3 sm:py-3.5 rounded-full border-2 border-theme-red dark:text-theme-white font-extrabold text-sm sm:text-base uppercase tracking-wider hover:bg-theme-red hover:text-white dark:hover:text-white transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
         >
           Explore Now →
         </a>
