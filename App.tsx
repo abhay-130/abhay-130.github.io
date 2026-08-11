@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -21,8 +21,10 @@ import BlogsPage from './components/BlogsPage';
 import ContactPage from './components/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
 import BlogPostPage from './components/BlogPostPage';
+import DrivePage from './components/DrivePage';
 import TermsPage from './components/TermsPage';
 import PrivacyPage from './components/PrivacyPage';
+
 
 // Standardized equal vertical padding while preserving initial side paddings (px-7 sm:px-8 md:px-12 lg:px-16)
 const sectionSpacing =
@@ -60,6 +62,9 @@ const HomePage: React.FC = () => (
 
 const App: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const location = useLocation();
+  
+  const isDrivePage = location.pathname === '/drive';
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -84,9 +89,22 @@ const App: React.FC = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  return (
-    <div className="bg-white dark:bg-dark-bg text-light-text dark:text-dark-text font-poppins transition-colors duration-400 ease-in-out overflow-x-hidden">
-      <ScrollToTop />
+      // 1. Standalone Fullscreen Render for Drive Page
+        if (isDrivePage) {
+          return (
+            <div className="w-screen h-screen overflow-hidden bg-black">
+              <ScrollToTop />
+              <Routes>
+                <Route path="/drive" element={<DrivePage />} />
+              </Routes>
+            </div>
+          );
+        }
+
+        // 2. Standard Shell Render for All Other Pages
+        return (
+          <div className="bg-white dark:bg-dark-bg text-light-text dark:text-dark-text font-poppins transition-colors duration-400 ease-in-out overflow-x-hidden">
+            <ScrollToTop />
 
       {/* Header with Theme Switcher */}
       <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
@@ -102,6 +120,7 @@ const App: React.FC = () => {
           <Route path="/blogs" element={<BlogsPage />} />
           <Route path="/blogs/:id" element={<BlogPostPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/drive" element={<DrivePage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
         </Routes>
