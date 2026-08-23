@@ -75,7 +75,9 @@ const Contact: React.FC = () => {
                 type="text" 
                 name="email" 
                 required 
-                placeholder="e.g. +91 8273746070 or parul@example.com" 
+                placeholder="e.g. +91 8273746070 or parul@example.com"
+                pattern="^([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}|(\+?\d{1,4}[\s\-]?)?(\(?\d{1,4}\)?[\s\-]?)?[\d\s\-]{7,15})$"
+                title="Please enter a valid email address or phone number"
                 className="w-full p-3.5 bg-white dark:bg-dark-bg rounded-2xl border border-black/10 dark:border-white/10 focus:border-theme-red outline-none transition-all text-sm shadow-sm" 
               />
             </div>
