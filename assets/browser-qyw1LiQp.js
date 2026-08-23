@@ -1,4 +1,4 @@
-import{g as Be}from"./index-DL44mysv.js";var z={exports:{}};/** @license
+import{g as Be}from"./index-CUucaL9v.js";var z={exports:{}};/** @license
  * eventsource.js
  * Available under MIT License (MIT)
  * https://github.com/Yaffle/EventSource/
