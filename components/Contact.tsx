@@ -70,12 +70,12 @@ const Contact: React.FC = () => {
             </div>
 
             <div>
-              <label className="text-[11px] font-mono font-bold uppercase tracking-widest text-light-text-muted dark:text-dark-text-muted mb-1 block">Email / Contact</label>
+              <label className="text-[11px] font-mono font-bold uppercase tracking-widest text-light-text-muted dark:text-dark-text-muted mb-1 block">Contact / Email</label>
               <input 
                 type="text" 
                 name="email" 
                 required 
-                placeholder="e.g. parul@example.com" 
+                placeholder="e.g. +91 8273746070 or parul@example.com" 
                 className="w-full p-3.5 bg-white dark:bg-dark-bg rounded-2xl border border-black/10 dark:border-white/10 focus:border-theme-red outline-none transition-all text-sm shadow-sm" 
               />
             </div>
