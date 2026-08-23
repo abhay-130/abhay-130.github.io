@@ -13,7 +13,7 @@ const ContactPage: React.FC = () => {
     setResult("Sending...");
 
     const formData = new FormData(form);
-    formData.append("access_key", import.meta.env.VITE_WEB3_FORMS_ACCESS_KEY || "");
+    formData.append("access_key", import.meta.env.VITE_WEB3_FORMS_ACCESS_KEY || "8c4fbd4e-4b37-4dfa-a9e3-411d469ddcd2");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
