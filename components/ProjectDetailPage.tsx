@@ -4,6 +4,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import ResizableButton from './ResizableButton';
 import { sanityClient } from './data/sanityClient';
 import { PortableText } from '@portabletext/react';
+import { ZapIcon } from './icons';
 
 interface ProjectDetail {
   id: string;
@@ -203,7 +204,7 @@ const ProjectDetailPage: React.FC = () => {
                 key={idx}
                 className="px-3.5 py-1.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-xs font-mono font-bold text-light-text dark:text-dark-text"
               >
-                ⚡ {tech}
+                <ZapIcon className="inline-block w-3.5 h-3.5 mr-1" /> {tech}
               </span>
             ))}
           </div>

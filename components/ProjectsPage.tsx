@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ResizableButton from './ResizableButton';
 import { sanityClient } from './data/sanityClient';
+import { CameraIcon } from './icons';
 
 export interface ProjectMedia {
   type: 'image' | 'video';
@@ -196,8 +197,8 @@ const ProjectsPage: React.FC = () => {
 
                       {/* Gallery Count Badge */}
                       {item.galleryImages && item.galleryImages.length > 0 && (
-                        <span className="text-[11px] font-mono text-white/70 bg-black/40 backdrop-blur-md px-3 py-2 rounded-full border border-white/10">
-                          📷 {item.galleryImages.length} Shots
+                        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-white/70 bg-black/40 backdrop-blur-md px-3 py-2 rounded-full border border-white/10">
+                          <CameraIcon className="w-4 h-4" /> {item.galleryImages.length} Shots
                         </span>
                       )}
                     </div>

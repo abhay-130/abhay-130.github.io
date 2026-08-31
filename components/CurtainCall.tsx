@@ -1,5 +1,6 @@
 import React from 'react';
 import ResizableButton from './ResizableButton';
+import { LandmarkIcon, MapPinIcon, ZapIcon } from './icons';
 
 const CurtainCall: React.FC = () => {
   const handleDownload = () => {
@@ -38,13 +39,13 @@ const CurtainCall: React.FC = () => {
         {/* Feature Vibe Badges */}
         <div className="flex flex-wrap gap-2.5 my-1">
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-xs font-mono font-bold text-light-text dark:text-dark-text">
-            <span className="text-theme-red">🏛️</span> Architecture & UX
+            <LandmarkIcon className="w-4 h-4 text-theme-red" /> Architecture & UX
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-xs font-mono font-bold text-light-text dark:text-dark-text">
-            <span className="text-emerald-500">⚡</span> Rapid Prototyping
+            <ZapIcon className="w-4 h-4 text-emerald-500" /> Rapid Prototyping
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-xs font-mono font-bold text-light-text dark:text-dark-text">
-            <span className="text-amber-500">📍</span> IIT Roorkee
+            <MapPinIcon className="w-4 h-4 text-amber-500" /> IIT Roorkee
           </div>
         </div>
 

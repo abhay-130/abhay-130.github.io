@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { MoonIcon, SunIcon } from './icons';
 
 interface ThemeToggleProps {
   isDarkMode: boolean;
@@ -20,7 +21,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ isDarkMode, toggleTheme, vari
       className={`${baseClasses} ${variantClasses}`}
       aria-label="Toggle theme"
     >
-      {isDarkMode ? '☀️' : '🌙'}
+      {isDarkMode ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
     </button>
   );
 };

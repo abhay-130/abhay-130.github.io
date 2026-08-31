@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
 import React, { useState } from 'react';
+import { MailIcon, MapPinIcon, PhoneIcon } from './icons';
 
 const ContactPage: React.FC = () => {
   const [result, setResult] = useState("");
@@ -242,7 +243,7 @@ const ContactPage: React.FC = () => {
             {/* Direct Details Cards */}
             <div className="space-y-3 w-full">
               <div className="flex items-center gap-4 p-3.5 rounded-2xl bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/5">
-                <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-theme-red/10 text-theme-red text-lg font-bold">📍</span>
+                <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-theme-red/10 text-theme-red"><MapPinIcon className="w-5 h-5" /></span>
                 <div>
                   <p className="text-[10px] font-mono uppercase text-light-text-muted dark:text-dark-text-muted font-bold">Location</p>
                   <p className="text-sm sm:text-base font-bold text-light-text dark:text-dark-text">IIT Roorkee, India</p>
@@ -250,7 +251,7 @@ const ContactPage: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-4 p-3.5 rounded-2xl bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/5">
-                <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-theme-red/10 text-theme-red text-lg font-bold">✉️</span>
+                <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-theme-red/10 text-theme-red"><MailIcon className="w-5 h-5" /></span>
                 <div>
                   <p className="text-[10px] font-mono uppercase text-light-text-muted dark:text-dark-text-muted font-bold">Direct Email</p>
                   <a
@@ -263,7 +264,7 @@ const ContactPage: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-4 p-3.5 rounded-2xl bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/5">
-                <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-theme-red/10 text-theme-red text-lg font-bold">📞</span>
+                <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-theme-red/10 text-theme-red"><PhoneIcon className="w-5 h-5" /></span>
                 <div>
                   <p className="text-[10px] font-mono uppercase text-light-text-muted dark:text-dark-text-muted font-bold">Phone / WhatsApp</p>
                   <a

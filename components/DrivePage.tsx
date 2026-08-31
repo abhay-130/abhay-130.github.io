@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PauseIcon, PlayIcon } from './icons';
 
 const DrivePage: React.FC = () => {
   const navigate = useNavigate();
@@ -86,7 +87,7 @@ const DrivePage: React.FC = () => {
             }}
             className="ml-1 w-8 h-8 rounded-full bg-white/10 hover:bg-theme-red text-white flex items-center justify-center font-bold text-xs transition-colors shrink-0"
           >
-            {isPlaying ? '❚❚' : '▶'}
+            {isPlaying ? <PauseIcon className="w-4 h-4" /> : <PlayIcon className="w-4 h-4" />}
           </button>
         </div>
       </div>

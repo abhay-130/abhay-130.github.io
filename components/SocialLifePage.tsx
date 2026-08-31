@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import ResizableButton from './ResizableButton';
 import { sanityClient } from './data/sanityClient';
+import { CameraIcon, StarIcon } from './icons';
 
 interface CarouselImageItem {
     url: string;
@@ -188,8 +189,8 @@ const SocialCard: React.FC<{ post: SocialMediaPost }> = ({ post }) => {
                             ))}
                         </div>
 
-                        <div className="absolute top-3 right-3 z-20 bg-black/60 dark:bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[10px] font-mono text-white font-bold">
-                            📷 {images.length}
+                        <div className="absolute top-3 right-3 z-20 inline-flex items-center gap-1 bg-black/60 dark:bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[10px] font-mono text-white font-bold">
+                            <CameraIcon className="w-3.5 h-3.5" /> {images.length}
                         </div>
                     </div>
                 ) : (
@@ -379,8 +380,8 @@ const WatchlistSection: React.FC = () => {
                                     {item.year || '—'}
                                 </td>
                                 <td className="py-3.5 px-4 text-center whitespace-nowrap">
-                                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-theme-red/10 text-theme-red font-mono font-bold text-xs border border-theme-red/20">
-                                        ★ {item.rating}/10
+                                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-theme-red/10 text-theme-red font-mono font-bold text-xs border border-theme-red/20">
+                                        <StarIcon className="w-3 h-3 fill-current" /> {item.rating}/10
                                     </span>
                                 </td>
                                 <td className="py-3.5 px-4 font-mono text-xs text-gray-600 dark:text-gray-300 min-w-[120px]">

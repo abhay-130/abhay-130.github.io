@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle'; 
+import { MenuIcon, XIcon } from './icons';
 
 interface HeaderProps {
   isDarkMode: boolean;
@@ -150,7 +151,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
               className="lg:hidden py-1 px-3 rounded-full border border-white/20 font-semibold hover:bg-white/10 transition-colors flex-shrink-0 text-light-text dark:text-dark-text"
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? '✕' : '☰'}
+              {isMenuOpen ? <XIcon className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
             </button>
 
             {/* Theme Toggle */}

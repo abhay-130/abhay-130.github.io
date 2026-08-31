@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ResizableButton from './ResizableButton';
 import { sanityClient } from './data/sanityClient';
+import { MailIcon, PhoneIcon } from './icons';
 
 interface Testimonial {
   id?: string;
@@ -52,27 +53,27 @@ const services = [
   {
     id: 'architecture',
     icon: <ArchIcon />,
-    title: 'Architectural Planning',
+    title: 'Architectur & Planning',
     subtitle: 'Physical Spaces',
-    description: 'Helping homeowners and local clients in Saharanpur with 3D front elevations, house planning, and basic interior layouts.',
+    description: 'Helping homeowners and clients with 3D front elevations, house planning, and interior layouts.',
     deliverables: [
       '3D Front Elevations & Renders',
       'Residential Floor Plans & Layouts',
-      'Basic Interior Concepts',
+      'Interior Design & Furniture Layouts',
       '2D Working Drawings'
     ],
-    tags: ['ArchiCAD', 'AutoCAD', '3D Elevations', 'Floor Plans']
+    tags: ['ArchiCAD', 'AutoCAD', '3D Elevations', 'Blender']
   },
   {
     id: 'digital',
     icon: <TechIcon />,
-    title: 'Web & Digital Design',
+    title: 'Graphic Design & Web-Dev',
     subtitle: 'Digital Projects',
-    description: 'Building clean, functional websites and mobile app layouts for personal projects, portfolios, or small businesses.',
+    description: 'Building functional websites and mobile app layouts for personal projects, portfolios, businesses and startups.',
     deliverables: [
       'Responsive Websites & Landing Pages',
-      'Simple Web Applications',
-      'UI/UX Layouts in Figma',
+      'Web Applications',
+      'UI/UX Layouts',
       'Logos & Banner Graphics'
     ],
     tags: ['React', 'Tailwind CSS', 'Figma', 'Android Basics']
@@ -80,16 +81,16 @@ const services = [
   {
     id: 'consultancy',
     icon: <ConsultIcon />,
-    title: 'General Advice',
-    subtitle: 'Guidance & Mentorship',
-    description: 'Open to sharing my learnings as a student, discussing house layout ideas, or providing career advice to junior students.',
+    title: 'Consultation & Mentorship',
+    subtitle: 'Advisory',
+    description: 'Open to sharing my learnings as a student, discussing house layout ideas, or providing mentorship to students.',
     deliverables: [
       'House Plan & Property Discussions',
       'Portfolio & Design Feedback',
       'Student Mentorship & Guidance',
       'Project Brainstorming'
     ],
-    tags: ['Consultation', 'Guidance', 'Portfolio Review']
+    tags: ['Consultation', 'Guidance', 'Portfolio', 'Student Mentorship']
   },
 ];
 
@@ -167,7 +168,8 @@ const ServicesPage: React.FC = () => {
             </p>
 
             <a href="mailto:abhaykishor130@gmail.com" className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-theme-red hover:underline">
-              <span>✉️ Email: abhaykishor130@gmail.com</span>
+              <MailIcon className="w-4 h-4" />
+              <span>Email: abhaykishor130@gmail.com</span>
             </a>
           </div>
         </div>
@@ -176,7 +178,7 @@ const ServicesPage: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 sm:p-8 rounded-[2rem] bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/10 mb-16">
           <div className="flex flex-col">
             <span className="text-2xl sm:text-3xl font-black text-theme-red">IIT Roorkee</span>
-            <span className="text-xs font-mono uppercase tracking-wider text-light-text-muted dark:text-dark-text-muted">4th Year Architecture</span>
+            <span className="text-xs font-mono uppercase tracking-wider text-light-text-muted dark:text-dark-text-muted">Undergraduate</span>
           </div>
           <div className="flex flex-col">
             <span className="text-2xl sm:text-3xl font-black text-light-text dark:text-dark-text">Hands-On</span>
@@ -378,7 +380,8 @@ const ServicesPage: React.FC = () => {
                 size={15} 
                 className="border-2 border-black/20 dark:border-white/20 text-light-text dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black px-8 py-4 rounded-full font-black uppercase tracking-wider text-xs sm:text-sm transition-all inline-flex items-center justify-center whitespace-nowrap"
               >
-                📞 +91 82737 46070
+                <PhoneIcon className="w-4 h-4 mr-2" />
+                +91 82737 46070
               </ResizableButton>
             </a>
           </div>

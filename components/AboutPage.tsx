@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ResizableButton from './ResizableButton';
+import { CodeIcon, FilmIcon, LandmarkIcon } from './icons';
 
 // 1. Standalone Clickable Mustang Drive Component
 const MustangDriveContainer: React.FC = () => {
@@ -307,9 +308,9 @@ const AboutPage: React.FC = () => {
                         {/* Interactive Tab Pills */}
                         <div className="flex flex-col gap-3">
                             {[
-                                { id: 'arch', label: '01. Vernacular & Spatial Research', emoji: '🏛️' },
-                                { id: 'dev', label: '02. Digital Products & Web Tools', emoji: '💻' },
-                                { id: 'cinema', label: '03. Cinema & Visual Storytelling', emoji: '🎬' }
+                                { id: 'arch', label: '01. Vernacular & Spatial Research', Icon: LandmarkIcon },
+                                { id: 'dev', label: '02. Digital Products & Web Tools', Icon: CodeIcon },
+                                { id: 'cinema', label: '03. Cinema & Visual Storytelling', Icon: FilmIcon }
                             ].map((tab) => (
                                 <button
                                     key={tab.id}
@@ -321,7 +322,7 @@ const AboutPage: React.FC = () => {
                                     }`}
                                 >
                                     <span className="flex items-center gap-3">
-                                        <span>{tab.emoji}</span>
+                                        <tab.Icon className="w-5 h-5" />
                                         <span>{tab.label}</span>
                                     </span>
                                     <span className="text-xs font-mono">{activeTab === tab.id ? '● ACTIVE' : '→'}</span>
