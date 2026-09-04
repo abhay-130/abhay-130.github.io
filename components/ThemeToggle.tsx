@@ -21,7 +21,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ isDarkMode, toggleTheme, vari
       className={`${baseClasses} ${variantClasses}`}
       aria-label="Toggle theme"
     >
-      {isDarkMode ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
+      {isDarkMode ? <SunIcon className="w-5 h-5 text-white" /> : <MoonIcon className="w-5 h-5 text-white" />}
     </button>
   );
 };
